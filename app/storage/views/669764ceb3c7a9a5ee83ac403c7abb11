@@ -1,0 +1,173 @@
+<?php $__env->startSection('body'); ?>
+<div class="inner">
+    <div class="row">
+        <div class="col-lg-12">
+            <h2> Facuras </h2>
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+    <div class="col-lg-12">
+        <div class="box primary">            
+            <header>
+                    <div class="icons"><i class="icon-group"></i></div>
+                    <h5>Factura: <?php echo $invoice->number; ?></h5>
+                    <div class="toolbar">
+                        <a class="btn btn-danger btn-sm btn-grad" href="">Eliminar</a>
+                    </div>
+                </header>
+            <div class="panel-body">
+                <div class="col-lg-6">           
+                    <h4>Emisi&oacute;n</h4>
+                    <blockquote>
+                       <i class="icon-group"></i> <label>Raz&oacute;n Social: </label> <?php echo $invoice->client_name; ?>
+
+                       <small>Cliente
+                        </small>
+                        <i class="icon-group"></i> <label>NIT: </label> <?php echo $invoice->client_nit; ?>
+
+                       <small>NIT del ciente
+                        </small>
+                        <i class="icon-group"></i> <label>Fecha: </label> <?php echo $invoice->date; ?>
+
+                       <small>Fecha de la emisi&oacute;n
+                        </small>
+                        <i class="icon-group"></i> <label>C&oacute;digo de control: </label> <?php echo $invoice->control_code; ?>
+
+                       <small>Fecha de la emisi&oacute;n
+                        </small>
+                        <i class="icon-group"></i> <label>Subtotal: </label> <?php echo $invoice->total_amount; ?>
+
+                       <small>Subtotal
+                        </small>
+                        <i class="icon-group"></i> <label>Descuento: </label> <?php echo $invoice->discount; ?>
+
+                       <small>Descuento
+                        </small>
+                        <i class="icon-group"></i> <label>Total: </label> <?php echo $invoice->net_amount; ?>
+
+                       <small>Importe total
+                        </small>
+                    </blockquote>                    
+                </div>
+                <div class="col-lg-6"> 
+                    <h4>Sucursal</h4>
+                    <blockquote>                    
+                        <i class="icon-group"></i> <label>NIT: </label> <?php echo $invoice->nit; ?>
+
+                        <small>Nit de la empresa
+                        </small>
+                        <i class="icon-group"></i> <label>N&uacute;mero de autorizaci&oacute;n: </label> <?php echo $invoice->authorization_number; ?>
+
+                        <small>N&uacute;mero de la sucursal
+                        </small>
+                        <i class="icon-group"></i> <label>Direcci&oacute;n: </label> <?php echo $invoice->address; ?>
+
+                        <small>Ubicacion de la sucursal
+                        </small>
+                        <i class="icon-group"></i> <label>Tel&eacute;fono: </label> <?php echo $invoice->phone; ?>
+
+                        <small>Contacto de la sucursal
+                        </small>
+                        <i class="icon-group"></i> <label>Cuidad: </label> <?php echo $invoice->city.' - '.$invoice->country; ?>
+
+                        <small>Ciudad
+                        </small>
+                        <i class="icon-group"></i> <label>Leyenda: </label> <?php echo $invoice->legend; ?>
+
+                        <small>Ley 423
+                        </small>
+                    </blockquote>                    
+                </div>
+                <div class="col-lg-12">
+                    <h4>Detalle</h4>
+                    <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>C&oacute;digo</th>
+                                            <th>Detalle</th>
+                                            <th>Cantidad</th>
+                                            <th>Precio</th>
+                                            <th>Subtotal</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>                                        
+                                        <?php foreach($products as $product): ?>
+                                        <tr>
+                                            <td class="text-center"><?php echo $product->code; ?></td>
+                                            <td class="text-center"><?php echo $product->name; ?></td>
+                                            <td class="text-right"><?php echo $product->quantity; ?></td>
+                                            <td class="text-right"><?php echo $product->price; ?></td>
+                                            <td class="text-right"><?php echo $product->quantity*$product->price; ?></td>
+                                            </tr>                                        
+                                        <?php endforeach; ?>
+                                        
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                </div>
+               <hr>
+               <div class="col-lg-6">
+                   <h4>Seguimiento</h4>
+
+               </div>
+               <div class="col-lg-6"></div>
+               <hr>
+            </div>
+<form class="form-horizontal" method="POST" id="form" action="<?php echo asset('factura/editar/'.$invoice->public_id); ?>">
+<div class="col-lg-12">
+    <div class="col-lg-3"></div>
+    <input type="hidden" value="0" name="action" id="action">
+    <div class="col-lg-3 input-group">
+        <input type="text" name="name" placeholder="Nombre" class="form-control" />
+        <input type="text" name="mail" placeholder="Correo" class="form-control" />
+        <span class="input-group-btn">
+            <button id="mail_s" class="btn btn-primary" type="button">
+                Enviar
+            </button>
+        </span>
+    </div>
+    <div class="col-lg-3 input-group">
+        <input type="text" id="cancel" name="cancel" placeholder="Motivo" class="form-control" />
+        <span class="input-group-btn">
+            <button id="cancel_s"  class="btn btn-danger" type="button">
+                Anular
+            </button>
+        </span>
+    </div>
+    <div class="col-lg-3 input-group">
+        <input type="text" id="copy" name="copy" placeholder="Para" class="form-control" />
+        <span class="input-group-btn">
+            <button id="copy_s" class="btn btn-default" type="button">
+                Copia
+            </button>
+        </span>
+    </div>
+    
+</div>
+</form>
+        </div>
+    </div>
+</div>
+</div>
+    <?php echo HTML::script('vendor/bcore/plugins/dataTables/jquery.dataTables.js'); ?>   
+    <?php echo HTML::script('vendor/bcore/plugins/dataTables/dataTables.bootstrap.js'); ?>   
+<script type="text/javascript">
+    $("#mail_s").click(function(){
+        $('#action').val('1');
+        $('#form').submit();
+    });
+    $("#copy_s").click(function(){
+        $('#action').val('2');
+        $('#form').submit();
+    });
+    $("#cancel_s").click(function(){
+        $('#action').val('3');
+        $('#form').submit();
+    });
+</script>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('header', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
