@@ -59,7 +59,7 @@ return array(
 			//'username'  => 'root',
 			//'password'  => '',
 			'host'      => 'localhost',
-			'database'  => 'demo1',
+			'database'  => 'demo2',
 			'username'  => 'user-demo1-db',
 			'password'  => 'passNEW-parademo',
 			'charset'   => 'utf8',
