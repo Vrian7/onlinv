@@ -23,7 +23,7 @@ Route::group(array('domain'=>'{enterprice}.demo.factufacil.online'),function(){
 	
 
 	Route::get('ingresar',function($enterprice){
-		$ent = EnterPrice::where('domain',$enterprice)->first();		
+		$ent = Enterprice::where('domain',$enterprice)->first();		
 		$data = [
 			'logo' => isset($ent->logo)?$ent->logo:'asdf',
 			'domain' => $enterprice
@@ -177,6 +177,15 @@ Route::group(array('before' => 'auth'), function(){
 	Route::get('alerta/editar/{public_id}','AlertController@edit');
 	Route::post('alerta/editar/{public_id}','AlertController@update');
 	Route::get('alerta/eliminar/{public_id}','AlertController@delete');
+
+	/*** NOTIFICATIONCONTROLLER ***/
+	Route::get('notificaciones','NotificationController@index');
+	Route::get('notificacion','NotificationController@create');
+	Route::post('notificacion','NotificationController@store');
+	Route::get('notificacion/{public_id}','NotificationController@show');
+	Route::get('notificacion/editar/{public_id}','NotificationController@edit');
+	Route::post('notificacion/editar/{public_id}','NotificationController@update');
+	Route::get('notificacion/eliminar/{public_id}','NotificationController@delete');
 
 	/*** CUSTOMCLIENTCONTROLLER ***/
 	Route::get('campos_clientes','CustomClientController@index');

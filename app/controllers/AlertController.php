@@ -11,7 +11,14 @@ class AlertController extends \BaseController{
 		return View::make('alert.index',$data);
 	}
 	public function show($public_id){
-
+		$alert = Alert::join('levels','levels.id','=','alerts.level_id')
+			->where('alerts.enterprice_id',Auth::user()->enterprice_id)->where('alerts.public_id',$public_id)
+			->select('alerts.title','alerts.public_id','alerts.date','alerts.time','alerts.message','levels.description','levels.name')
+			->orderBy('alerts.id','desc')->first();
+		$data = [
+			'alert' => $alert,
+		];		
+		return View::make('alert.show',$data);
 	}
 	public function create(){
 

@@ -46,7 +46,32 @@
                         </small>
                         <i class="icon-group"></i> <label>Marca: </label>&nbsp;<span class="label label-primary">{{$brand}}</span>
                        <small>Marca del producto
-                        </small>                        
+                        </small>     
+                        @if($custom->field1!="")
+                        <i class="icon-group"></i> <label>{{$custom->field1}}: </label> {{$product->extra1}}
+                        <small>Dato personalizado
+                        </small>
+                        @endif
+                        @if($custom->field2!="")
+                        <i class="icon-group"></i> <label>{{$custom->field2}}: </label> {{$product->extra2}}
+                        <small>Dato personalizado
+                        </small>
+                        @endif
+                        @if($custom->field3!="")
+                        <i class="icon-group"></i> <label>{{$custom->field3}}: </label> {{$product->extra3}}
+                        <small>Dato personalizado
+                        </small>
+                        @endif
+                        @if($custom->field4!="")
+                        <i class="icon-group"></i> <label>{{$custom->field4}}: </label> {{$product->extra4}}
+                        <small>Dato personalizado
+                        </small>
+                        @endif
+                        @if($custom->field5!="")
+                        <i class="icon-group"></i> <label>{{$custom->field5}}: </label> {{$product->extra5}}
+                        <small>Dato personalizado
+                        </small>
+                        @endif                   
                     </blockquote>
                 </div>
                <hr>

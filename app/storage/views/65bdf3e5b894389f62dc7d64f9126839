@@ -1,17 +1,16 @@
-@extends('header')
-@section('body')
+<?php $__env->startSection('body'); ?>
 <div class="inner">
     <div class="row">
         <div class="col-lg-12">
-            <h3 class="page-header">Crear Nuevo Cliente</h3>
+            <h3 class="page-header">Editar Cliente: <?php echo $client->business_name; ?></h3>
         </div>
-    </div>    
-<form class="form-horizontal" method="POST" action="{{asset('cliente')}}">
+    </div>
+<form class="form-horizontal" method="POST" action="<?php echo asset('cliente/editar/'.$client->public_id); ?>">
 <div class="col-lg-12">
     <div class="box dark">
         <header>
             <div class="icons"><i class="icon-file-alt"></i></div>
-            <h5>Datos B&aacute;sicos</h5> 
+            <h5>Datos Obligatorios</h5>
             <div class="toolbar">
                 <ul class="nav">
                     <!-- <li><a href="#">Link</a></li>
@@ -41,14 +40,14 @@
                     <label for="text1" class="control-label col-lg-4">Raz&oacute;n Social</label>
 
                     <div class="col-lg-8">
-                        <input type="text"  placeholder="Nombre a la cual se emitir&aacute; la factura" name='business_name' class="form-control" />
+                        <input type="text"  placeholder="Nombre a la cual se emitir&aacute; la factura" value="<?php echo $client->business_name; ?>"  name='business_name' class="form-control" />
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">NIT</label>
 
                     <div class="col-lg-8">
-                        <input type="text"  placeholder="NIT o CI" name="nit" class="form-control" />
+                        <input type="text"  placeholder="NIT o CI" value="<?php echo $client->nit; ?>" name="nit" class="form-control" />
                     </div>
                 </div>
                             
@@ -88,47 +87,46 @@
                     <label for="text1" class="control-label col-lg-4">Nombre del clente</label>
 
                     <div class="col-lg-8">
-                        <input type="text"  placeholder="Nombre real del ciente" name="name" class="form-control" />
+                        <input type="text"  placeholder="Nombre real del ciente" name="name" value="<?php echo $client->name; ?>" class="form-control" />
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Direcci&oacute;n</label>
 
                     <div class="col-lg-8">
-                        <input type="text"  placeholder="Direcci&oactue;n de la empresa" name="address" class="form-control" />
+                        <input type="text"  placeholder="Direcci&oactue;n de la empresa" name="address" value="<?php echo $client->address; ?>" class="form-control" />
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Tel&eacute;fono/Celular</label>
 
                     <div class="col-lg-8">
-                        <input type="text"  placeholder="Puede ingresar mas de uno." name="phone" class="form-control" />
+                        <input type="text"  placeholder="Puede ingresar mas de uno." name="phone" value="<?php echo $client->phone; ?>" class="form-control" />
                     </div>
-                </div>
+                </div>                 
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Correo electr&oacute;nico</label>
 
                     <div class="col-lg-8">
-                        <input type="text"  placeholder="Correo v&aacute;lido." name="mail" class="form-control" />
+                        <input type="text" value="<?php echo $client->mail; ?>" placeholder="Correo v&aacute;lido." name="mail" class="form-control" />
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Datos Adicionales</label>
                     <div class="col-lg-8">
-                        <input type="text"  placeholder="Antecedentes del cliente" name="description" class="form-control" />
+                        <input type="text"  placeholder="Antecedentes del cliente" name="description" value="<?php echo $client->description; ?>" class="form-control" />
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Contacto</label>
                     <div class="col-lg-8">
-                        <input type="text" placeholder="Puede ingresar nombre, celular, cargo, etc." name="contact_data" class="form-control" />
+                        <input type="text" placeholder="Puede ingresar nombre, celular, cargo, etc." value="<?php echo $client->contact_data; ?>" name="contact_data" class="form-control" />
                     </div>
-                </div>            
+                </div>        
+            </div>    
         </div>
     </div>
-    <hr>       
-</div>
-@if($custom)
+<?php if($custom): ?>
 <div class="col-lg-12">
     <div class="box dark">
         <header>
@@ -145,58 +143,61 @@
             </div>
         </header>        
         <div id="div-3" class="accordion-body collapse collapsed body">            
-            @if($custom->field1!="")
+            <?php if($custom->field1!=""): ?>
             <div class="form-group">
-                <label for="text1" class="control-label col-lg-4">{{$custom->field1}}</label>
+                <label for="text1" class="control-label col-lg-4"><?php echo $custom->field1; ?></label>
                 <div class="col-lg-8">
-                    <input type="text"  placeholder="Campo adicional" name='field1' class="form-control" />
+                    <input type="text" value="<?php echo $client->extra1; ?>" placeholder="Campo adicional" name='field1' class="form-control" />
                 </div>
             </div>
-            @endif
-            @if($custom->field2!="")
+            <?php endif; ?>
+            <?php if($custom->field2!=""): ?>
             <div class="form-group">
-                <label for="text1" class="control-label col-lg-4">{{$custom->field2}}</label>
+                <label for="text1" class="control-label col-lg-4"><?php echo $custom->field2; ?></label>
                 <div class="col-lg-8">
-                    <input type="text"  placeholder="Campo adicional" name='field2' class="form-control" />
+                    <input type="text" value="<?php echo $client->extra2; ?>" placeholder="Campo adicional" name='field2' class="form-control" />
                 </div>
             </div>
-            @endif
-            @if($custom->field3!="")
+            <?php endif; ?>
+            <?php if($custom->field3!=""): ?>
             <div class="form-group">
-                <label for="text1" class="control-label col-lg-4">{{$custom->field3}}</label>
+                <label for="text1" class="control-label col-lg-4"><?php echo $custom->field3; ?></label>
                 <div class="col-lg-8">
-                    <input type="text"  placeholder="Campo adicional" name='field3' class="form-control" />
+                    <input type="text" value="<?php echo $client->extra3; ?>" placeholder="Campo adicional" name='field3' class="form-control" />
                 </div>
             </div>
-            @endif
-            @if($custom->field4!="")
+            <?php endif; ?>
+            <?php if($custom->field4!=""): ?>
             <div class="form-group">
-                <label for="text1" class="control-label col-lg-4">{{$custom->field4}}</label>
+                <label for="text1" class="control-label col-lg-4"><?php echo $custom->field4; ?></label>
                 <div class="col-lg-8">
-                    <input type="text"  placeholder="Campo adicional" name='field4' class="form-control" />
+                    <input type="text" value="<?php echo $client->extra4; ?>" placeholder="Campo adicional" name='field4' class="form-control" />
                 </div>
             </div>
-            @endif
-            @if($custom->field5!="")
+            <?php endif; ?>
+            <?php if($custom->field5!=""): ?>
             <div class="form-group">
-                <label for="text1" class="control-label col-lg-4">{{$custom->field5}}</label>
+                <label for="text1" class="control-label col-lg-4"><?php echo $custom->field5; ?></label>
                 <div class="col-lg-8">
-                    <input type="text"  placeholder="Campo adicional" name='field5' class="form-control" />
+                    <input type="text" value="<?php echo $client->extra5; ?>" placeholder="Campo adicional" name='field5' class="form-control" />
                 </div>
             </div>
-            @endif
+            <?php endif; ?>
         </div>
 
         
     </div>
 </div>
-@endif
+<?php endif; ?>
+    <hr>       
+
 <div class="col-lg-12">
 	<div class="col-lg-3"></div>
-	<div class="col-lg-2"><a class="btn btn-primary" href="{{asset('clientes')}}"><i class="icon-ban-circle icon-white"></i> Cancelar</a></div>
+	<div class="col-lg-2"><a class="btn btn-primary" href="<?php echo asset('clientes'); ?>"><i class="icon-ban-circle icon-white"></i> Cancelar</a></div>
 	<div class="col-lg-2"></div>
 	<div class="col-lg-2"><button class="btn btn-success" type="submit"><i class="icon-save icon-white"></i> Guardar</a></div>
 </div>
 </form>
-</div>    
-@stop
+</div>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('header', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

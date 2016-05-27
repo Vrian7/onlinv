@@ -104,8 +104,7 @@
                     <div class="col-lg-8">
                         <input type="text"  placeholder="Puede ingresar mas de uno." name="phone" value="{{$client->phone}}" class="form-control" />
                     </div>
-                </div>
-                 </div>
+                </div>                 
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Correo electr&oacute;nico</label>
 
@@ -124,11 +123,75 @@
                     <div class="col-lg-8">
                         <input type="text" placeholder="Puede ingresar nombre, celular, cargo, etc." value="{{$client->contact_data}}" name="contact_data" class="form-control" />
                     </div>
-                </div>            
+                </div>        
+            </div>    
         </div>
     </div>
-    <hr>       
+@if($custom)
+<div class="col-lg-12">
+    <div class="box dark">
+        <header>
+            <div class="icons"><i class="icon-file-alt"></i></div>
+            <h5>Datos Personalizados</h5> 
+            <div class="toolbar">
+                <ul class="nav">                    
+                    <li>
+                        <a class="accordion-toggle minimize-box" data-toggle="collapse" href="#div-3">
+                            <i class="icon-chevron-up"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </header>        
+        <div id="div-3" class="accordion-body collapse collapsed body">            
+            @if($custom->field1!="")
+            <div class="form-group">
+                <label for="text1" class="control-label col-lg-4">{{$custom->field1}}</label>
+                <div class="col-lg-8">
+                    <input type="text" value="{{$client->extra1}}" placeholder="Campo adicional" name='field1' class="form-control" />
+                </div>
+            </div>
+            @endif
+            @if($custom->field2!="")
+            <div class="form-group">
+                <label for="text1" class="control-label col-lg-4">{{$custom->field2}}</label>
+                <div class="col-lg-8">
+                    <input type="text" value="{{$client->extra2}}" placeholder="Campo adicional" name='field2' class="form-control" />
+                </div>
+            </div>
+            @endif
+            @if($custom->field3!="")
+            <div class="form-group">
+                <label for="text1" class="control-label col-lg-4">{{$custom->field3}}</label>
+                <div class="col-lg-8">
+                    <input type="text" value="{{$client->extra3}}" placeholder="Campo adicional" name='field3' class="form-control" />
+                </div>
+            </div>
+            @endif
+            @if($custom->field4!="")
+            <div class="form-group">
+                <label for="text1" class="control-label col-lg-4">{{$custom->field4}}</label>
+                <div class="col-lg-8">
+                    <input type="text" value="{{$client->extra4}}" placeholder="Campo adicional" name='field4' class="form-control" />
+                </div>
+            </div>
+            @endif
+            @if($custom->field5!="")
+            <div class="form-group">
+                <label for="text1" class="control-label col-lg-4">{{$custom->field5}}</label>
+                <div class="col-lg-8">
+                    <input type="text" value="{{$client->extra5}}" placeholder="Campo adicional" name='field5' class="form-control" />
+                </div>
+            </div>
+            @endif
+        </div>
+
+        
+    </div>
 </div>
+@endif
+    <hr>       
+
 <div class="col-lg-12">
 	<div class="col-lg-3"></div>
 	<div class="col-lg-2"><a class="btn btn-primary" href="{{asset('clientes')}}"><i class="icon-ban-circle icon-white"></i> Cancelar</a></div>

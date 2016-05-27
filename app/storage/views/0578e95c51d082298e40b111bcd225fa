@@ -1,12 +1,11 @@
-@extends('header')
-@section('body')
+<?php $__env->startSection('body'); ?>
 <div class="inner">
     <div class="row">
         <div class="col-lg-12">
             <h3 class="page-header">Crear Nuevo Cliente</h3>
         </div>
     </div>    
-<form class="form-horizontal" method="POST" action="{{asset('cliente')}}">
+<form class="form-horizontal" method="POST" action="<?php echo asset('cliente'); ?>">
 <div class="col-lg-12">
     <div class="box dark">
         <header>
@@ -128,7 +127,7 @@
     </div>
     <hr>       
 </div>
-@if($custom)
+<?php if($custom): ?>
 <div class="col-lg-12">
     <div class="box dark">
         <header>
@@ -145,58 +144,59 @@
             </div>
         </header>        
         <div id="div-3" class="accordion-body collapse collapsed body">            
-            @if($custom->field1!="")
+            <?php if($custom->field1!=""): ?>
             <div class="form-group">
-                <label for="text1" class="control-label col-lg-4">{{$custom->field1}}</label>
+                <label for="text1" class="control-label col-lg-4"><?php echo $custom->field1; ?></label>
                 <div class="col-lg-8">
                     <input type="text"  placeholder="Campo adicional" name='field1' class="form-control" />
                 </div>
             </div>
-            @endif
-            @if($custom->field2!="")
+            <?php endif; ?>
+            <?php if($custom->field2!=""): ?>
             <div class="form-group">
-                <label for="text1" class="control-label col-lg-4">{{$custom->field2}}</label>
+                <label for="text1" class="control-label col-lg-4"><?php echo $custom->field2; ?></label>
                 <div class="col-lg-8">
                     <input type="text"  placeholder="Campo adicional" name='field2' class="form-control" />
                 </div>
             </div>
-            @endif
-            @if($custom->field3!="")
+            <?php endif; ?>
+            <?php if($custom->field3!=""): ?>
             <div class="form-group">
-                <label for="text1" class="control-label col-lg-4">{{$custom->field3}}</label>
+                <label for="text1" class="control-label col-lg-4"><?php echo $custom->field3; ?></label>
                 <div class="col-lg-8">
                     <input type="text"  placeholder="Campo adicional" name='field3' class="form-control" />
                 </div>
             </div>
-            @endif
-            @if($custom->field4!="")
+            <?php endif; ?>
+            <?php if($custom->field4!=""): ?>
             <div class="form-group">
-                <label for="text1" class="control-label col-lg-4">{{$custom->field4}}</label>
+                <label for="text1" class="control-label col-lg-4"><?php echo $custom->field4; ?></label>
                 <div class="col-lg-8">
                     <input type="text"  placeholder="Campo adicional" name='field4' class="form-control" />
                 </div>
             </div>
-            @endif
-            @if($custom->field5!="")
+            <?php endif; ?>
+            <?php if($custom->field5!=""): ?>
             <div class="form-group">
-                <label for="text1" class="control-label col-lg-4">{{$custom->field5}}</label>
+                <label for="text1" class="control-label col-lg-4"><?php echo $custom->field5; ?></label>
                 <div class="col-lg-8">
                     <input type="text"  placeholder="Campo adicional" name='field5' class="form-control" />
                 </div>
             </div>
-            @endif
+            <?php endif; ?>
         </div>
 
         
     </div>
 </div>
-@endif
+<?php endif; ?>
 <div class="col-lg-12">
 	<div class="col-lg-3"></div>
-	<div class="col-lg-2"><a class="btn btn-primary" href="{{asset('clientes')}}"><i class="icon-ban-circle icon-white"></i> Cancelar</a></div>
+	<div class="col-lg-2"><a class="btn btn-primary" href="<?php echo asset('clientes'); ?>"><i class="icon-ban-circle icon-white"></i> Cancelar</a></div>
 	<div class="col-lg-2"></div>
 	<div class="col-lg-2"><button class="btn btn-success" type="submit"><i class="icon-save icon-white"></i> Guardar</a></div>
 </div>
 </form>
 </div>    
-@stop
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('header', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

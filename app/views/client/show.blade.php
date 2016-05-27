@@ -52,7 +52,32 @@
                 </div>
                 <div class="col-lg-6"> 
                 <h4>Informaci&oacute;n Personalizada</h4>
-                    <blockquote>
+                    <blockquote>                        
+                        @if($custom->field1!="")
+                        <i class="icon-group"></i> <label>{{$custom->field1}}: </label> {{$client->extra1}}
+                        <small>Dato personalizado
+                        </small>
+                        @endif
+                        @if($custom->field2!="")
+                        <i class="icon-group"></i> <label>{{$custom->field2}}: </label> {{$client->extra2}}
+                        <small>Dato personalizado
+                        </small>
+                        @endif
+                        @if($custom->field3!="")
+                        <i class="icon-group"></i> <label>{{$custom->field3}}: </label> {{$client->extra3}}
+                        <small>Dato personalizado
+                        </small>
+                        @endif
+                        @if($custom->field4!="")
+                        <i class="icon-group"></i> <label>{{$custom->field4}}: </label> {{$client->extra4}}
+                        <small>Dato personalizado
+                        </small>
+                        @endif
+                        @if($custom->field5!="")
+                        <i class="icon-group"></i> <label>{{$custom->field5}}: </label> {{$client->extra5}}
+                        <small>Dato personalizado
+                        </small>
+                        @endif
                     </blockquote>
                 </div>
                <hr>

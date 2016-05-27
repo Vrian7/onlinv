@@ -124,6 +124,8 @@ class UserController extends \BaseController{
 		//return $password;
 		if (Auth::attempt(array('username' => $user, 'password' => $password)))
 		{
+			$ent = Enterprice::where('id',Auth::user()->enterprice_id)->first();
+			Session::put('enterprice',$ent->name);
     		return Redirect::intended('inicio');
 		}
 		return Redirect::intended('ingresar');

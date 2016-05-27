@@ -216,6 +216,11 @@ class InitialDatabase extends Migration {
 			$table->string('code');			
 			$table->double('price')->default(0);
 			$table->unsignedInteger('public_id');
+			$table->string('extra1')->nullable();
+			$table->string('extra2')->nullable();
+			$table->string('extra3')->nullable();
+			$table->string('extra4')->nullable();
+			$table->string('extra5')->nullable();
 			$table->timestamps();
 			$table->softDeletes();			
 			$table->foreign('category_id')->references('id')->on('categories');
@@ -390,11 +395,32 @@ class InitialDatabase extends Migration {
 			$table->foreign('level_id')->references('id')->on('levels');
 			$table->foreign('enterprice_id')->references('id')->on('enterprices');
 		});
+		Schema::create('notifications',function($table){
+			$table->increments('id');
+			$table->unsignedInteger('public_id');
+			$table->unsignedInteger('enterprice_id')->index();
+			$table->unsignedInteger('level_id')->index();
+			$table->string('title');
+			$table->string('message');
+			$table->string('description')->nullable();
+			$table->date('date');
+			$table->time('time');
+			$table->timestamps();
+			$table->softDeletes();
+			$table->foreign('level_id')->references('id')->on('levels');
+			$table->foreign('enterprice_id')->references('id')->on('enterprices');
+		});
 		/*** CREATING TRIGERS***/
 		DB::unprepared('
 			CREATE TRIGGER alerts_before_insert BEFORE INSERT ON `alerts` FOR EACH ROW 
 			BEGIN
     			SET NEW.public_id = (SELECT COALESCE (MAX(public_id),0) + 1 FROM alerts WHERE enterprice_id = NEW.enterprice_id );
+			END
+		');
+		DB::unprepared('
+			CREATE TRIGGER notifications_before_insert BEFORE INSERT ON `notifications` FOR EACH ROW 
+			BEGIN
+    			SET NEW.public_id = (SELECT COALESCE (MAX(public_id),0) + 1 FROM notifications WHERE enterprice_id = NEW.enterprice_id );
 			END
 		');
 		DB::unprepared('

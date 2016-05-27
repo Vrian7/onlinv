@@ -1,0 +1,101 @@
+<?php $__env->startSection('body'); ?>
+<div class="inner">
+    <div class="row">
+        <div class="col-lg-12">
+            <h2> Productos </h2>
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+    <div class="col-lg-12">
+        <div class="box primary">            
+            <header>
+                    <div class="icons"><i class="icon-group"></i></div>
+                    <h5>Producto: <?php echo $product->name; ?></h5>
+                    <div class="toolbar">
+                        <a class="btn btn-danger btn-sm btn-grad" href="">Eliminar</a>
+                    </div>
+                </header>
+            <div class="panel-body">
+                <div class="col-lg-6">           
+                    <h4>Informaci&oacute;n B&aacute;sica</h4>
+                    <blockquote>
+                       <i class="icon-group"></i> <label>C&oacute;digo del producto: </label> <?php echo $product->code; ?>
+
+                       <small>Dato para identifacr al producto
+                        </small>
+                        <i class="icon-group"></i> <label>Nombre: </label> <?php echo $product->name; ?>
+
+                       <small>Nombre o Descripci&oacute;n del producto
+                        </small>
+                        <i class="icon-group"></i> <label>Precio: </label> <?php echo $product->price; ?>
+
+                       <small>Precio general o nominal
+                        </small>
+                    </blockquote>
+                    
+                </div>
+                <div class="col-lg-6"> 
+                <h4>Informaci&oacute;n Adicional</h4>
+                    <blockquote>
+                       <i class="icon-group"></i> <label>Descripci&oacute;n: </label> <?php echo $product->description; ?>
+
+                       <small>Datos adicionales dle producto
+                        </small>
+                        <i class="icon-group"></i> <label>Categor&iacute;a: </label> <span class="label label-primary"><?php echo $category; ?></span>                       <small>Categorizaci&oacute;n del producto
+                        </small>
+                        <i class="icon-group"></i> <label>Unidad: </label> <span class="label label-primary"><?php echo $unit; ?></span>
+                       <small>Unidad de medida del producto
+                        </small>
+                        <i class="icon-group"></i> <label>Marca: </label>&nbsp;<span class="label label-primary"><?php echo $brand; ?></span>
+                       <small>Marca del producto
+                        </small>     
+                        <?php if($custom->field1!=""): ?>
+                        <i class="icon-group"></i> <label><?php echo $custom->field1; ?>: </label> <?php echo $product->extra1; ?>
+
+                        <small>Dato personalizado
+                        </small>
+                        <?php endif; ?>
+                        <?php if($custom->field2!=""): ?>
+                        <i class="icon-group"></i> <label><?php echo $custom->field2; ?>: </label> <?php echo $product->extra2; ?>
+
+                        <small>Dato personalizado
+                        </small>
+                        <?php endif; ?>
+                        <?php if($custom->field3!=""): ?>
+                        <i class="icon-group"></i> <label><?php echo $custom->field3; ?>: </label> <?php echo $product->extra3; ?>
+
+                        <small>Dato personalizado
+                        </small>
+                        <?php endif; ?>
+                        <?php if($custom->field4!=""): ?>
+                        <i class="icon-group"></i> <label><?php echo $custom->field4; ?>: </label> <?php echo $product->extra4; ?>
+
+                        <small>Dato personalizado
+                        </small>
+                        <?php endif; ?>
+                        <?php if($custom->field5!=""): ?>
+                        <i class="icon-group"></i> <label><?php echo $custom->field5; ?>: </label> <?php echo $product->extra5; ?>
+
+                        <small>Dato personalizado
+                        </small>
+                        <?php endif; ?>                   
+                    </blockquote>
+                </div>
+               <hr>
+            </div>
+<div class="col-lg-12">
+    <div class="col-lg-3"></div>
+    <div class="col-lg-2"><a class="btn btn-warning" href="<?php echo asset('productos'); ?>"><i class="icon-ban-circle icon-white"></i> Cancelar</a></div>
+    <div class="col-lg-2"></div>
+    <div class="col-lg-2"><a class="btn btn-primary" href="<?php echo asset('producto/editar/'.$product->public_id); ?>"><i class="icon-pencil icon-white"></i> Editar</a></div>
+</div>
+        </div>
+    </div>
+</div>
+</div>
+<?php echo HTML::script('vendor/bcore/plugins/dataTables/jquery.dataTables.js'); ?>   
+    <?php echo HTML::script('vendor/bcore/plugins/dataTables/dataTables.bootstrap.js'); ?>   
+
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('header', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

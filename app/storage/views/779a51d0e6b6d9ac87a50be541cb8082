@@ -6,38 +6,51 @@
 <html>
 	<head>
 		<meta charset="UTF-8" />
-		<title>@yield('title','Factufacil')</title>
+		<title><?php echo $__env->yieldContent('title','Factufacil'); ?></title>
 		<meta content="width=device-width, initial-scale=1.0" name="viewport" />
 		<meta content="" name="description" />
 		<meta content="" name="author" />
 		<!-- GLOBAL STYLES -->
-		{{ HTML::style('vendor/bcore/plugins/bootstrap/css/bootstrap.css') }}
-		{{ HTML::style('vendor/bcore/css/main.css') }}
-		{{ HTML::style('vendor/bcore/css/theme.css') }}
-		{{ HTML::style('vendor/bcore/css/MoneAdmin.css') }}		
-		{{ HTML::style('vendor/bcore/plugins/Font-Awesome/css/font-awesome.css') }}
-		{{ HTML::style('vendor/bcore/plugins/dataTables/dataTables.bootstrap.css') }}
-		{{ HTML::style('vendor/bcore/plugins/chosen/chosen.min.css') }}
-		{{ HTML::style('vendor/bcore/plugins/datepicker/css/datepicker.css') }}
-		{{ HTML::style('vendor/bcore/plugins/gritter/css/jquery.gritter.css') }}
+		<?php echo HTML::style('vendor/bcore/plugins/bootstrap/css/bootstrap.css'); ?>
+
+		<?php echo HTML::style('vendor/bcore/css/main.css'); ?>
+
+		<?php echo HTML::style('vendor/bcore/css/theme.css'); ?>
+
+		<?php echo HTML::style('vendor/bcore/css/MoneAdmin.css'); ?>		
+		<?php echo HTML::style('vendor/bcore/plugins/Font-Awesome/css/font-awesome.css'); ?>
+
+		<?php echo HTML::style('vendor/bcore/plugins/dataTables/dataTables.bootstrap.css'); ?>
+
+		<?php echo HTML::style('vendor/bcore/plugins/chosen/chosen.min.css'); ?>
+
+		<?php echo HTML::style('vendor/bcore/plugins/datepicker/css/datepicker.css'); ?>
+
+		<?php echo HTML::style('vendor/bcore/plugins/gritter/css/jquery.gritter.css'); ?>
+
 		<!--END GLOBAL STYLES -->
 		<!-- PAGE LEVEL STYLES -->
-		{{-- HTML::style('vendor/bcore/css/layout2.css') --}}
-		{{-- HTML::style('vendor/bcore/plugins/flot/examples/examples.css') --}}
-		{{-- HTML::style('vendor/bcore/plugins/timeline/timeline.css') --}}
+		<?php /* HTML::style('vendor/bcore/css/layout2.css') */ ?>
+		<?php /* HTML::style('vendor/bcore/plugins/flot/examples/examples.css') */ ?>
+		<?php /* HTML::style('vendor/bcore/plugins/timeline/timeline.css') */ ?>
 
 		
 		<!-- END PAGE LEVEL  STYLES -->
 
-		{{ HTML::script('vendor/bcore/plugins/jquery-2.0.3.min.js') }}
-		{{ HTML::script('vendor/bcore/plugins/bootstrap/js/bootstrap.js') }}
-		{{ HTML::script('vendor/bcore/js/login.js') }}
-		{{ HTML::script('vendor/bcore/plugins/chosen/chosen.jquery.min.js') }}
-		{{ HTML::script('vendor/bcore/plugins/datepicker/js/bootstrap-datepicker.js') }}	
-		{{ HTML::script('vendor/bcore/plugins/gritter/js/jquery.gritter.js') }}
-		{{-- HTML::script('vendor/bcore/js/moreNoti.js') --}}  
+		<?php echo HTML::script('vendor/bcore/plugins/jquery-2.0.3.min.js'); ?>
+
+		<?php echo HTML::script('vendor/bcore/plugins/bootstrap/js/bootstrap.js'); ?>
+
+		<?php echo HTML::script('vendor/bcore/js/login.js'); ?>
+
+		<?php echo HTML::script('vendor/bcore/plugins/chosen/chosen.jquery.min.js'); ?>
+
+		<?php echo HTML::script('vendor/bcore/plugins/datepicker/js/bootstrap-datepicker.js'); ?>	
+		<?php echo HTML::script('vendor/bcore/plugins/gritter/js/jquery.gritter.js'); ?>
+
+		<?php /* HTML::script('vendor/bcore/js/moreNoti.js') */ ?>  
 		
-		@yield('head')
+		<?php echo $__env->yieldContent('head'); ?>
 	</head>
 	<body class="padTop53 ">
 		<div id="wrap" >
@@ -52,7 +65,7 @@
 	                <header class="navbar-header">
 
 	                    <a href="index.html" class="navbar-brand">
-	                    <img src="{{asset('vendor/bcore/img/logo_factufacil.png')}}" alt="" />
+	                    <img src="<?php echo asset('vendor/bcore/img/logo_factufacil.png'); ?>" alt="" />
 	                        
 	                        </a>
 	                </header>
@@ -71,26 +84,27 @@
 	                        </a>
 
 	                        <ul class="dropdown-menu dropdown-messages">
-	                         @foreach($notifications as $notification)
+	                         <?php foreach($notifications as $notification): ?>
 	                            <li>
-	                                <a href="{{asset('notificacion/'.$notification->public_id)}}">
+	                                <a href="<?php echo asset('notificacion/'.$notification->public_id); ?>">
 	                                    <div>
-	                                       <strong>{{$notification->title}}</strong>
+	                                       <strong><?php echo $notification->title; ?></strong>
 	                                        <span class="pull-right text-muted">
-	                                            <em>{{$notification->date}}</em>
+	                                            <em><?php echo $notification->date; ?></em>
 	                                        </span>
 	                                    </div>
-	                                    <div>{{$notification->message}}
+	                                    <div><?php echo $notification->message; ?>
+
 	                                        <br />
-	                                        <span class="label {{$alert->description}}">{{$notification->name}}</span> 
+	                                        <span class="label <?php echo $alert->description; ?>"><?php echo $notification->name; ?></span> 
 
 	                                    </div>
 	                                </a>
 	                            </li>
 	                            <li class="divider"></li>
-	                      	@endforeach	                            
+	                      	<?php endforeach; ?>	                            
 	                            <li>
-	                                <a class="text-center" href="{{asset('notificaciones')}}">
+	                                <a class="text-center" href="<?php echo asset('notificaciones'); ?>">
 	                                    <strong>Ver mas notificaciones</strong>
 	                                    <i class="icon-angle-right"></i>
 	                                </a>
@@ -112,26 +126,27 @@
 								->select('alerts.title','alerts.public_id','alerts.date','alerts.time','alerts.message','levels.description','levels.name')
 								->orderBy('level_id','desc')->orderBy('date','desc')->get();
 	                       	?>
-	                       	@foreach($alerts as $alert)
+	                       	<?php foreach($alerts as $alert): ?>
 	                            <li>
-	                                <a href="{{asset('alerta/'.$alert->public_id)}}">
+	                                <a href="<?php echo asset('alerta/'.$alert->public_id); ?>">
 	                                    <div>
-	                                       <strong>{{$alert->title}}</strong>
+	                                       <strong><?php echo $alert->title; ?></strong>
 	                                        <span class="pull-right text-muted">
-	                                            <em>{{$alert->date}}</em>
+	                                            <em><?php echo $alert->date; ?></em>
 	                                        </span>
 	                                    </div>
-	                                    <div>{{$alert->message}}
+	                                    <div><?php echo $alert->message; ?>
+
 	                                        <br />
-	                                        <span class="label {{$alert->description}}">{{$alert->name}}</span> 
+	                                        <span class="label <?php echo $alert->description; ?>"><?php echo $alert->name; ?></span> 
 
 	                                    </div>
 	                                </a>
 	                            </li>
 	                            <li class="divider"></li>
-	                      	@endforeach	                        
+	                      	<?php endforeach; ?>	                        
 	                            <li>
-	                                <a class="text-center" href="{{asset('alertas')}}">
+	                                <a class="text-center" href="<?php echo asset('alertas'); ?>">
 	                                    <strong>Ver todas las alertas</strong>
 	                                    <i class="icon-angle-right"></i>
 	                                </a>
@@ -214,12 +229,12 @@
 	                        </a>
 
 	                        <ul class="dropdown-menu dropdown-user">
-	                            <li><a href="{{asset('usuario/editar/'.Auth::user()->public_id)}}"><i class="icon-user"></i> Perfil de usuario </a>
+	                            <li><a href="<?php echo asset('usuario/editar/'.Auth::user()->public_id); ?>"><i class="icon-user"></i> Perfil de usuario </a>
 	                            </li>
 	                            <li><a href="#"><i class="icon-gear"></i> Cuenta</a>
 	                            </li>
 	                            <li class="divider"></li>
-	                            <li><a href="{{asset('salir')}}"><i class="icon-signout"></i> Salir </a>
+	                            <li><a href="<?php echo asset('salir'); ?>"><i class="icon-signout"></i> Salir </a>
 	                            </li>
 	                        </ul>
 
@@ -236,14 +251,15 @@
 	       <div id="left" >
 	            <div class="media user-media well-small">
 	                <a class="user-link" href="#">
-	                    <img class="media-object img-thumbnail user-img" alt="Fotograf&iacute;a de usuario" src="{{asset('uploads/users/'.Auth::user()->avatar)}}"  height="100" width="100"/>
+	                    <img class="media-object img-thumbnail user-img" alt="Fotograf&iacute;a de usuario" src="<?php echo asset('uploads/users/'.Auth::user()->avatar); ?>"  height="100" width="100"/>
 	                </a>
 	                <br />
 	                <div class="media-body">
-	                    <h5 class="media-heading"> {{Auth::user()->name}}</h5>
+	                    <h5 class="media-heading"> <?php echo Auth::user()->name; ?></h5>
 	                    <ul class="list-unstyled user-info">	                        
 	                        <li>
-	                             <!--<a class="btn btn-success btn-xs btn-circle" style="width: 10px;height: 12px;"></a>--> {{Session::get('enterprice')}}
+	                             <!--<a class="btn btn-success btn-xs btn-circle" style="width: 10px;height: 12px;"></a>--> <?php echo Session::get('enterprice'); ?>
+
 	                        </li>
 	                       
 	                    </ul>
@@ -255,11 +271,11 @@
 
 	                
 	                <li class="panel active">
-	                    <a href="{{asset('inicio')}}" >
+	                    <a href="<?php echo asset('inicio'); ?>" >
 	                        <i class="icon-desktop"></i> Resumen		   	                      
 	                    </a>                   
 	                </li>
-	                <li><a href="{{asset('clientes')}}"><i class="icon-group"></i> Clientes </a></li>
+	                <li><a href="<?php echo asset('clientes'); ?>"><i class="icon-group"></i> Clientes </a></li>
 
 
 
@@ -274,12 +290,12 @@
 	                    </a>
 	                    <ul class="collapse" id="component-nav">
 	                       
-	                        <li class=""><a href="{{asset('productos')}}"><i class="icon-angle-right"></i> Productos </a></li>
-	                         <li class=""><a href="{{asset('categorias')}}"><i class="icon-angle-right"></i> Categorias	 </a></li>
-	                        <li class=""><a href="{{asset('unidades')}}"><i class="icon-angle-right"></i> Unidades </a></li>
-	                        <li class=""><a href="{{asset('marcas')}}"><i class="icon-angle-right"></i> Marcas </a></li>
-	                        <li class=""><a href="{{asset('inventarios')}}"><i class="icon-angle-right"></i> Asignaci&oacute;n </a></li>
-	                        <li class=""><a href="{{asset('campos_productos')}}"><i class="icon-angle-right"></i> Campos Adicionales </a></li>
+	                        <li class=""><a href="<?php echo asset('productos'); ?>"><i class="icon-angle-right"></i> Productos </a></li>
+	                         <li class=""><a href="<?php echo asset('categorias'); ?>"><i class="icon-angle-right"></i> Categorias	 </a></li>
+	                        <li class=""><a href="<?php echo asset('unidades'); ?>"><i class="icon-angle-right"></i> Unidades </a></li>
+	                        <li class=""><a href="<?php echo asset('marcas'); ?>"><i class="icon-angle-right"></i> Marcas </a></li>
+	                        <li class=""><a href="<?php echo asset('inventarios'); ?>"><i class="icon-angle-right"></i> Asignaci&oacute;n </a></li>
+	                        <li class=""><a href="<?php echo asset('campos_productos'); ?>"><i class="icon-angle-right"></i> Campos Adicionales </a></li>
 	                    </ul>
 	                </li>
 	                <li class="panel ">
@@ -292,8 +308,8 @@
 	                          &nbsp; <span class="label label-success">5</span>&nbsp;
 	                    </a>
 	                    <ul class="collapse" id="form-nav">
-	                        <li class=""><a href="{{asset('facturas')}}"><i class="icon-angle-right"></i> Facturas </a></li>
-	                        <li class=""><a href="{{asset('cobros')}}"><i class="icon-angle-right"></i> Cobros </a></li>	                        
+	                        <li class=""><a href="<?php echo asset('facturas'); ?>"><i class="icon-angle-right"></i> Facturas </a></li>
+	                        <li class=""><a href="<?php echo asset('cobros'); ?>"><i class="icon-angle-right"></i> Cobros </a></li>	                        
 	                    </ul>
 	                </li>
 
@@ -307,9 +323,9 @@
 	                          &nbsp; <span class="label label-info">6</span>&nbsp;
 	                    </a>
 	                    <ul class="collapse" id="pagesr-nav">
-	                        <li><a href="{{asset('sucursales')}}"><i class="icon-angle-right"></i> Sucursales </a></li>
-	                        <li><a href="{{asset('examen')}}"><i class="icon-angle-right"></i> Examen SFV </a></li>
-	                        <li><a href="{{asset('libro/ventas')}}"><i class="icon-angle-right"></i> Libro de ventas </a></li>
+	                        <li><a href="<?php echo asset('sucursales'); ?>"><i class="icon-angle-right"></i> Sucursales </a></li>
+	                        <li><a href="<?php echo asset('examen'); ?>"><i class="icon-angle-right"></i> Examen SFV </a></li>
+	                        <li><a href="<?php echo asset('libro/ventas'); ?>"><i class="icon-angle-right"></i> Libro de ventas </a></li>
 	                    </ul>
 	                </li>	                
 	                <li class="panel ">
@@ -323,18 +339,18 @@
 	                    </a>
 	                    <ul class="collapse" id="config-nav">
 	                       
-	                        <li class=""><a href="{{asset('usuarios')}}"><i class="icon-angle-right"></i> Usuarios </a></li>
-	                         <li class=""><a href="{{asset('campos_clientes')}}"><i class="icon-angle-right"></i> Campos adicionales</a></li>
+	                        <li class=""><a href="<?php echo asset('usuarios'); ?>"><i class="icon-angle-right"></i> Usuarios </a></li>
+	                         <li class=""><a href="<?php echo asset('campos_clientes'); ?>"><i class="icon-angle-right"></i> Campos adicionales</a></li>
 	                    </ul>
 	                </li>
-	                <li><a href="{{asset('salir')}}"><i class="icon-signout"></i> Salir del sistema </a></li>
+	                <li><a href="<?php echo asset('salir'); ?>"><i class="icon-signout"></i> Salir del sistema </a></li>
 
 	            </ul>
 
 	        </div>
 	        <!--END MENU SECTION -->	        
 	        <div id="content">
-	        	@yield('body')
+	        	<?php echo $__env->yieldContent('body'); ?>
 	        </div>
 	        
 		</div>
@@ -347,11 +363,11 @@
 		
 	</body>
 </html>
-@if(Session::get('title'))
+<?php if(Session::get('title')): ?>
 <script type="text/javascript">
     function notification(){
-        ti = '{{Session::get('title')}}';
-        te = '{{Session::get('text')}}';
+        ti = '<?php echo Session::get('title'); ?>';
+        te = '<?php echo Session::get('text'); ?>';
         $.gritter.add({            
             title: ti,            
             text: te,            
@@ -361,4 +377,4 @@
     }
     notification();
 </script>
-@endif
+<?php endif; ?>

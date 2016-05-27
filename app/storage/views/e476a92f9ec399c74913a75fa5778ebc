@@ -1,12 +1,11 @@
-@extends('header')
-@section('body')
+<?php $__env->startSection('body'); ?>
 <div class="inner">
     <div class="row">
         <div class="col-lg-12">
-            <h3 class="page-header">Editar Producto: {{$product->name}}</h3>
+            <h3 class="page-header">Crear Nuevo Producto</h3>
         </div>
     </div>
-<form class="form-horizontal" method="POST" action="{{asset('producto/editar/'.$product->public_id)}}">
+<form class="form-horizontal" method="POST" action="<?php echo asset('producto'); ?>">
 <div class="col-lg-12">
     <div class="box dark">
         <header>
@@ -39,19 +38,19 @@
                     <label for="text1" class="control-label col-lg-4">C&oacute;digo del producto</label>
 
                     <div class="col-lg-8">
-                        <input type="text" value="{{$product->code}}" placeholder="Ingrese un c&oacute;digo para identificar a su producto" name='code' class="form-control" />
+                        <input type="text"  placeholder="Ingrese un c&oacute;digo para identificar a su producto" name='code' class="form-control" />
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Nombre o denominaci&oacute;n del producto</label>
                     <div class="col-lg-8">
-                        <input type="text" value="{{$product->name}}"  placeholder="Ingrese un nombre para el producto" name="name" class="form-control" />
+                        <input type="text"  placeholder="Ingrese un nombre para el producto" name="name" class="form-control" />
                     </div>
                 </div>                
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Precio nominal del producto</label>
                     <div class="col-lg-8">
-                        <input type="text" value="{{$product->price}}" placeholder="Ingrese un precio nominal" name="price" class="form-control" />
+                        <input type="text"  placeholder="Ingrese un precio nominal" name="price" class="form-control" />
                     </div>
                 </div>
         </div>
@@ -89,20 +88,16 @@
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Descripci&oacute;on adicional</label>
                     <div class="col-lg-8">
-                        <input type="text" value="{{$product->description}}" placeholder="Descripci&oacute;n adicional para identificarlo." name="description" class="form-control" />
+                        <input type="text"  placeholder="Descripci&oacute;n adicional para identificarlo." name="description" class="form-control" />
                     </div>
                 </div>      
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Categor&iacute;a</label>
                     <div class="col-lg-8">
                         <select data-placeholder="Categorizacion de productos" id="category" name="category" class="form-control chzn-select chzn-rtl" tabindex="9">
-                            @foreach($categories as $category)
-                                @if($category->id == $product->category_id)
-                                    <option value="{{$category->id}}" selected>{{$category->name}}</option>
-                                @else
-                                    <option value="{{$category->id}}">{{$category->name}}</option>
-                                @endif
-                            @endforeach                        
+                            <?php foreach($categories as $category): ?>
+                                <option value="<?php echo $category->id; ?>"><?php echo $category->name; ?></option>
+                            <?php endforeach; ?>                        
                         </select>
                     </div>
                 </div>
@@ -110,13 +105,9 @@
                     <label for="text1" class="control-label col-lg-4">Unidad</label>
                     <div class="col-lg-8">
                         <select data-placeholder="Unidad del producto" name="unit" class="form-control chzn-select chzn-rtl" tabindex="9">
-                            @foreach($units as $unit)                            
-                                @if($unit->id == $product->unit_id)
-                                    <option value="{{$unit->id}}" selected>{{$unit->name}}</option>
-                                @else
-                                    <option value="{{$unit->id}}">{{$unit->name}}</option>
-                                @endif
-                            @endforeach                        
+                            <?php foreach($units as $unit): ?>
+                                <option value="<?php echo $unit->id; ?>"><?php echo $unit->name; ?></option>
+                            <?php endforeach; ?>                        
                         </select>
                     </div>
                 </div>
@@ -124,71 +115,68 @@
                     <label for="text1" class="control-label col-lg-4">Marca</label>
                     <div class="col-lg-8">
                         <select data-placeholder="Marca del producto" name="brand" class="form-control chzn-select chzn-rtl" tabindex="9">
-                            @foreach($brands as $brand)
-                                @if($brand->id == $product->brand_id)
-                                    <option value="{{$brand->id}}" selected>{{$brand->name}}</option>
-                                @else
-                                    <option value="{{$brand->id}}">{{$brand->name}}</option>
-                                @endif
-                            @endforeach                        
+                            <?php foreach($brands as $brand): ?>
+                                <option value="<?php echo $brand->id; ?>"><?php echo $brand->name; ?></option>
+                            <?php endforeach; ?>                        
                         </select>
                     </div>
-                </div>           
-                @if($custom->field1)
-                <div class="form-group" id="extra1">
-                    <label for="text1" class="control-label col-lg-4">{{$custom->field1}}</label>
+                </div>                
+                <?php if($custom->field1): ?>
+                <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4"><?php echo $custom->field1; ?></label>
                     <div class="col-lg-8">
-                        <input type="text" value="{{$product->extra1}}" placeholder="Campo personalizado." name="field1" class="form-control" />
+                        <input type="text"  placeholder="Campo personalizado." name="field1" class="form-control" />
                     </div>
                 </div> 
-                @endif
-                @if($custom->field2)
-                <div class="form-group" id="extra2">
-                    <label for="text1" class="control-label col-lg-4">{{$custom->field2}}</label>
+                <?php endif; ?>
+                <?php if($custom->field2): ?>
+                <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4"><?php echo $custom->field2; ?></label>
                     <div class="col-lg-8">
-                        <input type="text" value="{{$product->extra2}}" placeholder="Campo personalizado." name="field2" class="form-control" />
+                        <input type="text"  placeholder="Campo personalizado." name="field2" class="form-control" />
                     </div>
                 </div> 
-                @endif
-                @if($custom->field3)
-                <div class="form-group" id="extra3">
-                    <label for="text1" class="control-label col-lg-4">{{$custom->field3}}</label>
+                <?php endif; ?>
+                <?php if($custom->field3): ?>
+                <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4"><?php echo $custom->field3; ?></label>
                     <div class="col-lg-8">
-                        <input type="text" value="{{$product->extra3}}" placeholder="Campo personalizado." name="field3" class="form-control" />
+                        <input type="text"  placeholder="Campo personalizado." name="field3" class="form-control" />
                     </div>
                 </div> 
-                @endif
-                @if($custom->field4)
-                <div class="form-group" id="extra4">
-                    <label for="text1" class="control-label col-lg-4">{{$custom->field4}}</label>
+                <?php endif; ?>
+                <?php if($custom->field4): ?>
+                <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4"><?php echo $custom->field4; ?></label>
                     <div class="col-lg-8">
-                        <input type="text" value="{{$product->extra4}}" placeholder="Campo personalizado." name="field4" class="form-control" />
+                        <input type="text"  placeholder="Campo personalizado." name="field4" class="form-control" />
                     </div>
                 </div> 
-                @endif
-                @if($custom->field5)
-                <div class="form-group" id="extra5">
-                    <label for="text1" class="control-label col-lg-4">{{$custom->field5}}</label>
+                <?php endif; ?>
+                <?php if($custom->field5): ?>
+                <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4"><?php echo $custom->field5; ?></label>
                     <div class="col-lg-8">
-                        <input type="text" value="{{$product->extra5}}" placeholder="Campo personalizado." name="field5" class="form-control" />
+                        <input type="text"  placeholder="Campo personalizado." name="field5" class="form-control" />
                     </div>
                 </div> 
-                @endif
+                <?php endif; ?>
         </div>
     </div>
     <hr>       
 </div>
 <div class="col-lg-12">
 	<div class="col-lg-3"></div>
-	<div class="col-lg-2"><a class="btn btn-primary" href="{{asset('productos')}}"><i class="icon-ban-circle icon-white"></i> Cancelar</a></div>
+	<div class="col-lg-2"><a class="btn btn-primary" href="<?php echo asset('productos'); ?>"><i class="icon-ban-circle icon-white"></i> Cancelar</a></div>
 	<div class="col-lg-2"></div>
 	<div class="col-lg-2"><button class="btn btn-success" type="submit"><i class="icon-save icon-white"></i> Guardar</a></div>
 </div>
 </form>
 </div>
-{{ HTML::script('vendor/bcore/js/jquery-ui.min.js') }}
+<?php echo HTML::script('vendor/bcore/js/jquery-ui.min.js'); ?>
+
 <script type="text/javascript">
-    customs = {{$customs}};        
+    customs = <?php echo $customs; ?>;        
     $('#category').change(function(){        
         cleanAdditional();                
         customs.forEach(function(custom) {                        
@@ -223,4 +211,5 @@
         $('#extra5').remove();   
     }
 </script>
-@stop
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('header', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

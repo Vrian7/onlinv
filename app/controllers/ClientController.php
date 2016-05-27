@@ -9,15 +9,21 @@ class ClientController extends \BaseController{
 	}
 	public function show($public_id){
 		$client = Client::where('enterprice_id',Auth::user()->enterprice_id)->where('public_id',$public_id)->first();
+		$custom = CustomClient::where('enterprice_id',Auth::user()->enterprice_id)->first();
 		$data = [
 			'client' => $client,
+			'custom' => $custom,
 		];
 		return View::make('client.show',$data);
 	}
 	public function create(){				
-		return View::make('client.create');
+		$custom = CustomClient::where('enterprice_id',Auth::user()->enterprice_id)->first();
+		$data = [			
+			'custom' => $custom,
+		];
+		return View::make('client.create',$data);
 	}
-	public function store(){
+	public function store(){				
 		$client = new Client();
 		$client->enterprice_id = Auth::user()->enterprice_id;
 		$client->name = Input::get('name');
@@ -30,8 +36,19 @@ class ClientController extends \BaseController{
 		$client->debt = 0;
 		$client->flow = 0;
 		$client->contact_data = Input::get('contact_data');				
+		if(Input::get('field1'))
+			$client->extra1 = Input::get('field1');
+		if(Input::get('field2'))
+			$client->extra2 = Input::get('field2');
+		if(Input::get('field3'))
+			$client->extra3 = Input::get('field3');
+		if(Input::get('field4'))
+			$client->extra4 = Input::get('field4');
+		if(Input::get('field5'))
+			$client->extra5 = Input::get('field5');
 		$validation = $client->isValid();
 		if($validation==""){
+			$client->save();
 			Session::flash('title','Creacion de cliente');
 			Session::flash('text','Se cre&oacute; el cliente '.$client->name.' correctamente..');
 			return Redirect::to('clientes');
@@ -45,8 +62,10 @@ class ClientController extends \BaseController{
 	}
 	public function edit($public_id){		
 		$client = Client::where('enterprice_id',Auth::user()->enterprice_id)->where('public_id',$public_id)->first();		
+		$custom = CustomCLient::where('enterprice_id',Auth::user()->enterprice_id)->first();
 		$data=[
 			'client' => $client,
+			'custom' => $custom,
 		];
 		return View::make('client.edit',$data);	
 	}
@@ -59,7 +78,17 @@ class ClientController extends \BaseController{
 		$client->phone = Input::get('phone');
 		$client->mail = Input::get('mail');
 		$client->description = Input::get('description');		
-		$client->contact_data = Input::get('contact_data');		
+		$client->contact_data = Input::get('contact_data');
+		if(Input::get('field1'))
+			$client->extra1 = Input::get('field1');
+		if(Input::get('field2'))
+			$client->extra2 = Input::get('field2');
+		if(Input::get('field3'))
+			$client->extra3 = Input::get('field3');
+		if(Input::get('field4'))
+			$client->extra4 = Input::get('field4');
+		if(Input::get('field5'))
+			$client->extra5 = Input::get('field5');
 		$client->save();
 		return Redirect::to('clientes');
 	}
