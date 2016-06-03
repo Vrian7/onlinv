@@ -16,7 +16,8 @@
 	return View::make('index.dashboard');
 });*/
 Route::get('factura/cliente/{enterprice}/{public_id}','InvoiceController@showClient');
-Route::group(array('domain'=>'{enterprice}.demo.factufacil.online'),function(){
+//Route::group(array('domain'=>'{enterprice}.demo.factufacil.online'),function(){
+Route::group(array('domain'=>'{enterprice}.factucom.inv'),function(){
 	/*** USER CONTROLLER ***/
 	//Route::get('ingresar','UserController@login');
 
@@ -78,6 +79,7 @@ Route::group(array('before' => 'auth'), function(){
 	Route::post('cliente/editar/{public_id}','ClientController@update');
 	Route::get('cliente/eliminar/{public_id}','ClientController@delete');
 	Route::get('buscar_cliente','ClientController@findByString');
+	Route::get('obtener_clientes','ClientController@getClientsByNit');	
 	
 
 	/*** CATEGORYCONTROLLER ***/

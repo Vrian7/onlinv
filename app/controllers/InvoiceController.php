@@ -82,14 +82,48 @@ class InvoiceController extends \BaseController{
 	}
 	public function create(){
 		$products = Product::where('enterprice_id',Auth::user()->enterprice_id)->get();
+		$client = Client::where('enterprice_id',Auth::user()->enterprice_id)->where('nit',0)->where('business_name','Sin Nombre')->where('name','Sin Nombre')->first();
+		$today = date("Y-m-d");
+
+		$today_time = strtotime($today);
+		$last_invoice= Invoice::where('enterprice_id',Auth::user()->enterprice_id)->where('branch_id',Auth::user()->branch_id)->max('date');
+		//return $last_invoice;
+        $last_date=  strtotime($last_invoice);
+        $secs = $today_time - $last_date;
+        $days = $secs / 86400;
+        $days--;
+        $today = date('d-m-Y');        
+		if(!$client)
+			$nit = 0;
+		else
+			$nit = $client->id;
 		$data = [
 			'products' => $products,
 			'last_invoice_date' => 5,
+			'nit' => $nit,
+			'today' => $today,
+			'min_date' => '"-'.$days.'D"',
 		];
 		return View::make('invoice.create',$data);
 	}
 	public function store(){		
-		$client = Client::where('id',Input::get('client'))->first();
+		/*echo Input::get('client').' '.Input::get('razon').' '.Input::get('nit');
+		return 0;*/
+		if(Input::get('client')==0){
+			$client = new Client();
+			$client->enterprice_id = Auth::user()->enterprice_id;			
+			$client->business_name = Input::get('razon');
+			$client->name = Input::get('razon');
+			$client->nit = Input::get('nit');
+			$client->save();
+		}
+		else{
+			$client = Client::where('id',Input::get('client'))->first();
+			$client->business_name = Input::get('razon');		
+			$client->nit = Input::get('nit');
+			$client->save();
+		}
+
 		$client->debt = $client->debt+Input::get('total');
 		$branch = Branch::where('id',Auth::user()->branch_id)->first();
 		$central = Branch::where('id',Auth::user()->branch_id)->where('number',0)->first();
@@ -99,7 +133,7 @@ class InvoiceController extends \BaseController{
 		$invoice->branch_id = Auth::user()->branch_id;
 		$invoice->branch_type_id = $branch->branch_type_id;
 		$invoice->user_id = Auth::user()->id;
-		$invoice->client_id = Input::get('client');
+		$invoice->client_id = $client->id;
 		$invoice->invoice_status_ids = 1;
 		$invoice->nit = $client->nit;
 		$invoice->client_name = $client->business_name;
@@ -204,9 +238,9 @@ class InvoiceController extends \BaseController{
 		$invoice->user_id = Auth::user()->id;
 		$invoice->client_id = Input::get('client');
 		$invoice->invoice_status_ids = 1;
-		$invoice->nit = $client->nit;
-		$invoice->client_name = $client->business_name;
-		$invoice->client_nit = $client->nit;
+		$invoice->nit = Input::get('nit');
+		$invoice->client_name = Input::get('razon');
+		$invoice->client_nit = Input::get('nit');
 		$invoice->authorization_number = $branch->authorization_number;
 		$invoice->dosage_key = $branch->dosage_key;
 		$invoice->matriz_address = $central->address;

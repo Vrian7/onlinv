@@ -28,6 +28,8 @@
 
 		<?php echo HTML::style('vendor/bcore/plugins/gritter/css/jquery.gritter.css'); ?>
 
+		<?php echo HTML::style('vendor/custom/customdatepicker.css'); ?>
+
 		<!--END GLOBAL STYLES -->
 		<!-- PAGE LEVEL STYLES -->
 		<?php /* HTML::style('vendor/bcore/css/layout2.css') */ ?>
@@ -48,7 +50,11 @@
 		<?php echo HTML::script('vendor/bcore/plugins/datepicker/js/bootstrap-datepicker.js'); ?>	
 		<?php echo HTML::script('vendor/bcore/plugins/gritter/js/jquery.gritter.js'); ?>
 
-		<?php /* HTML::script('vendor/bcore/js/moreNoti.js') */ ?>  
+		<?php /* HTML::script('vendor/bcore/js/moreNoti.js') */ ?>  				
+		<?php echo HTML::script('vendor/bcore/js/jquery-ui.min.js'); ?>
+
+		<?php echo HTML::script('vendor/custom/customdatepicker.js'); ?>
+
 		
 		<?php echo $__env->yieldContent('head'); ?>
 	</head>

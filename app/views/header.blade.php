@@ -20,6 +20,7 @@
 		{{ HTML::style('vendor/bcore/plugins/chosen/chosen.min.css') }}
 		{{ HTML::style('vendor/bcore/plugins/datepicker/css/datepicker.css') }}
 		{{ HTML::style('vendor/bcore/plugins/gritter/css/jquery.gritter.css') }}
+		{{ HTML::style('vendor/custom/customdatepicker.css') }}
 		<!--END GLOBAL STYLES -->
 		<!-- PAGE LEVEL STYLES -->
 		{{-- HTML::style('vendor/bcore/css/layout2.css') --}}
@@ -35,7 +36,9 @@
 		{{ HTML::script('vendor/bcore/plugins/chosen/chosen.jquery.min.js') }}
 		{{ HTML::script('vendor/bcore/plugins/datepicker/js/bootstrap-datepicker.js') }}	
 		{{ HTML::script('vendor/bcore/plugins/gritter/js/jquery.gritter.js') }}
-		{{-- HTML::script('vendor/bcore/js/moreNoti.js') --}}  
+		{{-- HTML::script('vendor/bcore/js/moreNoti.js') --}}  				
+		{{ HTML::script('vendor/bcore/js/jquery-ui.min.js') }}
+		{{ HTML::script('vendor/custom/customdatepicker.js') }}
 		
 		@yield('head')
 	</head>

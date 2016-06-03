@@ -24,6 +24,7 @@ class ClientController extends \BaseController{
 		return View::make('client.create',$data);
 	}
 	public function store(){				
+		//return 0;
 		$client = new Client();
 		$client->enterprice_id = Auth::user()->enterprice_id;
 		$client->name = Input::get('name');
@@ -104,7 +105,11 @@ class ClientController extends \BaseController{
         }*/
   		//if($total==0)
    		$clients = Client::where('nit','like',$string."%")->where('enterprice_id','=', Auth::user()->enterprice_id)->select('id','name','nit','business_name','public_id')->get();
-  		return Response::json($clients);  
+  		return Response::json($clients);
+	}
+	public function getClientsByNit(){
+		$clients = Client::where('nit',Input::get('nit'))->where('enterprice_id','=', Auth::user()->enterprice_id)->select('id','name','nit','business_name','public_id','description')->get();
+		return Response::json($clients);
 	}
 }
 ?>
