@@ -2,7 +2,7 @@
 
 class UserController extends \BaseController{
 	public function index(){
-		$users = User::where('enterprice_id',Auth::user()->enterprice_id)->get();
+		$users = User::where('enterprice_id',Auth::user()->enterprice_id)->where('id','!=',Auth::user()->id)->get();
 		$roles = Rol::get();
 		$branchs = Branch::where('enterprice_id',Auth::user()->enterprice_id)->get();  
 		$rols=[];
@@ -79,6 +79,8 @@ class UserController extends \BaseController{
 	}
 	public function edit($public_id){
 		$user = User::where('enterprice_id',Auth::user()->enterprice_id)->where('public_id',$public_id)->first();
+		$name = explode('.',$user->username);
+		$user->username = $name[1];
 		$rols = Rol::where('id','!=',1)->get();
 		$branches = Branch::where('enterprice_id',Auth::user()->enterprice_id)->get();
 		$data = [
@@ -109,7 +111,10 @@ class UserController extends \BaseController{
 		else
 			$user->enabled = 0;
 		$user->save();
-		return Redirect::to('usuarios');
+		if($user->id == Auth::user()->id)
+			return Redirect::to('salir');
+		else
+			return Redirect::to('usuarios');
 	}
 	public function delete($public_id){
 		

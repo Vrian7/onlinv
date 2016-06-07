@@ -7,6 +7,7 @@
 	<head>
 		<meta charset="UTF-8" />
 		<title>@yield('title','Factufacil')</title>
+		<link href="{{ asset('favicon.gif') }}" rel="icon" type="image/x-icon">
 		<meta content="width=device-width, initial-scale=1.0" name="viewport" />
 		<meta content="" name="description" />
 		<meta content="" name="author" />
