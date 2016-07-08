@@ -88,3 +88,19 @@ Route::filter('csrf', function()
 		throw new Illuminate\Session\TokenMismatchException;
 	}
 });
+
+/*** CUSTOM FILTERS (ROLS)***/
+Route::filter('admin', function()
+{
+    //if (Auth::user()->type == "Admin") 
+    if (false) 
+    {
+        if (Request::ajax())
+        {
+            return Response::make('Unauthorized', 404);
+        }
+
+    }
+
+    else return Response::make('Unauthorized', 404);//"error no encontrado";//View::make('error'); // Need to have this view !
+});

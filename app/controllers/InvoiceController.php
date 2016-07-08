@@ -8,7 +8,7 @@ class InvoiceController extends \BaseController{
 		];
 		return View::make('mail.invoice',$data);
 		return;*/
-		$invoices = Invoice::where('enterprice_id',Auth::user()->enterprice_id)->where('branch_id',Auth::user()->branch_id)->get();
+		$invoices = Invoice::where('enterprice_id',Auth::user()->enterprice_id)->where('branch_id',Auth::user()->branch_id)->orderBy('public_id','desc')->get();
 		//$statuses = InvoiceStatus::where('id',$invoi)->first();
 
 		$data = [

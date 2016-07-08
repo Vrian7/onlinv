@@ -27,7 +27,7 @@
         <h5>Emitir factura</h5>
         <div class="toolbar">
             <ul class="nav">
-                <li><a href="#">Link</a></li>
+                <!-- <li><a href="#">Link</a></li>
                 <li class="dropdown">
                     <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                         <i class="icon-th-large"></i>
@@ -42,7 +42,7 @@
                     <a class="accordion-toggle minimize-box" data-toggle="collapse" href="#div-1">
                         <i class="icon-chevron-up"></i>
                     </a>
-                </li>
+                </li> -->
             </ul>
         </div>
       </header>         
@@ -145,7 +145,7 @@
             <div class="col-lg-12">
             <div class="col-lg-3"></div>
             <div class="col-lg-2"><a class="btn btn-primary" href="{{asset('facturas')}}"><i class="icon-ban-circle icon-white"></i> Cancelar</a></div>
-            <div class="col-lg-2"> <a type="button" class="btn btn-info btn-circle btn-lg" id="preview_btn"><i class="icon-eye-open"></i></a></div>
+            <div class="col-lg-2"> <a type="button" class="btn btn-info" id="preview_btn"><i class="icon-eye-open"></i> Previsualizar</a></div>
             <div class="col-lg-2"><button class="btn btn-success" type="submit"><i class="icon-save icon-white"></i> Emitir</button></div>            
             <div class="col-lg-3"></div>            
           </form>

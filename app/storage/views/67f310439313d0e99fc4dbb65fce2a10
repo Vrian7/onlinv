@@ -17,17 +17,17 @@
 <div class="inner">
   <div class="row">
     <div class="col-lg-12">
-      <h3 class="page-header">Nueva Factura</h3>
+      <h3 class="page-header">Nueva Cotizaci&oacute;n</h3>
     </div>
   </div>  
   <div class="col-lg-12">
     <div class="panel box dark">
       <header>
         <div class="icons"><i class="icon-home"></i></div>
-        <h5>Emitir factura</h5>
+        <h5>Generar Cotizaci&oacute;n</h5>
         <div class="toolbar">
-            <ul class="nav">
-                <!-- <li><a href="#">Link</a></li>
+            <!-- <ul class="nav">
+                <li><a href="#">Link</a></li>
                 <li class="dropdown">
                     <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                         <i class="icon-th-large"></i>
@@ -42,12 +42,13 @@
                     <a class="accordion-toggle minimize-box" data-toggle="collapse" href="#div-1">
                         <i class="icon-chevron-up"></i>
                     </a>
-                </li> -->
-            </ul>
+                </li>
+            </ul> -->
         </div>
       </header>         
       <div id="div-1" class="accordion-body collapse in body">
         <form class="form-horizontal" method="POST" id="main_form" action="<?php echo asset('factura'); ?>">                  
+        <div class="col-lg-12">
           <div class="form-group col-lg-4">
               <label>Cliente</label>
               <!-- <select id="client" name="client" onchange="addValuesClient(this)" class="form-control js-data-example-ajax">
@@ -70,17 +71,18 @@
             <input type="text" name="client" class="form-control" id="client" /> -->
           </div>
           <div class="form-group col-lg-4">
-          <label>Fecha de emisi&oacute;n</label>
+          <label>Fecha de cotizaci&oacute;n</label>
           <div class="form-group input-group">
               
-              <input type="text" name="date" class="form-control" data-date-format="dd/mm/yyyy" id="date" />                
+              <input type="text" name="date" class="form-control" data-date-format="dd/mm/yyyy" id="date" />  
               <span class="input-group-btn">
               <a class="btn btn-default" type="button">
               <i class="icon-calendar"></i>
               </a>
               </span>
-              </div>                
-          </div>  
+              </div>   
+          </div>
+        </div>          
           <p></p>
         <input id="client" type="hidden" name="client" value="<?php echo $nit; ?>" >
         <input id="nombre" type="hidden" name="nombre" >
@@ -122,7 +124,19 @@
                 <option value="<?php echo $key; ?>"><?php echo $product->code." - ".$product->name; ?></option>
                 <?php } ?>
               </select>     
+              <br><br>
+              <div class="col-lg-12">
+              <div class="form-group col-lg-8">
+              <label>Descripci&oacute;n</label>
+              <textarea class="form-control" rows="2"></textarea>
+            </div>          
+          <div class="form-group col-lg-4">
+              <label>V&aacute;lido</label>
+              <input class="form-control" placeholder="Ingrese validez en dias">
+          </div>
+          </div>
             </div>                
+
             <div class="col-lg-2">
               <label>Total</label>
               <br>
@@ -140,19 +154,20 @@
             <!-- <label id="descuento_box">0</label> -->
             <br>
             <h4><label id="total">0</label></h4>
+<br><br><br>
             </div>
             <div class="col-lg-1"></div>            
             <div class="col-lg-12">
             <div class="col-lg-3"></div>
             <div class="col-lg-2"><a class="btn btn-primary" href="<?php echo asset('facturas'); ?>"><i class="icon-ban-circle icon-white"></i> Cancelar</a></div>
-            <div class="col-lg-2"> <a type="button" class="btn btn-info" id="preview_btn"><i class="icon-eye-open"></i> Previsualizar</a></div>
+            <div class="col-lg-2"> <a type="button" class="btn btn-info btn-circle btn-lg" id="preview_btn"><i class="icon-eye-open"></i></a></div>
             <div class="col-lg-2"><button class="btn btn-success" type="submit"><i class="icon-save icon-white"></i> Emitir</button></div>            
-            <div class="col-lg-3"></div>            
+            <div class="col-lg-3"></div>                        
           </form>
         </div><!-- div body-->
       </div> <!-- div pannel-->
     </div> <!-- first div-->
-  </div> <!-- Class iner-->
+  </div> <!-- Class iner-->    
    <div class="modal vista fade" id="preview" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
       <div class="modal-content">

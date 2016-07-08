@@ -17,7 +17,7 @@
 });*/
 Route::get('factura/cliente/{enterprice}/{public_id}','InvoiceController@showClient');
 //Route::group(array('domain'=>'{enterprice}.demo.factufacil.online'),function(){
-Route::group(array('domain'=>'{enterprice}.factucom.inv'),function(){
+Route::group(array('domain'=>'{enterprice}.factufacil.bo'),function(){
 	/*** USER CONTROLLER ***/
 	//Route::get('ingresar','UserController@login');
 
@@ -32,7 +32,7 @@ Route::group(array('domain'=>'{enterprice}.factucom.inv'),function(){
 		return View::make('index.login',$data);			
 	});
 	Route::get('/',function($enterprice){
-		if($enterprice == "creatumundo")
+		if($enterprice == "crear")
 			return Redirect::to('registrar');
 		else
 			return Redirect::to('ingresar');
@@ -92,6 +92,7 @@ Route::group(array('before' => 'auth'), function(){
 	Route::get('categoria/eliminar/{public_id}','CategoryController@delete');
 
 	/*** PRODUCTCONTROLLER ***/
+	Route::group(array('before'=>'admin'),function() {
 	Route::get('productos','ProductController@index');
 	Route::get('producto','ProductController@create');
 	Route::post('producto','ProductController@store');
@@ -99,7 +100,7 @@ Route::group(array('before' => 'auth'), function(){
 	Route::get('producto/editar/{public_id}','ProductController@edit');
 	Route::post('producto/editar/{public_id}','ProductController@update');
 	Route::get('producto/eliminar/{public_id}','ProductController@delete');
-
+	});
 	/*** BRANCHCONTROLLER ***/
 	Route::get('sucursales','BranchController@index');
 	Route::get('sucursal','BranchController@create');
@@ -206,4 +207,13 @@ Route::group(array('before' => 'auth'), function(){
 	Route::get('campos_producto/editar/{public_id}','CustomProductController@edit');
 	Route::post('campos_producto/editar/{public_id}','CustomProductController@update');
 	Route::get('campos_producto/eliminar/{public_id}','CustomProductController@delete');
+
+	/*** QUOTECONTROLLER ***/
+	Route::get('cotizaciones','QuoteController@index');
+	Route::get('cotizacion','QuoteController@create');
+	Route::post('cotizacion','QuoteController@store');
+	Route::get('cotizacion/{public_id}','QuoteController@show');
+	Route::get('cotizacion/editar/{public_id}','QuoteController@edit');
+	Route::post('cotizacion/editar/{public_id}','QuoteController@update');
+	Route::get('cotizacion/eliminar/{public_id}','QuoteController@delete');
 });

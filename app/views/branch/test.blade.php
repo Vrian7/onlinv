@@ -135,7 +135,7 @@
                   url:'{{ URL::to('examen') }}',
                   data: 'authorization='+authorization+'&number='+number+'&nit='+nit+'&date='+date+'&amount='+amount+'&dosage_key='+dosage_key,
                   beforeSend: function(){
-                    $("#control_code").val("Generando C&oacute;digo de control");
+                    $("#control_code").val("Generando Codigo de control");
                   },
                   success: function(result)
                   {                      

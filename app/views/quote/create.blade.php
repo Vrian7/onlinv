@@ -1,6 +1,6 @@
-<?php $__env->startSection('body'); ?>
-<?php echo HTML::style('vendor/select2/select2.min.css'); ?>
-
+@extends('header')
+@section('body')
+{{ HTML::style('vendor/select2/select2.min.css') }}
 <style type="text/css">
  table thead th, table thead td {
   padding: 10px 18px;
@@ -17,17 +17,17 @@
 <div class="inner">
   <div class="row">
     <div class="col-lg-12">
-      <h3 class="page-header">Nueva Factura</h3>
+      <h3 class="page-header">Nueva Cotizaci&oacute;n</h3>
     </div>
   </div>  
   <div class="col-lg-12">
     <div class="panel box dark">
       <header>
         <div class="icons"><i class="icon-home"></i></div>
-        <h5>Emitir factura</h5>
+        <h5>Generar Cotizaci&oacute;n</h5>
         <div class="toolbar">
-            <ul class="nav">
-                <!-- <li><a href="#">Link</a></li>
+            <!-- <ul class="nav">
+                <li><a href="#">Link</a></li>
                 <li class="dropdown">
                     <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                         <i class="icon-th-large"></i>
@@ -42,12 +42,13 @@
                     <a class="accordion-toggle minimize-box" data-toggle="collapse" href="#div-1">
                         <i class="icon-chevron-up"></i>
                     </a>
-                </li> -->
-            </ul>
+                </li>
+            </ul> -->
         </div>
       </header>         
       <div id="div-1" class="accordion-body collapse in body">
-        <form class="form-horizontal" method="POST" id="main_form" action="<?php echo asset('factura'); ?>">                  
+        <form class="form-horizontal" method="POST" id="main_form" action="{{asset('factura')}}">                  
+        <div class="col-lg-12">
           <div class="form-group col-lg-4">
               <label>Cliente</label>
               <!-- <select id="client" name="client" onchange="addValuesClient(this)" class="form-control js-data-example-ajax">
@@ -70,19 +71,20 @@
             <input type="text" name="client" class="form-control" id="client" /> -->
           </div>
           <div class="form-group col-lg-4">
-          <label>Fecha de emisi&oacute;n</label>
+          <label>Fecha de cotizaci&oacute;n</label>
           <div class="form-group input-group">
               
-              <input type="text" name="date" class="form-control" data-date-format="dd/mm/yyyy" id="date" />                
+              <input type="text" name="date" class="form-control" data-date-format="dd/mm/yyyy" id="date" />  
               <span class="input-group-btn">
               <a class="btn btn-default" type="button">
               <i class="icon-calendar"></i>
               </a>
               </span>
-              </div>                
-          </div>  
+              </div>   
+          </div>
+        </div>          
           <p></p>
-        <input id="client" type="hidden" name="client" value="<?php echo $nit; ?>" >
+        <input id="client" type="hidden" name="client" value="{{$nit}}" >
         <input id="nombre" type="hidden" name="nombre" >
         <input id="nit" placeholder="NIT"  type="hidden" name="nit" value="0">
         <input id="razon"  placeholder="Razón Social" type="hidden" name="razon" value="Sin Nombre">
@@ -119,10 +121,22 @@
               <select class="form-control" id="selectableproducts" style="width: 100%;">
                 <option></option>
                 <?php foreach ($products as $key => $product){?>  
-                <option value="<?php echo $key; ?>"><?php echo $product->code." - ".$product->name; ?></option>
+                <option value="{{$key}}">{{$product->code." - ".$product->name}}</option>
                 <?php } ?>
               </select>     
+              <br><br>
+              <div class="col-lg-12">
+              <div class="form-group col-lg-8">
+              <label>Descripci&oacute;n</label>
+              <textarea class="form-control" rows="2"></textarea>
+            </div>          
+          <div class="form-group col-lg-4">
+              <label>V&aacute;lido</label>
+              <input class="form-control" placeholder="Ingrese validez en dias">
+          </div>
+          </div>
             </div>                
+
             <div class="col-lg-2">
               <label>Total</label>
               <br>
@@ -140,19 +154,20 @@
             <!-- <label id="descuento_box">0</label> -->
             <br>
             <h4><label id="total">0</label></h4>
+<br><br><br>
             </div>
             <div class="col-lg-1"></div>            
             <div class="col-lg-12">
             <div class="col-lg-3"></div>
-            <div class="col-lg-2"><a class="btn btn-primary" href="<?php echo asset('facturas'); ?>"><i class="icon-ban-circle icon-white"></i> Cancelar</a></div>
-            <div class="col-lg-2"> <a type="button" class="btn btn-info" id="preview_btn"><i class="icon-eye-open"></i> Previsualizar</a></div>
+            <div class="col-lg-2"><a class="btn btn-primary" href="{{asset('facturas')}}"><i class="icon-ban-circle icon-white"></i> Cancelar</a></div>
+            <div class="col-lg-2"> <a type="button" class="btn btn-info btn-circle btn-lg" id="preview_btn"><i class="icon-eye-open"></i></a></div>
             <div class="col-lg-2"><button class="btn btn-success" type="submit"><i class="icon-save icon-white"></i> Emitir</button></div>            
-            <div class="col-lg-3"></div>            
+            <div class="col-lg-3"></div>                        
           </form>
         </div><!-- div body-->
       </div> <!-- div pannel-->
     </div> <!-- first div-->
-  </div> <!-- Class iner-->
+  </div> <!-- Class iner-->    
    <div class="modal vista fade" id="preview" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -184,15 +199,14 @@
       </div>
      </div>
   </div>
-<?php echo HTML::script('vendor/select2/select2.full.min.js'); ?>
-
+{{ HTML::script('vendor/select2/select2.full.min.js') }}
 
 <script type="text/javascript">
 /*** DATE ***/
 $("#date").datepicker({
-  minDate: <?php echo $min_date; ?>,
+  minDate: {{$min_date}},
   maxDate: '+0D',
-}).datepicker("setDate", <?php echo $today; ?>);
+}).datepicker("setDate", {{$today}});
 
 $('#date').on('changeDate', function(ev){
     $(this).datepicker('hide');
@@ -207,7 +221,7 @@ $("#search_client").click(function(){
   nit = $("#client_nit").val();
   $.ajax({
         type: 'GET',
-        url:'<?php echo URL::to('obtener_clientes'); ?>',
+        url:'{{ URL::to('obtener_clientes') }}',
         data: 'nit='+nit,
         beforeSend: function(){ 
           console.log("Starting send data ");
@@ -254,7 +268,7 @@ $(document).on("change",'#razon_new',function(){
 //$("#select_client").modal('show');  
 $('#preview_btn').click(function(){
   var datos = $('#main_form').serialize();
-    $('#invoice_frame').attr('src', '<?php echo asset("factura/nuevo/previsualizar?'+datos+'"); ?>' );
+    $('#invoice_frame').attr('src', '{{asset("factura/nuevo/previsualizar?'+datos+'")}}' );
     $('#preview').modal('show');  
 });
 /*$(".razon_text").click(function(){
@@ -299,18 +313,18 @@ $(".select2").select2();
         }
     });
     //********************
-<?php /*
+{{--
 //$("#desc").bootstrapSwitch();
 
 $("#desc").on('switchChange.bootstrapSwitch',function(e, data){
     calculateAllTotal( $("#desc").prop('checked'));
     if($("#desc").prop('checked'))
-        $("#desc").siblings(".bootstrap-switch-label").text("<?php echo $moneda; ?>");
+        $("#desc").siblings(".bootstrap-switch-label").text("{{$moneda}}");
     else
         $("#desc").siblings(".bootstrap-switch-label").text("%");
     
 
-});*/ ?>
+});--}}
 
 $(document).on('keyup','.number_field',function(){
   number = $(this).val();
@@ -364,7 +378,7 @@ function preview()
 }
 else{
     var datos = $('#formulario').serialize();
-    $('#theFrame2').attr('src', '<?php echo asset("previsualizacion/factura?'+datos+'"); ?>' );
+    $('#theFrame2').attr('src', '{{asset("previsualizacion/factura?'+datos+'")}}' );
     $('#preview').modal('show');}
 
 }
@@ -401,7 +415,7 @@ $("#email").click(function(){
   $("#mail").val("1");
 });
 /****Inicializacion de variables globales para la factura****/
-var products = <?php echo $products; ?>;
+var products = {{ $products }};
 var selected_products=[];
 var total = 0;
 var subtotal = 0;
@@ -414,7 +428,7 @@ var changing_note = false;
 // $(".code").select2();
 // $(".notes1").select2();
 //addProducts(1);
-var productos = <?php echo $products; ?>;
+var productos = {{ $products }};
 console.log(productos[0]);
 
 $selectObject = $("#selectableproducts").select2({
@@ -505,7 +519,7 @@ $(document).on('focus', '.select2', function() {
 /*$("#client").select2({
   ajax: {
     Type: 'POST',
-    url: "<?php echo URL::to('buscar_cliente'); ?>",
+    url: "{{ URL::to('buscar_cliente') }}",
     data: function (params) {
       return {
         name: params.term, // search term
@@ -571,7 +585,7 @@ $(document).on('focus', '.select2', function() {
 
     $.ajax({
           type: 'POST',
-          url:'<?php echo URL::to('clientes'); ?>',
+          url:'{{ URL::to('clientes') }}',
           data: 'business_name='+razon+'&nit='+nit+'&name='+user+'&json=1',
           beforeSend: function(){
             console.log("Inicia ajax client register ");
@@ -591,7 +605,7 @@ $(document).on('focus', '.select2', function() {
     $("#client").select2({
         ajax: {
           Type: 'POST',
-          url: "<?php echo URL::to('obtenercliente'); ?>",
+          url: "{{ URL::to('obtenercliente') }}",
           data: function (params) {
             return {
               name: params.term, // search term
@@ -632,7 +646,7 @@ $(document).on('focus', '.select2', function() {
 ///$("#invoice_date").datepicker(/*"update", new Date()*/);
 //$("#invoice_date").datepicker({  endDate: '+2d' });
     //$("#dp3").bootstrapDP();
-last_invoice_date = <?php echo $last_invoice_date; ?>;
+last_invoice_date = {{$last_invoice_date}};
 last_invoice_date = '-'+last_invoice_date+'D';
 //console.log("-->>>><"+last_invoice_date);
 $( "#invoice_date" ).datepicker({ minDate: last_invoice_date, maxDate: "+0D" }).datepicker({ dateFormat: 'dd-mm-yy' }).datepicker("setDate", new Date());
@@ -916,7 +930,7 @@ function completeItem(ind_act,index){
     unidad = $("#unit_new").val();
     $.ajax({
           type: 'POST',
-          url:'<?php echo URL::to('productos'); ?>',
+          url:'{{ URL::to('productos') }}',
           data: 'product_key='+product_key+'&notes='+item+'&cost='+cost+'&category_id='+category+'&json=1&unidad='+unidad,
           beforeSend: function(){
             console.log("Inicia ajax with ");
@@ -1005,7 +1019,7 @@ function completeItem(ind_act,index){
   function agregarContactos(id){
     $.ajax({
           type: 'POST',
-          url:'<?php echo URL::to('getClientContacts'); ?>',
+          url:'{{ URL::to('getClientContacts') }}',
           data: 'id='+id,
           beforeSend: function(){
             console.log("Inicia ajax with ");
@@ -1033,7 +1047,7 @@ function completeItem(ind_act,index){
     category = $("#categoy_news").val();
     $.ajax({
           type: 'POST',
-          url:'<?php echo URL::to('productos'); ?>',
+          url:'{{ URL::to('productos') }}',
           data: 'product_key='+product_key+'&notes='+item+'&cost='+cost+'&category_id=1&json=2',
           beforeSend: function(){
             console.log("Inicia ajax with ");
@@ -1225,5 +1239,4 @@ $(document).ready(function(){
 
 </script>
 
-<?php $__env->stopSection(); ?>
-<?php echo $__env->make('header', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+@stop

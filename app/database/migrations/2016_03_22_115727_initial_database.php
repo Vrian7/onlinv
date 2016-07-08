@@ -410,6 +410,51 @@ class InitialDatabase extends Migration {
 			$table->foreign('level_id')->references('id')->on('levels');
 			$table->foreign('enterprice_id')->references('id')->on('enterprices');
 		});
+		Schema::create('quotes',function($table){
+			$table->increments('id');
+			$table->unsignedInteger('public_id');
+			$table->unsignedInteger('enterprice_id')->index();
+
+			/*** INDEX of related tables***/
+			$table->unsignedInteger('branch_id');
+			$table->unsignedInteger('user_id');			
+			$table->unsignedInteger('client_id');						
+			/*** Addional account data***/
+			$table->string('nit');	
+			$table->string('matriz_address');		
+			$table->string('city');
+			$table->string('country');
+			$table->date('deadline');
+			/*** Aditional client data***/
+			$table->string('client_name');
+			$table->string('client_nit');
+			$table->string('seller');
+			//$table->
+			/*** numerical data***/
+			$table->double('net_amount');
+			$table->double('total_amount');					
+			$table->float('ice_amount');			
+			$table->float('discount');
+			$table->float('exchange');
+			$table->double('net_amount_dollar');
+			$table->double('debt');
+			//$table-> seuq esiente que poco a pococ todo se va a al migrationsauq
+			/*** Invoice Data***/
+			$table->unsignedInteger('number');
+			$table->date('date');			
+			$table->unsignedInteger('notes');						
+			//$table->string('');
+			$table->string('tracing')->nullable();
+			//nit,nombre usuario, nombre o rqazon social, direccion, codigo sucursal, codigo tipo factura,nombrecomprador,dui,indentificador comprador,
+			//debito fiscal, importeneto, importe total, importe ice, importe exento, descuento total, codigo cde control, num de autorizacion,
+			//numero de factura, actividad economica, fecha emision, numerio de linea, detalle de la compra, precio unitario, canidad m unidad ede medidam, preciototal
+			$table->timestamps();
+			$table->softDeletes();
+			$table->foreign('branch_id')->references('id')->on('branches');
+			$table->foreign('user_id')->references('id')->on('users');	
+			$table->foreign('client_id')->references('id')->on('clients');
+			$table->foreign('enterprice_id')->references('id')->on('enterprices');
+		});
 		/*** CREATING TRIGERS***/
 		DB::unprepared('
 			CREATE TRIGGER alerts_before_insert BEFORE INSERT ON `alerts` FOR EACH ROW 
@@ -493,6 +538,12 @@ class InitialDatabase extends Migration {
 			CREATE TRIGGER users_before_insert BEFORE INSERT ON `users` FOR EACH ROW 
 			BEGIN
 			    SET NEW.public_id = (SELECT COALESCE (MAX(public_id),0) + 1 FROM users WHERE enterprice_id = NEW.enterprice_id );
+			END
+		');
+		DB::unprepared('
+			CREATE TRIGGER quotes_before_insert BEFORE INSERT ON `quotes` FOR EACH ROW 
+			BEGIN
+				SET NEW.public_id = (SELECT COALESCE (MAX(public_id),0) + 1 FROM quotes WHERE enterprice_id = NEW.enterprice_id );
 			END
 		');	
 	}
