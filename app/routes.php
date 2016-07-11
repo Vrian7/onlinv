@@ -16,8 +16,8 @@
 	return View::make('index.dashboard');
 });*/
 Route::get('factura/cliente/{enterprice}/{public_id}','InvoiceController@showClient');
-//Route::group(array('domain'=>'{enterprice}.demo.factufacil.online'),function(){
-Route::group(array('domain'=>'{enterprice}.factufacil.bo'),function(){
+Route::group(array('domain'=>'{enterprice}.demo.factufacil.online'),function(){
+//Route::group(array('domain'=>'{enterprice}.factufacil.bo'),function(){
 	/*** USER CONTROLLER ***/
 	//Route::get('ingresar','UserController@login');
 
@@ -222,5 +222,5 @@ Route::group(array('before' => 'auth.basic'), function(){
 	Route::get('loggin','AndroidController@loggin');
 	Route::post('client','AndroidController@storeClient');
 	Route::get('client/{nit}','AndroidController@getClient');
-	Route::post('client/edit/{public_id}','ClientController@updateClient');
+	Route::post('client/edit/{public_id}','AndroidController@updateClient');
 });

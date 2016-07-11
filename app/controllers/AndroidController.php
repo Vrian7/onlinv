@@ -64,7 +64,7 @@ class AndroidController extends \BaseController{
 			return Response::json($data);
 		}		
 	}
-	public function update($public_id){
+	public function updateClient($public_id){		
 		$client = Client::where('enterprice_id',Auth::user()->enterprice_id)->where('public_id',$public_id)->first();
 		$client->business_name = Input::get('business_name');
 		$client->nit = Input::get('nit');		
