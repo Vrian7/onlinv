@@ -217,3 +217,10 @@ Route::group(array('before' => 'auth'), function(){
 	Route::post('cotizacion/editar/{public_id}','QuoteController@update');
 	Route::get('cotizacion/eliminar/{public_id}','QuoteController@delete');
 });
+
+Route::group(array('before' => 'auth.basic'), function(){
+	Route::get('loggin','AndroidController@loggin');
+	Route::post('client','AndroidController@storeClient');
+	Route::get('client/{nit}','AndroidController@getClient');
+	Route::post('client/edit/{public_id}','ClientController@updateClient');
+});
