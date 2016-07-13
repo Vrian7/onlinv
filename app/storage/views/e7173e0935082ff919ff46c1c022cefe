@@ -1,0 +1,66 @@
+<?php $__env->startSection('body'); ?>
+<div class="inner col-lg-12">
+	
+		<div class="row">
+            <div class="col-lg-12">
+                <h1> Resumen </h1>
+            </div>
+        </div>
+	
+	<hr>
+    <!--BLOCK SECTION -->
+	 <div class="row">
+	    
+	        <div style="text-align: center;">
+	           <div class="col-md-2">
+	            <a class="quick-btn" href="#">
+	                <i class="icon-check icon-2x"></i>
+	                <span> Facturas</span>
+	                <span class="label label-danger"><?php echo $invoice; ?></span>
+	            </a>
+	            </div>
+	            <div class="col-md-2">
+	            <a class="quick-btn" href="#">
+	                <i class="icon-envelope icon-2x"></i>
+	                <span>Notificaciones</span>
+	                <span class="label label-success">4</span>
+	            </a>
+	            </div>
+	            <div class="col-md-2">
+	            <a class="quick-btn" href="#">
+	                <i class="icon-signal icon-2x"></i>
+	                <span>Montos</span>
+	                <span class="label label-warning"><?php echo $amount; ?></span>
+	            </a>
+	            </div>
+	            <div class="col-md-2">
+	            <a class="quick-btn" href="#">
+	                <i class="icon-external-link icon-2x"></i>
+	                <span>Clientes</span>
+	                <span class="label btn-metis-2"><?php echo $client; ?></span>
+	            </a>
+	            </div>
+	            <div class="col-md-2">
+	            <a class="quick-btn" href="#">
+	                <i class="icon-lemon icon-2x"></i>
+	                <span>Productos</span>
+	                <span class="label btn-metis-4"><?php echo $product; ?></span>
+	            </a>
+	            </div>
+	            <div class="col-md-2">
+	            <a class="quick-btn" href="#">
+	                <i class="icon-bolt icon-2x"></i>
+	                <span>Sucursales</span>
+	                <span class="label label-default"><?php echo $branch; ?></span>
+	            </a>	            
+	            </div>	   
+	                    
+	        </div>
+	    	
+	</div>
+</div>
+    <!--END BLOCK SECTION -->
+
+
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('header', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

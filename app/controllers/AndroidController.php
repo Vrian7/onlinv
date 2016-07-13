@@ -2,7 +2,7 @@
 class AndroidController extends \BaseController{
 	public function loggin(){
 		$data = [
-			'result' => 0,				
+			'result' => '0'			
 		];
 		return Response::json($data);
 	}
@@ -57,8 +57,8 @@ class AndroidController extends \BaseController{
 		else
 		{
 			$data = [
-				'result' => 0,
-				'status' => 0,
+				'result' => '0',
+				'status' => '0',
 				'message' => $validation,
 			];
 			return Response::json($data);

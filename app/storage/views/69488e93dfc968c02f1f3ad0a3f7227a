@@ -1,0 +1,111 @@
+<?php $__env->startSection('body'); ?>
+<div class="inner">
+    <div class="row">
+        <div class="col-lg-12">
+            <h2> Clientes </h2>
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+    <div class="col-lg-12">
+        <div class="box primary">            
+            <header>
+                    <div class="icons"><i class="icon-group"></i></div>
+                    <h5>Cliente: <?php echo $client->business_name; ?></h5>
+                    <div class="toolbar">
+                        <a class="btn btn-danger btn-sm btn-grad" href="">Eliminar</a>
+                    </div>
+                </header>
+            <div class="panel-body">
+                <div class="col-lg-6">           
+                    <h4>Informaci&oacute;n B&aacute;sica</h4>
+                    <blockquote>
+                       <i class="icon-group"></i> <label>Raz&oacute;n Social: </label> <?php echo $client->business_name; ?>
+
+                       <small>Dato para facuturar
+                        </small>
+                        <i class="icon-group"></i> <label>NIT: </label> <?php echo $client->nit; ?>
+
+                       <small>N&uacute;mero de identificaci&oacute;n tributaria
+                        </small>
+                    </blockquote>
+                    <h4>Informaci&oacute;n del cliente</h4>
+                    <blockquote>
+                       <i class="icon-group"></i> <label>Nombre del cliente: </label> <?php echo $client->name; ?>
+
+                       <small>Dato para identificar al cliente
+                        </small>
+                        <i class="icon-group"></i> <label>Direcci&oacute;n: </label> <?php echo $client->address; ?>
+
+                       <small>Ubicaci&oacute;n
+                        </small>
+                        <i class="icon-group"></i> <label>Tel&eacute;fono / Celular: </label> <?php echo $client->phone; ?>
+
+                       <small>Dato telef&oacute;nico
+                        </small>
+                        <i class="icon-group"></i> <label>Correo electr&oacute;nico: </label> <?php echo $client->mail; ?>
+
+                       <small>Correo 
+                        </small>
+                        <i class="icon-group"></i> <label>Datos Adicionales: </label> <?php echo $client->description; ?>
+
+                       <small>Dato cliente
+                        </small>
+                        <i class="icon-group"></i> <label>Contacto: </label> <?php echo $client->contact_data; ?>
+
+                       <small>Dato para comunicar a la empresa
+                        </small>
+                    </blockquote>
+                </div>
+                <div class="col-lg-6"> 
+                <h4>Informaci&oacute;n Personalizada</h4>
+                    <blockquote>                        
+                        <?php if($custom->field1!=""): ?>
+                        <i class="icon-group"></i> <label><?php echo $custom->field1; ?>: </label> <?php echo $client->extra1; ?>
+
+                        <small>Dato personalizado
+                        </small>
+                        <?php endif; ?>
+                        <?php if($custom->field2!=""): ?>
+                        <i class="icon-group"></i> <label><?php echo $custom->field2; ?>: </label> <?php echo $client->extra2; ?>
+
+                        <small>Dato personalizado
+                        </small>
+                        <?php endif; ?>
+                        <?php if($custom->field3!=""): ?>
+                        <i class="icon-group"></i> <label><?php echo $custom->field3; ?>: </label> <?php echo $client->extra3; ?>
+
+                        <small>Dato personalizado
+                        </small>
+                        <?php endif; ?>
+                        <?php if($custom->field4!=""): ?>
+                        <i class="icon-group"></i> <label><?php echo $custom->field4; ?>: </label> <?php echo $client->extra4; ?>
+
+                        <small>Dato personalizado
+                        </small>
+                        <?php endif; ?>
+                        <?php if($custom->field5!=""): ?>
+                        <i class="icon-group"></i> <label><?php echo $custom->field5; ?>: </label> <?php echo $client->extra5; ?>
+
+                        <small>Dato personalizado
+                        </small>
+                        <?php endif; ?>
+                    </blockquote>
+                </div>
+               <hr>
+            </div>
+<div class="col-lg-12">
+    <div class="col-lg-3"></div>
+    <div class="col-lg-2"><a class="btn btn-warning" href="<?php echo asset('clientes'); ?>"><i class="icon-ban-circle icon-white"></i> Cancelar</a></div>
+    <div class="col-lg-2"></div>
+    <div class="col-lg-2"><a class="btn btn-primary" href="<?php echo asset('cliente/editar/'.$client->public_id); ?>"><i class="icon-pencil icon-white"></i> Editar</a></div>
+</div>
+        </div>
+    </div>
+</div>
+</div>
+<?php echo HTML::script('vendor/bcore/plugins/dataTables/jquery.dataTables.js'); ?>   
+    <?php echo HTML::script('vendor/bcore/plugins/dataTables/dataTables.bootstrap.js'); ?>   
+
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('header', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
