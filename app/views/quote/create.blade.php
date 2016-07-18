@@ -47,7 +47,7 @@
         </div>
       </header>         
       <div id="div-1" class="accordion-body collapse in body">
-        <form class="form-horizontal" method="POST" id="main_form" action="{{asset('factura')}}">                  
+        <form class="form-horizontal" method="POST" id="main_form" action="{{asset('cotizacion')}}">                  
         <div class="col-lg-12">
           <div class="form-group col-lg-4">
               <label>Cliente</label>
@@ -127,12 +127,12 @@
               <br><br>
               <div class="col-lg-12">
               <div class="form-group col-lg-8">
-              <label>Descripci&oacute;n</label>
-              <textarea class="form-control" rows="2"></textarea>
+              <label>T&eacute;erminos y condiciones</label>
+              <textarea class="form-control" name="notes" rows="2"></textarea>
             </div>          
           <div class="form-group col-lg-4">
               <label>V&aacute;lido</label>
-              <input class="form-control" placeholder="Ingrese validez en dias">
+              <input class="form-control" name="validate" placeholder="Ingrese validez en dias">
           </div>
           </div>
             </div>                
@@ -159,9 +159,9 @@
             <div class="col-lg-1"></div>            
             <div class="col-lg-12">
             <div class="col-lg-3"></div>
-            <div class="col-lg-2"><a class="btn btn-primary" href="{{asset('facturas')}}"><i class="icon-ban-circle icon-white"></i> Cancelar</a></div>
+            <div class="col-lg-2"><a class="btn btn-primary" href="{{asset('cotizaciones')}}"><i class="icon-ban-circle icon-white"></i> Cancelar</a></div>
             <div class="col-lg-2"> <a type="button" class="btn btn-info btn-circle btn-lg" id="preview_btn"><i class="icon-eye-open"></i></a></div>
-            <div class="col-lg-2"><button class="btn btn-success" type="submit"><i class="icon-save icon-white"></i> Emitir</button></div>            
+            <div class="col-lg-2"><button class="btn btn-success" type="submit"><i class="icon-save icon-white"></i> Emitir</button></div> 
             <div class="col-lg-3"></div>                        
           </form>
         </div><!-- div body-->
@@ -176,7 +176,7 @@
             <h4 class="modal-title" id="myModalLabel">Vista Previa Factura</h4>
           </div>
           <div class="modal-body col-lg-12">
-          <iframe id="invoice_frame" type="text/html" frameborder="1" width="100%" height="800"></iframe>        
+          <iframe id="invoice_frame" type="text/html" frameborder="1" width="100%" height="800"></iframe>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
@@ -268,7 +268,7 @@ $(document).on("change",'#razon_new',function(){
 //$("#select_client").modal('show');  
 $('#preview_btn').click(function(){
   var datos = $('#main_form').serialize();
-    $('#invoice_frame').attr('src', '{{asset("factura/nuevo/previsualizar?'+datos+'")}}' );
+    $('#invoice_frame').attr('src', '{{asset("factura/nuevo/previsualizar2?'+datos+'")}}' );
     $('#preview').modal('show');  
 });
 /*$(".razon_text").click(function(){
