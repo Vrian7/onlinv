@@ -297,7 +297,8 @@
 	                    </a>
 	                    <ul class="collapse" id="form-nav">
 	                        <li class=""><a href="{{asset('facturas')}}"><i class="icon-angle-right"></i> Facturas </a></li>
-	                        <li class=""><a href="{{asset('cobros')}}"><i class="icon-angle-right"></i> Cobros </a></li>	                        
+	                        <li class=""><a href="{{asset('cobros')}}"><i class="icon-angle-right"></i> Cobros </a></li>
+	                        <li class=""><a href="{{asset('cotizacion')}}"><i class="icon-angle-right"></i> Cotizaci&oacute;n </a></li>
 	                    </ul>
 	                </li>
 

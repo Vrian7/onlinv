@@ -121,6 +121,7 @@ Route::group(array('before' => 'auth'), function(){
 	Route::post('factura/editar/{public_id}','InvoiceController@update');
 	Route::get('factura/eliminar/{public_id}','InvoiceController@delete');	
 	Route::get('factura/nuevo/previsualizar','InvoiceController@previewInvoice');
+	Route::get('factura/nuevo/previsualizar2','QuoteController@previewInvoice');
 	Route::get('factura/estandar/{public_id}','InvoiceController@showStandard');
 	Route::get('factura/copia/{public_id}','InvoiceController@showCopy');
 	
@@ -223,4 +224,5 @@ Route::group(array('before' => 'auth.basic'), function(){
 	Route::post('client','AndroidController@storeClient');
 	Route::get('client/{nit}','AndroidController@getClient');
 	Route::post('client/edit/{public_id}','AndroidController@updateClient');
+	Route::post('invoice','AndroidController@storeInvoice');
 });
