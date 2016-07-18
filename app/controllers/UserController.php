@@ -67,13 +67,13 @@ class UserController extends \BaseController{
 			$user->save();
 			Session::flash('title','Creacion de usuario');
 			Session::flash('text','Se cre&oacute; el usuario '.$user->username.' correctamente..');
-			return Redirect::to('inventarios');
+			return Redirect::to('usuarios');
 		}
 		else
 		{
 			Session::flash('title','Se encontraron estos errores');
 			Session::flash('text',$validation);
-			return Redirect::to('inventario');
+			return Redirect::to('usuarios');
 		}
 
 	}

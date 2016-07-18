@@ -1,8 +1,27 @@
 <?php
 class AndroidController extends \BaseController{
 	public function loggin(){
+		$ent = Enterprice::where('id',Auth::user()->enterprice_id)->first();
+		$user = User::where('id',Auth::user()->id)->first();
+		$branch = Branch::where('id',$user->branch_id)->first();				
 		$data = [
-			'result' => '0'			
+			'result' => 0,
+			'id' => $ent->id,
+			'name' => $ent->name,
+			'branch_id' => $branch->id,
+			'branch' => $branch->name,
+			'owner' => $ent->owner,
+			'address' => $branch->address,
+			'phone' => $branch->phone,
+			'city' => $branch->city,
+			'country' => $branch->state,
+			'title' => 'FACTURA',
+			'nit' => $ent->nit,
+			'authorization' => $branch->authorization_number,
+			'dead_line' => $branch->deadline,
+			'law' => $branch->legend,
+			'activity' => $branch->economic_activity,
+			'username' => $user->name,
 		];
 		return Response::json($data);
 	}

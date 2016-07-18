@@ -92,7 +92,7 @@ Route::group(array('before' => 'auth'), function(){
 	Route::get('categoria/eliminar/{public_id}','CategoryController@delete');
 
 	/*** PRODUCTCONTROLLER ***/
-	Route::group(array('before'=>'admin'),function() {
+	//Route::group(array('before'=>'admin'),function() {
 	Route::get('productos','ProductController@index');
 	Route::get('producto','ProductController@create');
 	Route::post('producto','ProductController@store');
@@ -100,7 +100,7 @@ Route::group(array('before' => 'auth'), function(){
 	Route::get('producto/editar/{public_id}','ProductController@edit');
 	Route::post('producto/editar/{public_id}','ProductController@update');
 	Route::get('producto/eliminar/{public_id}','ProductController@delete');
-	});
+	//});
 	/*** BRANCHCONTROLLER ***/
 	Route::get('sucursales','BranchController@index');
 	Route::get('sucursal','BranchController@create');
