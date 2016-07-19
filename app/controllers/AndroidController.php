@@ -199,5 +199,110 @@ class AndroidController extends \BaseController{
 		];
 		return Response::json($data);
 	}
+
+	public function storeQuote(){
+
+		$invoice = new Quote();
+		if(Input::get('client')==0){
+			$client = new Client();
+			$client->enterprice_id = Auth::user()->enterprice_id;			
+			$client->business_name = Input::get('name');
+			$client->name = Input::get('name');
+			$client->nit = Input::get('nit');
+			$client->save();
+		}
+		else{
+			$client = Client::where('id',Input::get('client'))->first();
+			$client->business_name = Input::get('name');		
+			$client->nit = Input::get('nit');
+			$client->save();
+		}
+
+		//$client->debt = $client->debt + Input::get('total');
+		$branch = Branch::where('id',Auth::user()->branch_id)->first();
+		$central = Branch::where('enterprice_id',Auth::user()->enterprice_id)->where('number',0)->first();
+		$tool = new Tool();
+		$date = date('Y-m-d');
+		$invoice->enterprice_id = Auth::user()->enterprice_id;
+		$invoice->branch_id = Auth::user()->branch_id;
+		//$invoice->branch_type_id = $branch->branch_type_id;
+		$invoice->user_id = Auth::user()->id;
+		$invoice->client_id = $client->id;
+		//$invoice->invoice_status_ids = 1;
+		$invoice->nit = $client->nit;
+		$invoice->client_name = $client->business_name;
+		$invoice->client_nit = $client->nit;
+		//$invoice->authorization_number = $branch->authorization_number;
+		//$invoice->dosage_key = $branch->dosage_key;
+		//$invoice->matriz_address = $central->address;
+		$invoice->city = $branch->city;
+		$invoice->country = "no";//$branch->country;
+		$invoice->deadline = $branch->deadline;
+		$invoice->net_amount = Input::get('total');
+		$invoice->debt = Input::get('total');
+		$invoice->total_amount = Input::get('subtotal');
+		//$invoice->taxable_amount = Input::get('total');
+		//$invoice->tax_amount = $invoice->taxable_amount * 0.13;
+		$invoice->ice_amount = 0;
+		//$invoice->excent_amount = 0;
+		$invoice->discount = $invoice->total_amount - $invoice->net_amount;
+		$invoice->exchange = 6.96;
+		$invoice->net_amount_dollar = 0;
+		//$date_send = Input::get('date');
+		//$date_send = explode('/',$date_send);
+		$invoice->date = $date; //$date_send[2].'-'.$date_send[1].'-'.$date_send[0];
+		$invoice->notes = "";
+		$invoice->legend = $branch->legend;
+		$invoice->number = $branch->getInvoiceNumber($branch->id);
+		//$fecha = date('d/m/Y');//trim(Input::get('date'));
+        //$fecha=  explode("/",$fecha);
+        //$date=$fecha[2].$fecha[1].$fecha[0];           
+		//$date = date('d/m/Y');
+		$date = date('Ymd');
+//		return $invoice->number." - ".$invoice->nit." - ".$date." - ".$invoice->net_amount." - ".$invoice->authorization_number." - ".$invoice->dosage_key;
+//		return 0;
+		//$invoice->control_code =$tool->generateControlCode($invoice->number,$invoice->nit,$date,$invoice->net_amount,$invoice->authorization_number,$invoice->dosage_key);
+		//print_r($invoice);
+		//return;	
+		$invoice->save();
+		//$invoice->setTracing(1,Auth::user()->name,'hola');
+		foreach (Input::get('products') as $key => $producto) {
+			if($producto['code']!=""){
+			$product = Product::where('enterprice_id',Auth::user()->enterprice_id)->where('code',$producto['code'])->first();
+			$inventory = Inventory::where('enterprice_id',Auth::user()->enterprice_id)->where('branch_id',$invoice->branch_id)->where('product_id',$product->id)->first();
+			if($inventory){
+			$inventory->stock = $inventory->stock-$producto['quantity'];			
+			$inventory->sold = $inventory->sold + $producto['quantity'];
+			$inventory->save(); 
+			}
+			$detail = new InvoiceDetail();			
+			$detail->enterprice_id = Auth::user()->enterprice_id;
+			$detail->invoice_id = $invoice->id;			
+			$detail->product_id = $product->id;
+			$detail->code = $producto['code'];
+			$detail->name = $producto['name'];
+			$detail->price = $producto['price'];
+			$detail->quantity = $producto['quantity'];						
+			$detail->save();
+			}
+		}				
+		$importe = number_format((float)$invoice->net_amount, 2, '.', '');
+		$num = explode(".", $importe);
+		if(!isset($num[1]))
+    	$num[1]="00";
+		$literal = $tool->to_string($num[0] ).substr($num[1],0,2);
+		$date = date('d/m/Y');
+		$hour = date('h:i:s');
+		$data = [
+			'id' => $invoice->id,
+			'literal' => $literal,
+			'enterprice_id' => Auth::user()->enterprice_id,
+			'number' => $invoice->number,
+			'control_code' => $invoice->control_code,
+			'date' => $date,
+			'hour' => $hour,
+		];
+		return Response::json($data);
+	}
 }
 ?>

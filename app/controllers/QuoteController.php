@@ -48,9 +48,9 @@ class QuoteController extends \BaseController{
 			$client->save();
 		}
 
-		$client->debt = $client->debt+Input::get('total');
+		//$client->debt = $client->debt+Input::get('total');
 		$branch = Branch::where('id',Auth::user()->branch_id)->first();
-		$central = Branch::where('id',Auth::user()->branch_id)->where('number',0)->first();
+		$central = Branch::where('enterprice_id',Auth::user()->enterprice_id)->where('number',0)->first();
 		$tool = new Tool();
 		$invoice = new Quote();
 		$invoice->enterprice_id = Auth::user()->enterprice_id;
