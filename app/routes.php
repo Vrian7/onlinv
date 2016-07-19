@@ -225,4 +225,5 @@ Route::group(array('before' => 'auth.basic'), function(){
 	Route::get('client/{nit}','AndroidController@getClient');
 	Route::post('client/edit/{public_id}','AndroidController@updateClient');
 	Route::post('invoice','AndroidController@storeInvoice');
+	Route::post('quote','AndroidController@storeQuote');
 });
