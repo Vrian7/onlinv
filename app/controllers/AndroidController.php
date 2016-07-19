@@ -186,14 +186,16 @@ class AndroidController extends \BaseController{
 		if(!isset($num[1]))
     	$num[1]="00";
 		$literal = $tool->to_string($num[0] ).substr($num[1],0,2);
-		$date = date('d/m/Y h:i:s');
+		$date = date('d/m/Y');
+		$hour = date('h:i:s');
 		$data = [
 			'id' => $invoice->id,
-			'leteral' => $literal,
+			'literal' => $literal,
 			'enterprice_id' => Auth::user()->enterprice_id,
 			'number' => $invoice->number,
 			'control_code' => $invoice->control_code,
 			'date' => $date,
+			'hour' => $hour,
 		];
 		return Response::json($data);
 	}
