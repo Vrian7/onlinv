@@ -133,7 +133,8 @@
                             @endforeach                        
                         </select>
                     </div>
-                </div>           
+                </div>          
+            @if(isset($custom->field1) )
                 @if($custom->field1)
                 <div class="form-group" id="extra1">
                     <label for="text1" class="control-label col-lg-4">{{$custom->field1}}</label>
@@ -174,6 +175,7 @@
                     </div>
                 </div> 
                 @endif
+            @endif
         </div>
     </div>
     <hr>       

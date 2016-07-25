@@ -51,6 +51,7 @@
                     </blockquote>
                 </div>
                 <div class="col-lg-6"> 
+                @if(isset($custom->field1))
                 <h4>Informaci&oacute;n Personalizada</h4>
                     <blockquote>                        
                         @if($custom->field1!="")
@@ -79,6 +80,7 @@
                         </small>
                         @endif
                     </blockquote>
+                    @endif
                 </div>
                <hr>
             </div>

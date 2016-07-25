@@ -47,6 +47,7 @@
                         <i class="icon-group"></i> <label>Marca: </label>&nbsp;<span class="label label-primary">{{$brand}}</span>
                        <small>Marca del producto
                         </small>     
+                    @if(isset($custom->field1))
                         @if($custom->field1!="")
                         <i class="icon-group"></i> <label>{{$custom->field1}}: </label> {{$product->extra1}}
                         <small>Dato personalizado
@@ -72,6 +73,7 @@
                         <small>Dato personalizado
                         </small>
                         @endif                   
+                    @endif
                     </blockquote>
                 </div>
                <hr>
