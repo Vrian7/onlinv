@@ -127,7 +127,7 @@
     </div>
     <hr>       
 </div>
-<?php if($custom): ?>
+<?php if(isset($custom->field1)): ?>
 <div class="col-lg-12">
     <div class="box dark">
         <header>
