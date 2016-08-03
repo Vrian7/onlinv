@@ -45,8 +45,8 @@ class DeduplicationHandlerTest extends TestCase
         @unlink(sys_get_temp_dir().'/monolog_dedup.log');
         $handler = new DeduplicationHandler($test, sys_get_temp_dir().'/monolog_dedup.log', 0);
 
-        $handler->handle($this->getRecord(Logger::ERROR));
-        $handler->handle($this->getRecord(Logger::CRITICAL));
+        $handler->handle($this->getRecord(Logger::ERROR, 'Foo:bar'));
+        $handler->handle($this->getRecord(Logger::CRITICAL, "Foo\nbar"));
 
         $handler->flush();
 
@@ -66,8 +66,8 @@ class DeduplicationHandlerTest extends TestCase
         $test = new TestHandler();
         $handler = new DeduplicationHandler($test, sys_get_temp_dir().'/monolog_dedup.log', 0);
 
-        $handler->handle($this->getRecord(Logger::ERROR));
-        $handler->handle($this->getRecord(Logger::CRITICAL));
+        $handler->handle($this->getRecord(Logger::ERROR, 'Foo:bar'));
+        $handler->handle($this->getRecord(Logger::CRITICAL, "Foo\nbar"));
 
         $handler->flush();
 

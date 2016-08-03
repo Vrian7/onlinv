@@ -115,5 +115,25 @@ class ProductController extends \BaseController{
 	public function delete($public_id){
 		
 	}
+	public function excel(){		
+		Excel::load('files/excel/productos4.csv', function($reader) {
+ 
+     		foreach ($reader->get() as $prueba) {     			
+                foreach($prueba as $pru){                    
+					$prod = explode(';',$pru);                    
+                	$product = new Product();
+					$product->enterprice_id = Auth::user()->enterprice_id;
+					$product->unit_id = 2;
+					$product->category_id = 2;
+					$product->brand_id = 2;
+					$product->name = $prod[1];
+					$product->code = $prod[0];
+					$product->price = $prod[2];
+					$product->description = "";		
+					$product->save();
+                }                
+      		}
+		});
+	}
 }
 ?>

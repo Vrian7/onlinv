@@ -20,7 +20,7 @@
                 <div class="col-lg-6">           
                     <h4>Informaci&oacute;n B&aacute;sica</h4>
                     <blockquote>
-                       <i class="icon-group"></i> <label>Raz&oacute;n Social: </label> <?php echo $client->business_name; ?>
+                       <i class="icon-user"></i> <label>Raz&oacute;n Social: </label> <?php echo $client->business_name; ?>
 
                        <small>Dato para facuturar
                         </small>
@@ -58,6 +58,7 @@
                     </blockquote>
                 </div>
                 <div class="col-lg-6"> 
+                <?php if(isset($custom->field1)): ?>
                 <h4>Informaci&oacute;n Personalizada</h4>
                     <blockquote>                        
                         <?php if($custom->field1!=""): ?>
@@ -91,6 +92,7 @@
                         </small>
                         <?php endif; ?>
                     </blockquote>
+                    <?php endif; ?>
                 </div>
                <hr>
             </div>

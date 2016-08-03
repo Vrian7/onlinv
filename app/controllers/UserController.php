@@ -23,6 +23,8 @@ class UserController extends \BaseController{
 	public function show($public_id){
 		$user = User::where('enterprice_id',Auth::user()->enterprice_id)->where('public_id',$public_id)->first();
 		$branch = Branch::where('id',$user->branch_id)->first();
+		$real_name = explode('.',$user->username);
+		$user->username = $real_name[1];
 		$rol = Rol::where('id',$user->rol_id)->first();
 		$data = [
 			'user' => $user,

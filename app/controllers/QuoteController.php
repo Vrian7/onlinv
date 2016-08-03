@@ -1,10 +1,23 @@
 <?php 
 class QuoteController extends \BaseController{
 	public function index(){
-
+		$quotes = Quote::where('enterprice_id',Auth::user()->enterprice_id)->where('branch_id',Auth::user()->branch_id)->get();
+		$data = [
+			'quotes' => $quotes,
+		];
+		return View::make('quote.index',$data);		
 	}
 	public function show($public_id){
-
+		$quote = Quote::where('enterprice_id',Auth::user()->enterprice_id)->where('public_id',$public_id)->first();
+		$products = QuoteDetail::where('quote_id',$quote->id)->get();
+		$ent = Enterprice::where('id',Auth::user()->enterprice_id)->first();
+		$data = [
+			'quote' => $quote,
+			'products' => $products,
+			'logo' => $ent->logo,
+		//	'tracing' => $invoice->getTracing(),
+		];
+		return View::make('quote.show',$data);
 	}
 	public function create(){
 		$products = Product::where('enterprice_id',Auth::user()->enterprice_id)->get();
@@ -18,7 +31,7 @@ class QuoteController extends \BaseController{
         $secs = $today_time - $last_date;
         $days = $secs / 86400;
         $days--;
-        $today = date('d-m-Y');        
+        $today = date('d/m/Y');        
 		if(!$client)
 			$nit = 0;
 		else
@@ -96,31 +109,25 @@ class QuoteController extends \BaseController{
 		//$invoice->setTracing(1,Auth::user()->name,'hola');
 		foreach (Input::get('productos') as $key => $producto) {
 			if($producto['code']!=""){
-			$product = Product::where('enterprice_id',Auth::user()->enterprice_id)->where('code',$producto['code'])->first();			
-			$inventory = Inventory::where('enterprice_id',Auth::user()->enterprice_id)->where('branch_id',$invoice->branch_id)->where('product_id',$product->id)->first();
-			if($inventory){
-			$inventory->stock = $inventory->stock-$producto['quantity'];			
-			$inventory->sold = $inventory->sold + $producto['quantity'];
-			$inventory->save(); 
-			}
-			$detail = new InvoiceDetail();			
+			$product = Product::where('enterprice_id',Auth::user()->enterprice_id)->where('code',$producto['code'])->first();						
+			$detail = new QuoteDetail();			
 			$detail->enterprice_id = Auth::user()->enterprice_id;
-			$detail->invoice_id = $invoice->id;			
+			$detail->quote_id = $invoice->id;			
 			$detail->product_id = $product->id;
 			$detail->code = $producto['code'];
 			$detail->name = $producto['name'];
 			$detail->price = $producto['price'];
-			$detail->quantity = $producto['quantity'];						
+			$detail->quantity = $producto['quantity'];				
 			$detail->save();
 			}
 		}		
-		$inv = Invoice::where('id',$invoice->id)->first();
+		$inv = Quote::where('id',$invoice->id)->first();
 		$data = [
 			'public_id' => $inv->public_id,
 			'number' => $inv->number,
 			'invoice' => $invoice,
 		];
-		return View::make('invoice.showStandard2',$data);
+		return View::make('quote.template',$data);
 	}
 	public function edit($public_id){
 

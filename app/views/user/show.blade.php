@@ -19,7 +19,7 @@
                 </header>
             <div class="panel-body">
                 <div class="col-lg-6">           
-                    <h4>Datod de Usuario</h4>
+                    <h4>Datos de Usuario</h4>
                     <blockquote>
                        <i class="icon-group"></i> <label>Nombre Completo: </label> {{$user->name}}
                        <small>Nombre real del usuario
@@ -49,9 +49,9 @@
                        <small>Habilitado
                         </small>                        
                     </blockquote>
-                </div>
-               <hr>
+                </div>               
             </div>
+            <hr>
 <div class="col-lg-12">
     <div class="col-lg-3"></div>
     <div class="col-lg-2"><a class="btn btn-warning" href="{{asset('usuarios')}}"><i class="icon-ban-circle icon-white"></i> Cancelar</a></div>

@@ -127,7 +127,7 @@
               <br><br>
               <div class="col-lg-12">
               <div class="form-group col-lg-8">
-              <label>T&eacute;erminos y condiciones</label>
+              <label>T&eacute;rminos y condiciones</label>
               <textarea class="form-control" name="notes" rows="2"></textarea>
             </div>          
           <div class="form-group col-lg-4">
@@ -154,7 +154,7 @@
             <!-- <label id="descuento_box">0</label> -->
             <br>
             <h4><label id="total">0</label></h4>
-<br><br><br>
+            <br><br><br>
             </div>
             <div class="col-lg-1"></div>            
             <div class="col-lg-12">

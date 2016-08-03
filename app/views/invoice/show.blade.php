@@ -3,7 +3,7 @@
 <div class="inner">
     <div class="row">
         <div class="col-lg-12">
-            <h2> Facuras </h2>
+            <h2> Facturas </h2>
         </div>
     </div>
     <hr />
@@ -87,8 +87,8 @@
                                             <td class="text-center">{{$product->code}}</td>
                                             <td class="text-center">{{$product->name}}</td>
                                             <td class="text-right">{{$product->quantity}}</td>
-                                            <td class="text-right">{{$product->price}}</td>
-                                            <td class="text-right">{{$product->quantity*$product->price}}</td>
+                                            <td class="text-right">{{ number_format($product->price,2,'.',',') }}</td>
+                                            <td class="text-right">{{ number_format($product->quantity*$product->price,2,'.',',') }}</td>
                                             </tr>                                        
                                         @endforeach
                                         

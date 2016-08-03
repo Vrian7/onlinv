@@ -227,7 +227,7 @@ class InitialDatabase extends Migration {
 			$table->foreign('brand_id')->references('id')->on('brands');
 			$table->foreign('unit_id')->references('id')->on('units');			
 			$table->foreign('enterprice_id')->references('id')->on('enterprices');
-		});
+		});		
 		Schema::create('custom_products',function($table){
 			$table->increments('id');						
 			$table->unsignedInteger('public_id');
@@ -349,12 +349,13 @@ class InitialDatabase extends Migration {
 			$table->string('code');
 			$table->double('price');
 			$table->float('quantity');
+			$table->double('total');
 			$table->timestamps();
 			$table->softDeletes();
 			$table->foreign('product_id')->references('id')->on('products');
 			$table->foreign('invoice_id')->references('id')->on('invoices');
 			$table->foreign('enterprice_id')->references('id')->on('enterprices');
-		});
+		});		
 		Schema::create('payment_types',function($table){
 			$table->increments('id');
 			$table->string('name');
@@ -390,6 +391,7 @@ class InitialDatabase extends Migration {
 			$table->string('description')->nullable();
 			$table->date('date');
 			$table->time('time');
+			$table->boolean('read')->default(0);
 			$table->timestamps();
 			$table->softDeletes();
 			$table->foreign('level_id')->references('id')->on('levels');
@@ -405,6 +407,7 @@ class InitialDatabase extends Migration {
 			$table->string('description')->nullable();
 			$table->date('date');
 			$table->time('time');
+			$table->boolean('read')->default(0);
 			$table->timestamps();
 			$table->softDeletes();
 			$table->foreign('level_id')->references('id')->on('levels');
@@ -453,6 +456,23 @@ class InitialDatabase extends Migration {
 			$table->foreign('branch_id')->references('id')->on('branches');
 			$table->foreign('user_id')->references('id')->on('users');	
 			$table->foreign('client_id')->references('id')->on('clients');
+			$table->foreign('enterprice_id')->references('id')->on('enterprices');
+		});
+		Schema::create('quote_details',function($table){
+			$table->increments('id');
+			$table->unsignedInteger('public_id');
+			$table->unsignedInteger('enterprice_id')->index();
+			$table->unsignedInteger('quote_id')->index();
+			$table->unsignedInteger('product_id')->index();		
+			$table->string('name');
+			$table->string('code');
+			$table->double('price');
+			$table->float('quantity');
+			$table->double('total');
+			$table->timestamps();
+			$table->softDeletes();
+			$table->foreign('product_id')->references('id')->on('products');
+			$table->foreign('quote_id')->references('id')->on('quotes');
 			$table->foreign('enterprice_id')->references('id')->on('enterprices');
 		});
 		/*** CREATING TRIGERS***/
@@ -544,6 +564,12 @@ class InitialDatabase extends Migration {
 			CREATE TRIGGER quotes_before_insert BEFORE INSERT ON `quotes` FOR EACH ROW 
 			BEGIN
 				SET NEW.public_id = (SELECT COALESCE (MAX(public_id),0) + 1 FROM quotes WHERE enterprice_id = NEW.enterprice_id );
+			END
+		');	
+		DB::unprepared('
+			CREATE TRIGGER quote_details_before_insert BEFORE INSERT ON `quote_details` FOR EACH ROW 
+			BEGIN
+				SET NEW.public_id = (SELECT COALESCE (MAX(public_id),0) + 1 FROM quote_details WHERE enterprice_id = NEW.enterprice_id );
 			END
 		');	
 	}

@@ -1,7 +1,7 @@
 <?php 
 class ClientController extends \BaseController{
 	public function index(){
-		$clients = Client::where('enterprice_id',Auth::user()->enterprice_id)->get();
+		$clients = Client::where('enterprice_id',Auth::user()->enterprice_id)->get();		
 		$data=[
 			'clients' => $clients,
 		];
@@ -63,7 +63,7 @@ class ClientController extends \BaseController{
 	}
 	public function edit($public_id){		
 		$client = Client::where('enterprice_id',Auth::user()->enterprice_id)->where('public_id',$public_id)->first();		
-		$custom = CustomCLient::where('enterprice_id',Auth::user()->enterprice_id)->first();
+		$custom = CustomClient::where('enterprice_id',Auth::user()->enterprice_id)->first();
 		$data=[
 			'client' => $client,
 			'custom' => $custom,

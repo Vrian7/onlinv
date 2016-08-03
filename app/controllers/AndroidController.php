@@ -78,8 +78,8 @@ class AndroidController extends \BaseController{
 		else
 		{
 			$data = [
-				'result' => 0,
-				'status' => 0,
+				'result' => '0',
+				'status' => '0',
 				'message' => $validation,
 			];
 			return Response::json($data);

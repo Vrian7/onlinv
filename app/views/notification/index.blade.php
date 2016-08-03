@@ -14,7 +14,7 @@
                     <div class="icons"><i class="icon-group"></i></div>
                     <h5>Listado de Notificaciones</h5>
                     <div class="toolbar">
-                        <a class="btn btn-success btn-sm btn-grad" href="{{asset('notificacion')}}">Nuevo</a>
+                        <!-- <a class="btn btn-success btn-sm btn-grad" href="{{asset('notificacion')}}">Nuevo</a> -->
                     </div>
                 </header>
             <div class="panel-body">
@@ -25,8 +25,9 @@
                                 <th class="col-md-1">Id</th>
                                 <th class="col-md-3">T&iacute;tulo</th>
                                 <th class="col-md-3">Contenido</th>
-                                <th class="col-md-2">Fecha</th>
+                                <th class="col-md-1">Fecha</th>
                                 <th class="col-md-2">Prioridad</th>
+                                <th class="col-md-1">Leido</th>
                                 <th class="col-md-1">Ver</th>
                             </tr>
                         </thead>
@@ -38,8 +39,9 @@
                                 <td>{{ $notification->message }}</td>
                                 <td class="center">{{ $notification->date }}</td>
                                 <td class="center">{{ $notification->name }}</td>
+                                <td class="center">@if($notification->read) SI @else NO @endif</td>
                                 <td class="center">
-                                    <a class="btn btn-primary btn-xs" href="{{asset('notificationa/'.$notification->public_id)}}">
+                                    <a class="btn btn-primary btn-xs" href="{{asset('notificacion/'.$notification->public_id)}}">
                                         <i class="icon-eye-open"></i> Ver
                                     </a>
                                 </td>

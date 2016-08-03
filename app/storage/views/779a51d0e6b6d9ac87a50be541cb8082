@@ -71,23 +71,25 @@
 	                <!-- LOGO SECTION -->
 	                <header class="navbar-header">
 
-	                    <a href="index.html" class="navbar-brand">
-	                    <img src="<?php echo asset('vendor/bcore/img/logo_factufacil.png'); ?>" alt="" />
-	                        
+	                    <a href="<?php echo asset('/inicio'); ?>" class="navbar-brand">
+	                    <img src="<?php echo asset('vendor/bcore/img/logo_factufacil.png'); ?>" alt="" height="40" />
 	                        </a>
 	                </header>
 	                <!-- END LOGO SECTION -->
 	                <ul class="nav navbar-top-links navbar-right">
 	                	<?php
+	                	
+	                    	$alertc = Alert::where('enterprice_id',Auth::user()->enterprice_id)->where('read',0)->count();
+	                   		$notic = Notification::where('enterprice_id',Auth::user()->enterprice_id)->where('read',0)->count();
 	                		$notifications = Notification::join('levels','levels.id','=','notifications.level_id')
-								->where('notifications.enterprice_id',Auth::user()->enterprice_id)
+								->where('notifications.enterprice_id',Auth::user()->enterprice_id)->where('read',0)
 								->select('notifications.title','notifications.public_id','notifications.date','notifications.time','notifications.message','levels.description','levels.name')
 								->orderBy('level_id','desc')->orderBy('date','desc')->get();
 						?>
 	                    <!-- MESSAGES SECTION -->
 	                    <li class="dropdown">
 	                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-	                            <span class="label label-success">2</span>    <i class="icon-envelope-alt"></i>&nbsp; <i class="icon-chevron-down"></i>
+	                            <span class="label label-success"><?php echo $notic; ?></span>    <i class="icon-envelope-alt"></i>&nbsp; <i class="icon-chevron-down"></i>
 	                        </a>
 
 	                        <ul class="dropdown-menu dropdown-messages">
@@ -103,8 +105,7 @@
 	                                    <div><?php echo $notification->message; ?>
 
 	                                        <br />
-	                                        <span class="label <?php echo $alert->description; ?>"><?php echo $notification->name; ?></span> 
-
+	                                        <span class="label <?php echo $notification->description; ?>"><?php echo $notification->name; ?></span> 
 	                                    </div>
 	                                </a>
 	                            </li>
@@ -119,17 +120,16 @@
 	                        </ul>
 
 	                    </li>
-	                    <!--END MESSAGES SECTION -->
-
+	                    <!--END MESSAGES SECTION -->	                    
 	                    <!--TASK SECTION -->
 	                    <li class="dropdown">
 	                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-	                            <span class="label label-danger">5</span>   <i class="icon-warning-sign"></i>&nbsp; <i class="icon-chevron-down"></i>
+	                            <span class="label label-danger"><?php echo $alertc; ?></span>   <i class="icon-warning-sign"></i>&nbsp; <i class="icon-chevron-down"></i>
 	                        </a>
 	                       <ul class="dropdown-menu dropdown-messages">
 	                       	<?php 	                       		
 	                       		$alerts = Alert::join('levels','levels.id','=','alerts.level_id')
-								->where('alerts.enterprice_id',Auth::user()->enterprice_id)
+								->where('alerts.enterprice_id',Auth::user()->enterprice_id)->where('alerts.read',0)
 								->select('alerts.title','alerts.public_id','alerts.date','alerts.time','alerts.message','levels.description','levels.name')
 								->orderBy('level_id','desc')->orderBy('date','desc')->get();
 	                       	?>
@@ -244,13 +244,10 @@
 	                            <li><a href="<?php echo asset('salir'); ?>"><i class="icon-signout"></i> Salir </a>
 	                            </li>
 	                        </ul>
-
 	                    </li>
 	                    <!--END ADMIN SETTINGS -->
 	                </ul>
-
 	            </nav>
-
 	        </div>
 	        <!-- END HEADER SECTION -->
 
@@ -293,10 +290,9 @@
 	                        <span class="pull-right">
 	                          <i class="icon-angle-left"></i>
 	                        </span>
-	                       &nbsp; <span class="label label-default">10</span>&nbsp;
+	                       &nbsp; <span class="label label-default">6</span>&nbsp;
 	                    </a>
-	                    <ul class="collapse" id="component-nav">
-	                       
+	                    <ul class="collapse" id="component-nav">	                       
 	                        <li class=""><a href="<?php echo asset('productos'); ?>"><i class="icon-angle-right"></i> Productos </a></li>
 	                         <li class=""><a href="<?php echo asset('categorias'); ?>"><i class="icon-angle-right"></i> Categorias	 </a></li>
 	                        <li class=""><a href="<?php echo asset('unidades'); ?>"><i class="icon-angle-right"></i> Unidades </a></li>
@@ -312,12 +308,12 @@
 	                        <span class="pull-right">
 	                            <i class="icon-angle-left"></i>
 	                        </span>	
-	                          &nbsp; <span class="label label-success">5</span>&nbsp;
+	                          &nbsp; <span class="label label-success">3</span>&nbsp;
 	                    </a>
 	                    <ul class="collapse" id="form-nav">
 	                        <li class=""><a href="<?php echo asset('facturas'); ?>"><i class="icon-angle-right"></i> Facturas </a></li>
 	                        <li class=""><a href="<?php echo asset('cobros'); ?>"><i class="icon-angle-right"></i> Cobros </a></li>
-	                        <li class=""><a href="<?php echo asset('cotizacion'); ?>"><i class="icon-angle-right"></i> Cotizaci&oacute;n </a></li>
+	                        <li class=""><a href="<?php echo asset('cotizaciones'); ?>"><i class="icon-angle-right"></i> Cotizaci&oacute;n </a></li>
 	                    </ul>
 	                </li>
 
@@ -328,7 +324,7 @@
 	                        <span class="pull-right">
 	                            <i class="icon-angle-left"></i>
 	                        </span>
-	                          &nbsp; <span class="label label-info">6</span>&nbsp;
+	                          &nbsp; <span class="label label-info">3</span>&nbsp;
 	                    </a>
 	                    <ul class="collapse" id="pagesr-nav">
 	                        <li><a href="<?php echo asset('sucursales'); ?>"><i class="icon-angle-right"></i> Sucursales </a></li>
@@ -343,7 +339,7 @@
 	                        <span class="pull-right">
 	                          <i class="icon-angle-left"></i>
 	                        </span>
-	                       &nbsp; <span class="label label-default">10</span>&nbsp;
+	                       &nbsp; <span class="label label-default">2</span>&nbsp;
 	                    </a>
 	                    <ul class="collapse" id="config-nav">
 	                       
@@ -365,7 +361,7 @@
 		
 
 		<div id="footer">
-        <p>&copy;  Factuf&aacute;cil &nbsp;2016 &nbsp;</p>
+        <p>&copy;  RUSYSVE &nbsp;2016 &nbsp;</p>
     	</div>
 		
 		

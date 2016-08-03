@@ -11,7 +11,7 @@
         <div class="box primary">            
             <header>
                     <div class="icons"><i class="icon-group"></i></div>
-                    <h5>Listado de Faturas</h5>
+                    <h5>Listado de Facturas</h5>
                     <div class="toolbar">
                         <a class="btn btn-success btn-sm btn-grad" href="<?php echo asset('factura'); ?>">Nuevo</a>
                     </div>
@@ -33,10 +33,10 @@
                             <?php foreach( $invoices as $invoice): ?>
                             <tr class="odd gradeX">
                                 <td><?php echo $invoice->number; ?></td>
-                                <td><?php echo $invoice->client_name; ?></td>
-                                <td><?php echo $invoice->net_amount; ?></td>
+                                <td><?php echo $invoice->client_name; ?></td>                                
+                                <td align="right"><?php echo number_format($invoice->net_amount,2,'.',','); ?></td>
                                 <td class="center"><?php echo $invoice->date; ?></td>
-                                <td class="center"><?php echo $statuses; ?></td>
+                                <td class="center"><?php echo $statuses[$invoice->invoice_status_ids]; ?></td>
                                 <td class="center">
                                     <a class="btn btn-primary btn-xs" href="<?php echo asset('factura/'.$invoice->public_id); ?>">
                                         <i class="icon-eye-open"></i> Ver

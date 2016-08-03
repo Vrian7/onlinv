@@ -12,7 +12,7 @@
         <div class="box primary">            
             <header>
                     <div class="icons"><i class="icon-group"></i></div>
-                    <h5>Listado de Faturas</h5>
+                    <h5>Listado de Facturas</h5>
                     <div class="toolbar">
                         <a class="btn btn-success btn-sm btn-grad" href="{{asset('factura')}}">Nuevo</a>
                     </div>
@@ -34,10 +34,10 @@
                             @foreach( $invoices as $invoice)
                             <tr class="odd gradeX">
                                 <td>{{ $invoice->number }}</td>
-                                <td>{{ $invoice->client_name }}</td>
-                                <td>{{ $invoice->net_amount }}</td>
+                                <td>{{ $invoice->client_name }}</td>                                
+                                <td align="right">{{ number_format($invoice->net_amount,2,'.',',') }}</td>
                                 <td class="center">{{ $invoice->date }}</td>
-                                <td class="center">{{ $statuses }}</td>
+                                <td class="center">{{ $statuses[$invoice->invoice_status_ids] }}</td>
                                 <td class="center">
                                     <a class="btn btn-primary btn-xs" href="{{asset('factura/'.$invoice->public_id)}}">
                                         <i class="icon-eye-open"></i> Ver

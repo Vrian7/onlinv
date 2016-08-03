@@ -59,7 +59,7 @@ class Invoice extends Eloquent
 	public function getTracing(){
 		return json_decode($this->tracing);
 	}
-	public function isValid(){
+	public function isValid(){	
 		$error = "";
 		return $error;
 	}

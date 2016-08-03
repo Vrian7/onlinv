@@ -58,7 +58,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Tel&eacute;fono/Celualar</label>
+                    <label for="text1" class="control-label col-lg-4">Tel&eacute;fono/Celular</label>
                     <div class="col-lg-8">
                         <input placeholder="N&uacute;mero de contacto" name="phone" class="form-control" />
                     </div>

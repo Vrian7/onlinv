@@ -7,7 +7,11 @@
 		"laravel/framework": "4.2.*",
 		"dollar/generators": "dev-master",
 		"maxxscho/laravel-tcpdf": "0.*",
+<<<<<<< HEAD
 		"maatwebsite/excel": "~2.1.0"		
+=======
+		"maatwebsite/excel": "~1.3"
+>>>>>>> 3af702ff9bfe3ce2ad9e9aa740b232c23e91df9f
 	},
 	"autoload": {
 		"classmap": [

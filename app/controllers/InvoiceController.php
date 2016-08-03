@@ -9,11 +9,16 @@ class InvoiceController extends \BaseController{
 		return View::make('mail.invoice',$data);
 		return;*/
 		$invoices = Invoice::where('enterprice_id',Auth::user()->enterprice_id)->where('branch_id',Auth::user()->branch_id)->orderBy('public_id','desc')->get();
-		//$statuses = InvoiceStatus::where('id',$invoi)->first();
-
+		$statuses = InvoiceStatus::get();
+		//$statusvar = [];
+		foreach ($statuses as $key => $status) {
+			$statusvar[$status->id] = $status->name;
+		}
+		//print_r($statusvar);
+		//return;		
 		$data = [
 			'invoices' => $invoices,
-			'statuses' => "Emitido",//$statuses->name,
+			'statuses' => $statusvar,
 		];
 		return View::make('invoice.index',$data);
 	}
@@ -69,13 +74,15 @@ class InvoiceController extends \BaseController{
 		$ent = Enterprice::where('id',Auth::user()->enterprice_id)->first();
 		$branch = Branch::where('id',$invoice->branch_id)->first();
 		$data = [
-			'invoice' => $invoice,			
+			'invoice' => $invoice,
 			'products' => $products,
 			'logo' => $ent->logo,
 			'type' => 'Copia para: '.Input::get('copy'),
 			'branch' => $branch,
-		];
-		if($invoice->branch_type_id == 1 )
+			'number' => $invoice->number,
+			'public_id' => $invoice->public_id,
+		];		
+		if($invoice->branch_type_id == 1)
 			return View::make('invoice.view2',$data);	
 		else
 			return View::make('invoice.view',$data);	
@@ -92,7 +99,8 @@ class InvoiceController extends \BaseController{
         $secs = $today_time - $last_date;
         $days = $secs / 86400;
         $days--;
-        $today = date('d-m-Y');        
+        $today = date('d/m/Y');
+
 		if(!$client)
 			$nit = 0;
 		else
@@ -126,7 +134,7 @@ class InvoiceController extends \BaseController{
 
 		$client->debt = $client->debt+Input::get('total');
 		$branch = Branch::where('id',Auth::user()->branch_id)->first();
-		$central = Branch::where('id',Auth::user()->branch_id)->where('number',0)->first();
+		$central = Branch::where('enterprice_id',Auth::user()->enterprice_id)->where('number',0)->first();
 		$tool = new Tool();
 		$invoice = new Invoice();
 		$invoice->enterprice_id = Auth::user()->enterprice_id;
@@ -192,7 +200,11 @@ class InvoiceController extends \BaseController{
 			'public_id' => $inv->public_id,
 			'number' => $inv->number,
 		];
-		return View::make('invoice.showStandard',$data);
+		if($invoice->branch_type_id == 1)
+			return View::make('invoice.view2',$data);	
+		else
+			return View::make('invoice.view',$data);	
+//		return View::make('invoice.showStandard',$data);
 	}
 	public function edit($public_id){
 
@@ -203,10 +215,12 @@ class InvoiceController extends \BaseController{
 		return ;
 	}
 	public function update($public_id){
+		//MAIL
 		if(Input::get('action')==1){
 			$this->sendInvoice($public_id,Input::get('name'),Input::get('mail'));			
 			return Redirect::to('facturas');	
 		}
+		//COPY
 		if(Input::get('action')==2){
 			$inv = Invoice::where('enterprice_id',Auth::user()->enterprice_id)->where('public_id',$public_id)->first();
 			$data = [
@@ -216,10 +230,16 @@ class InvoiceController extends \BaseController{
 			];
 			return View::make('invoice.showCopy',$data);			
 		}
-		if(Input::get('action')==3){
+		//CANCEL
+		if(Input::get('action')==3){			
 			$invoice = Invoice::where('enterprice_id',Auth::user()->enterprice_id)->where('public_id',$public_id)->first();
 			$invoice->invoice_status_ids = "2";
+			Session::flash('title','Factura Anulada');
+			Session::flash('text','Se anuló la factura: '.$invoice->number.' debido a: '.Input::get('cancel'));
 			$invoice->save();
+			$invoice->setTracing(2,Auth::user()->name,Input::get('cancel'));
+			$alert = new Alert();
+			$alert->add('Factura anulada','La factura '.$invoice->number.' ha sido anulada',3,'factura anulada por: '.Auth::user()->name.' por '.Input::get('cancel'));
 			return Redirect::to('facturas');	
 		}		
 	}
@@ -229,7 +249,7 @@ class InvoiceController extends \BaseController{
 	public function previewInvoice(){
 		$client = Client::where('id',Input::get('client'))->first();	
 		$branch = Branch::where('id',Auth::user()->branch_id)->first();
-		$central = Branch::where('id',Auth::user()->branch_id)->where('number',0)->first();
+		$central = Branch::where('enterprice_id',Auth::user()->enterprice_id)->where('number',0)->first();
 		//$tool = new Tool();
 		$invoice = new Invoice();
 		//$invoice->enterprice_id = Auth::user()->enterprice_id;
@@ -324,7 +344,5 @@ class InvoiceController extends \BaseController{
 		Session::flash('title','Envio de email');
 		Session::flash('text','Se envio correctamene la factura: '.$invoice->number.' a: '.$name.' al correo: '.$mail);
 	}
-
-
 }
 ?>

@@ -3,7 +3,7 @@ class NotificationController extends \BaseController{
 	public function index(){
         $notifications = Notification::join('levels','levels.id','=','notifications.level_id')
 			->where('notifications.enterprice_id',Auth::user()->enterprice_id)
-			->select('notifications.title','notifications.public_id','notifications.date','notifications.time','notifications.message','levels.description','levels.name')
+			->select('notifications.title','notifications.public_id','notifications.date','notifications.time','notifications.message','notifications.read','levels.description','levels.name')
 			->orderBy('notifications.id','desc')->get();		
 //		$number = Notification::where()->count();
 
@@ -13,9 +13,13 @@ class NotificationController extends \BaseController{
 		return View::make('notification.index',$data);
 	}
 	public function show($public_id){
+		$notification = Notification::where('enterprice_id',Auth::user()->enterprice_id)->where('public_id',$public_id)->first();
+		$notification->read = 1;
+		$notification->save();
+
 		$notification = Notification::join('levels','levels.id','=','notifications.level_id')
 			->where('notifications.enterprice_id',Auth::user()->enterprice_id)->where('notifications.public_id',$public_id)
-			->select('notifications.title','notifications.public_id','notifications.date','notifications.time','notifications.message','levels.description','levels.name')
+			->select('notifications.title','notifications.public_id','notifications.date','notifications.time','notifications.message','notifications.read','levels.description','levels.name')
 			->orderBy('notifications.id','desc')->first();
 		$data = [
 			'notification' => $notification,

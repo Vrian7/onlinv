@@ -92,15 +92,13 @@ Route::filter('csrf', function()
 /*** CUSTOM FILTERS (ROLS)***/
 Route::filter('admin', function()
 {
-    //if (Auth::user()->type == "Admin") 
-    if (false) 
-    {
+    if (Auth::user()->rol_id == 1 || Auth::user()->rol_id ==2 )    
+    {    	
         if (Request::ajax())
         {
             return Response::make('Unauthorized', 404);
         }
-
     }
-
-    else return Response::make('Unauthorized', 404);//"error no encontrado";//View::make('error'); // Need to have this view !
+    else //return Response::make('error.error403', 404);//"error no encontrado";//View::make('error'); // Need to have this view !
+    	return View::make('error.error403');
 });

@@ -21,7 +21,7 @@
                 <div class="col-lg-6">           
                     <h4>Informaci&oacute;n B&aacute;sica</h4>
                     <blockquote>
-                       <i class="icon-group"></i> <label>Raz&oacute;n Social: </label> {{$client->business_name}}
+                       <i class="icon-user"></i> <label>Raz&oacute;n Social: </label> {{$client->business_name}}
                        <small>Dato para facuturar
                         </small>
                         <i class="icon-group"></i> <label>NIT: </label> {{$client->nit}}
@@ -51,6 +51,7 @@
                     </blockquote>
                 </div>
                 <div class="col-lg-6"> 
+                @if(isset($custom->field1))
                 <h4>Informaci&oacute;n Personalizada</h4>
                     <blockquote>                        
                         @if($custom->field1!="")
@@ -79,6 +80,7 @@
                         </small>
                         @endif
                     </blockquote>
+                    @endif
                 </div>
                <hr>
             </div>

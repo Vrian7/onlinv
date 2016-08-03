@@ -95,7 +95,7 @@
                     <label for="text1" class="control-label col-lg-4">Direcci&oacute;n</label>
 
                     <div class="col-lg-8">
-                        <input type="text"  placeholder="Direcci&oactue;n de la empresa" name="address" class="form-control" />
+                        <input type="text"  placeholder="Direcci&oacute;n de la empresa" name="address" class="form-control" />
                     </div>
                 </div>
                 <div class="form-group">

@@ -33,18 +33,22 @@
                         <i class="icon-group"></i> <label>Fecha: </label> {{$alert->date}}
                        <small>Fecha de la alerta
                         </small>
-                        <i class="icon-group"></i> <label>HOra: </label> {{$alert->time}}
+                        <i class="icon-group"></i> <label>Hora: </label> {{$alert->time}}
                        <small>Hora de la alerta
-                        </small>                            
-                    </blockquote>                    
-                </div>                
-               <hr>
+                        </small>    
+                        <i class="icon-group"></i> <label>Leido: </label> @if($alert->read) SI @else NO @endif
+                       <small>Se ley&oacute; la alerta
+                        </small>
+                    </blockquote>     
+                    
+                </div>                               
             </div>
+            <hr>
 <div class="col-lg-12">
     <div class="col-lg-3"></div>
     <div class="col-lg-2"><a class="btn btn-warning" href="{{asset('alertas')}}"><i class="icon-ban-circle icon-white"></i> Cancelar</a></div>
     <div class="col-lg-2"></div>
-        <div class="col-lg-2"><a class="btn btn-primary" href="{{asset('alerta/editar/'.$alert->public_id)}}"><i class="icon-pencil icon-white"></i> Editar</a></div>
+        <!-- <div class="col-lg-2"><a class="btn btn-primary" href="{{asset('alerta/editar/'.$alert->public_id)}}"><i class="icon-pencil icon-white"></i> Editar</a></div> -->
 </div>
         </div>
     </div>

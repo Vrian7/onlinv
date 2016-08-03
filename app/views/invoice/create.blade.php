@@ -73,7 +73,7 @@
           <label>Fecha de emisi&oacute;n</label>
           <div class="form-group input-group">
               
-              <input type="text" name="date" class="form-control" data-date-format="dd/mm/yyyy" id="date" />                
+              <input type="text" name="date" class="form-control" data-date-format="dd/mm/yyyy" id="date" /> 
               <span class="input-group-btn">
               <a class="btn btn-default" type="button">
               <i class="icon-calendar"></i>
@@ -141,18 +141,22 @@
             <br>
             <h4><label id="total">0</label></h4>
             </div>
-            <div class="col-lg-1"></div>            
+
+            <div class="col-lg-1"></div>                        
             <div class="col-lg-12">
+
             <div class="col-lg-3"></div>
             <div class="col-lg-2"><a class="btn btn-primary" href="{{asset('facturas')}}"><i class="icon-ban-circle icon-white"></i> Cancelar</a></div>
             <div class="col-lg-2"> <a type="button" class="btn btn-info" id="preview_btn"><i class="icon-eye-open"></i> Previsualizar</a></div>
-            <div class="col-lg-2"><button class="btn btn-success" type="submit"><i class="icon-save icon-white"></i> Emitir</button></div>            
+            <div class="col-lg-2"><button class="btn btn-success" type="submit"><i class="icon-save icon-white"></i> Emitir</button></div> 
             <div class="col-lg-3"></div>            
+            </div>
           </form>
         </div><!-- div body-->
       </div> <!-- div pannel-->
     </div> <!-- first div-->
   </div> <!-- Class iner-->
+
    <div class="modal vista fade" id="preview" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -373,6 +377,7 @@ else{
 $('#killit1').css('cursor', 'pointer');
 $("#cost1").val('').prop('disabled', true);
 $("#qty1").val('').prop('disabled', true);
+$("#notes1").val('').prop('disabled', true);
 $('#discount').val("0");
 $("#due_date").val('');
 $("#public_notes").val('');

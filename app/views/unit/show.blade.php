@@ -27,13 +27,13 @@
                         <i class="icon-group"></i> <label>S&iacute;mbolo: </label> {{$unit->symbol}}
                        <small>Nombre del simolo
                         </small>                  
-                        <i class="icon-group"></i> <label>Desctipci&oacute;n: </label> {{$unit->description}}
+                        <i class="icon-group"></i> <label>Descripci&oacute;n: </label> {{$unit->description}}
                        <small>Descipcion adicional
                         </small>                            
                     </blockquote>                    
-                </div>                
-               <hr>
+                </div>                               
             </div>
+            <hr>
 <div class="col-lg-12">
     <div class="col-lg-3"></div>
     <div class="col-lg-2"><a class="btn btn-warning" href="{{asset('unidades')}}"><i class="icon-ban-circle icon-white"></i> Cancelar</a></div>
