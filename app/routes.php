@@ -81,6 +81,17 @@ Route::group(array('before' => 'auth'), function(){
 	Route::get('buscar_cliente','ClientController@findByString');
 	Route::get('obtener_clientes','ClientController@getClientsByNit');	
 	
+	
+Route::group(array('before'=>'admin'),function() {
+	/*** PRODUCTCONTROLLER ***/
+	Route::get('productos','ProductController@index');
+	Route::get('producto','ProductController@create');
+	Route::post('producto','ProductController@store');
+	Route::get('producto/{public_id}','ProductController@show');
+	Route::get('producto/editar/{public_id}','ProductController@edit');
+	Route::post('producto/editar/{public_id}','ProductController@update');
+	Route::get('producto/eliminar/{public_id}','ProductController@delete');
+
 
 	/*** CATEGORYCONTROLLER ***/
 	Route::get('categorias','CategoryController@index');
@@ -91,16 +102,6 @@ Route::group(array('before' => 'auth'), function(){
 	Route::post('categoria/editar/{public_id}','CategoryController@update');
 	Route::get('categoria/eliminar/{public_id}','CategoryController@delete');
 
-	/*** PRODUCTCONTROLLER ***/
-Route::group(array('before'=>'admin'),function() {
-	Route::get('productos','ProductController@index');
-	Route::get('producto','ProductController@create');
-	Route::post('producto','ProductController@store');
-	Route::get('producto/{public_id}','ProductController@show');
-	Route::get('producto/editar/{public_id}','ProductController@edit');
-	Route::post('producto/editar/{public_id}','ProductController@update');
-	Route::get('producto/eliminar/{public_id}','ProductController@delete');
-});
 	/*** BRANCHCONTROLLER ***/
 	Route::get('sucursales','BranchController@index');
 	Route::get('sucursal','BranchController@create');
@@ -110,7 +111,56 @@ Route::group(array('before'=>'admin'),function() {
 	Route::post('sucursal/editar/{public_id}','BranchController@update');
 	Route::get('sucursal/eliminar/{public_id}','BranchController@delete');	
 	Route::get('examen','BranchController@test');
-	Route::post('examen','BranchController@testResult');
+	Route::post('examen','BranchController@testResult');	
+
+	/*** UNITCONTROLLER ***/
+	Route::get('unidades','UnitController@index');
+	Route::get('unidad','UnitController@create');
+	Route::post('unidad','UnitController@store');
+	Route::get('unidad/{public_id}','UnitController@show');
+	Route::get('unidad/editar/{public_id}','UnitController@edit');
+	Route::post('unidad/editar/{public_id}','UnitController@update');
+	Route::get('unidad/eliminar/{public_id}','UnitController@delete');
+
+	/*** BRANDCONTROLLER ***/
+	Route::get('marcas','BrandController@index');
+	Route::get('marca','BrandController@create');
+	Route::post('marca','BrandController@store');
+	Route::get('marca/{public_id}','BrandController@show');
+	Route::get('marca/editar/{public_id}','BrandController@edit');
+	Route::post('marca/editar/{public_id}','BrandController@update');
+	Route::get('marca/eliminar/{public_id}','BrandController@delete');
+
+
+	/*** CUSTOMPRODUCTCONTROLLER ***/
+	Route::get('campos_productos','CustomProductController@index');
+	Route::get('campos_producto','CustomProductController@create');
+	Route::post('campos_producto','CustomProductController@store');
+	Route::get('campos_producto/{public_id}','CustomProductController@show');
+	Route::get('campos_producto/editar/{public_id}','CustomProductController@edit');
+	Route::post('campos_producto/editar/{public_id}','CustomProductController@update');
+	Route::get('campos_producto/eliminar/{public_id}','CustomProductController@delete');
+
+});
+Route::group(array('before'=>'superadmin'),function() {
+	/*** USERCONTROLLER ***/
+	Route::get('usuarios','UserController@index');
+	Route::get('usuario','UserController@create');
+	Route::post('usuario','UserController@store');
+	Route::get('usuario/{public_id}','UserController@show');
+	Route::get('usuario/editar/{public_id}','UserController@edit');
+	Route::post('usuario/editar/{public_id}','UserController@update');
+	Route::get('usuario/eliminar/{public_id}','UserController@delete');			
+
+	/*** CUSTOMCLIENTCONTROLLER ***/
+	Route::get('campos_clientes','CustomClientController@index');
+	Route::get('campos_cliente','CustomClientController@create');
+	Route::post('campos_cliente','CustomClientController@store');
+	Route::get('campos_cliente/{public_id}','CustomClientController@show');
+	Route::get('campos_cliente/editar/{public_id}','CustomClientController@edit');
+	Route::post('campos_cliente/editar/{public_id}','CustomClientController@update');
+	Route::get('campos_cliente/eliminar/{public_id}','CustomClientController@delete');
+});	
 
 	/*** INVOICECONTROLLER ***/
 	Route::get('facturas','InvoiceController@index');
@@ -125,34 +175,6 @@ Route::group(array('before'=>'admin'),function() {
 	Route::get('factura/estandar/{public_id}','InvoiceController@showStandard');
 	Route::get('factura/copia/{public_id}','InvoiceController@showCopy');
 	
-	
-	/*** USERCONTROLLER ***/
-	Route::get('usuarios','UserController@index');
-	Route::get('usuario','UserController@create');
-	Route::post('usuario','UserController@store');
-	Route::get('usuario/{public_id}','UserController@show');
-	Route::get('usuario/editar/{public_id}','UserController@edit');
-	Route::post('usuario/editar/{public_id}','UserController@update');
-	Route::get('usuario/eliminar/{public_id}','UserController@delete');	
-
-	/*** UNITCONTROLLER ***/
-	Route::get('unidades','UnitController@index');
-	Route::get('unidad','UnitController@create');
-	Route::post('unidad','UnitController@store');
-	Route::get('unidad/{public_id}','UnitController@show');
-	Route::get('unidad/editar/{public_id}','UnitController@edit');
-	Route::post('unidad/editar/{public_id}','UnitController@update');
-	Route::get('unidad/eliminar/{public_id}','UnitController@delete');
-
-
-	/*** BRANDCONTROLLER ***/
-	Route::get('marcas','BrandController@index');
-	Route::get('marca','BrandController@create');
-	Route::post('marca','BrandController@store');
-	Route::get('marca/{public_id}','BrandController@show');
-	Route::get('marca/editar/{public_id}','BrandController@edit');
-	Route::post('marca/editar/{public_id}','BrandController@update');
-	Route::get('marca/eliminar/{public_id}','BrandController@delete');
 
 	/*** CHARGECONTROLLER ***/
 	Route::get('cobros','ChargeController@index');
@@ -191,23 +213,6 @@ Route::group(array('before'=>'admin'),function() {
 	Route::post('notificacion/editar/{public_id}','NotificationController@update');
 	Route::get('notificacion/eliminar/{public_id}','NotificationController@delete');
 
-	/*** CUSTOMCLIENTCONTROLLER ***/
-	Route::get('campos_clientes','CustomClientController@index');
-	Route::get('campos_cliente','CustomClientController@create');
-	Route::post('campos_cliente','CustomClientController@store');
-	Route::get('campos_cliente/{public_id}','CustomClientController@show');
-	Route::get('campos_cliente/editar/{public_id}','CustomClientController@edit');
-	Route::post('campos_cliente/editar/{public_id}','CustomClientController@update');
-	Route::get('campos_cliente/eliminar/{public_id}','CustomClientController@delete');
-
-	/*** CUSTOMPRODUCTCONTROLLER ***/
-	Route::get('campos_productos','CustomProductController@index');
-	Route::get('campos_producto','CustomProductController@create');
-	Route::post('campos_producto','CustomProductController@store');
-	Route::get('campos_producto/{public_id}','CustomProductController@show');
-	Route::get('campos_producto/editar/{public_id}','CustomProductController@edit');
-	Route::post('campos_producto/editar/{public_id}','CustomProductController@update');
-	Route::get('campos_producto/eliminar/{public_id}','CustomProductController@delete');
 
 	/*** QUOTECONTROLLER ***/
 	Route::get('cotizaciones','QuoteController@index');

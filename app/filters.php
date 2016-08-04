@@ -96,7 +96,20 @@ Route::filter('admin', function()
     {    	
         if (Request::ajax())
         {
-            return Response::make('Unauthorized', 404);
+            return View::make('error.error403');
+        }
+    }
+    else //return Response::make('error.error403', 404);//"error no encontrado";//View::make('error'); // Need to have this view !
+    	return View::make('error.error403');
+});
+
+Route::filter('superadmin', function()
+{
+    if (Auth::user()->rol_id == 1)    
+    {    	
+        if (Request::ajax())
+        {
+            return View::make('error.error403');
         }
     }
     else //return Response::make('error.error403', 404);//"error no encontrado";//View::make('error'); // Need to have this view !

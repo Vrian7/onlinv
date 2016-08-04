@@ -32,7 +32,7 @@
 	  <div class="logo">
 	    <h1>Restringido !</h1>
           </div>
-          <p class="lead text-muted">Ouch, ocurri&oacute; un error. Forbidden!</p>
+          <p class="lead text-muted">Alto, no tiene acceso a este lugar.</p>
           <div class="clearfix"></div>
                 <div class="col-lg-6 col-lg-offset-3">
                     <form action="index.html">

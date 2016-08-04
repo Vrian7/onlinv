@@ -108,7 +108,7 @@
                 <td><input class="form-control derecha" disabled value='0' id="subtotal1"></td>
                 <td>
                   <div for="inputError">
-                    <span class="killit" id="killit1" style="color:red" >&nbsp;<i class="fa fa-minus-circle redlink"></i></span>
+                    <span class="killit" id="killit1" style="color:green" >&nbsp;<i class="icon-ok-sign"></i></span>
                   </div>
                 </td>
               </tr>                
@@ -691,14 +691,22 @@ function getProductsName(){
 // $(document).on('click','.notes', function(){
 //   $("#"+this.id).autocomplete( "search", "" );
 // });
-/*$(document).on('mouseover','.new_row',function(){
+$(document).on('mouseover','.new_row',function(){
   val = this.id.substring(7);
-  $("#killit"+val).show();
+  console.log("asdfadf "+val);
+  $("#killit"+val).children().removeClass("icon-ok-sign");
+  $("#killit"+val).children().addClass('icon-remove-sign');
+  $("#killit"+val).css('color','red').show();
+  //$("#killit"+val).css('color','green');
 });
 $(document).on('mouseout','.new_row',function(){
   val = this.id.substring(7);
-  $("#killit"+val).hide();
-});*/
+  $("#killit"+val).css('color','green');
+  $("#killit"+val).children().removeClass('icon-remove-sign');
+  $("#killit"+val).children().addClass("icon-ok-sign");
+  
+  //$("#killit"+val).hide();
+});
 
 
 function calculateTotal()
@@ -1160,7 +1168,7 @@ function addNewRow(){
   tdcost = "<td><input disabled class='form-control cost centertext number_field' id='cost"+id_products+"' name=\"productos["+id_products+"][price]\""+"</td>";
   tdqty = "<td><input disabled class='form-control qty centertext number_field' id='qty"+id_products+"' name=\"productos["+id_products+"][quantity]\""+"</td>";
   tdsubtotal = "<td><input disabled class='form-control derecha' value='0' id='subtotal"+id_products+"'></td>";
-  tdkill= "<td><div for='inputError'><span class='killit' style='color:red' id='killit"+id_products+"'>&nbsp;<i class='fa fa-minus-circle redlink'></i></span></div></td>";
+  tdkill= "<td><div for='inputError'><span class='killit' style='color:green' id='killit"+id_products+"'>&nbsp;<i class='icon-ok-sign redlink'></i></span></div></td>";
   fintr="</tr>";
   return tr+tdcode+tdnotes+tdcost+tdqty+tdsubtotal+tdkill+fintr;
 }
