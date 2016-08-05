@@ -73,9 +73,9 @@
           <label>Fecha de emisi&oacute;n</label>
           <div class="form-group input-group">
               
-              <input type="text" name="date" class="form-control" data-date-format="dd/mm/yyyy" id="date" /> 
+              <input type="text" name="date" readonly class="form-control" data-date-format="dd/mm/yyyy" id="date" /> 
               <span class="input-group-btn">
-              <a class="btn btn-default" type="button">
+              <a class="btn btn-default" type="button" id='icondate'>
               <i class="icon-calendar"></i>
               </a>
               </span>
@@ -201,7 +201,7 @@ $("#date").datepicker({
 $('#date').on('changeDate', function(ev){
     $(this).datepicker('hide');
 });
-$(".icon-calendar").click(function(){
+$("#icondate").click(function(){
     $("#date").datepicker('show');    
 });
 /*** END DATE***/
@@ -228,6 +228,7 @@ $("#search_client").click(function(){
             result.forEach(function(res) {                      
               $(".razon_text").remove();
               $("#divrazon").append('<p class="razon_text"><strong>'+res.business_name+'</strong> <a><i class=\"icon-pencil\"></i></a></p> ');
+              if(res.description==null){ res.description = '';}
               $("#divrazon").append('<p class=\"razon_text\">'+res.name+': '+res.description+'</p>');
               $("#razon").val(res.business_name);
               $("#client").val(res.id);
@@ -906,17 +907,12 @@ $("#sub_boton").mouseover(function(){
     $("#sub_boton").prop('disabled', false);
 });
 function completeItem(ind_act,index){
-    //products.forEach(function(prod){
-    //if(prod['notes'] == item_send)
-    //{
+    
       $("#code"+ind_act).val(productos[index]['code']).trigger("change");
       $("#notes"+ind_act).val(productos[index]['name']).prop('disabled', false);
       $("#cost"+ind_act).val(productos[index]['price']).prop('disabled', false);
       $("#qty"+ind_act).val(1).prop('disabled', false);
       $("#subtotal"+ind_act).val(parseFloat(productos[index]['price']).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,'));
-
-    //}
-  //});
 }
 
 

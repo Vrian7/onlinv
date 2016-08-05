@@ -1,7 +1,7 @@
 <?php 
 class ProductController extends \BaseController{
 	public function index(){
-		$products = Product::where('enterprice_id',Auth::user()->enterprice_id)->get();
+		$products = Product::where('enterprice_id',Auth::user()->enterprice_id)->take(100)->skip(100)->get();
 		$data = [
 			'products' => $products,
 		];
@@ -116,7 +116,7 @@ class ProductController extends \BaseController{
 		
 	}
 	public function excel(){		
-		Excel::load('files/excel/productos4.csv', function($reader) {
+		Excel::load('files/excel/productos5.csv', function($reader) {
  
      		foreach ($reader->get() as $prueba) {     			
                 foreach($prueba as $pru){                    
@@ -134,6 +134,34 @@ class ProductController extends \BaseController{
                 }                
       		}
 		});
+	}
+
+	public function busqueda ($code="", $nombre="", $precio="", $descripcion=""){
+		if(Input::get('codigo')){
+			$code = Input::get('codigo');
+			$codesql = "'code','like', '".$code."%'";
+
+		}
+		if(Input::get('nombre')){
+			$nombre = Input::get('nombre');
+		}
+		if(Input::get('precio')){
+			$precio = Input::get('precio');
+		}
+		if(Input::get('descripcion')){
+			$descripcion = Input::get('descripcion');
+		}
+
+		$products = Product::where('enterprice_id',Auth::user()->enterprice_id)
+								->select('id', 'code', 'name', 'price', 'description')
+								->where('code','like', $code.'%')
+								->where('name','like', $nombre.'%')
+								->where('price','like', $precio.'%')
+								->where('description','like', $descripcion.'%')
+								->orderBy('code', 'desc')
+	    					->simplePaginate(30);
+								// ->get();
+		return Response::json($products);
 	}
 }
 ?>

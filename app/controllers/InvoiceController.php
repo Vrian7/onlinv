@@ -200,11 +200,11 @@ class InvoiceController extends \BaseController{
 			'public_id' => $inv->public_id,
 			'number' => $inv->number,
 		];
-		if($invoice->branch_type_id == 1)
-			return View::make('invoice.view2',$data);	
-		else
-			return View::make('invoice.view',$data);	
-//		return View::make('invoice.showStandard',$data);
+		// if($invoice->branch_type_id == 1)
+		// 	return View::make('invoice.view2',$data);	
+		// else
+		// 	return View::make('invoice.view',$data);	
+		return View::make('invoice.showStandard',$data);
 	}
 	public function edit($public_id){
 
@@ -233,6 +233,7 @@ class InvoiceController extends \BaseController{
 		//CANCEL
 		if(Input::get('action')==3){			
 			$invoice = Invoice::where('enterprice_id',Auth::user()->enterprice_id)->where('public_id',$public_id)->first();
+					
 			$invoice->invoice_status_ids = "2";
 			Session::flash('title','Factura Anulada');
 			Session::flash('text','Se anuló la factura: '.$invoice->number.' debido a: '.Input::get('cancel'));
@@ -336,7 +337,7 @@ class InvoiceController extends \BaseController{
 			'enterprice' => $ent->name,
 		];		
 
-		Mail::send('mail.invoice', $data, function($message) use ($data_message){						
+		Mail::send('mail.invoice', $data, function($message) use ($data_message){
 			$message->to($data_message['mail'], $data_message['name']);			
 			$message->from('info@rusysve.com','FACTUFACIL');
 			$message->subject('Factura: '.$data_message['enterprice']);

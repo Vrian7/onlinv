@@ -142,6 +142,7 @@ Route::group(array('before'=>'admin'),function() {
 	Route::get('campos_producto/eliminar/{public_id}','CustomProductController@delete');
 
 });
+Route::get('productos/busqueda', 'ProductController@busqueda');
 Route::group(array('before'=>'superadmin'),function() {
 	/*** USERCONTROLLER ***/
 	Route::get('usuarios','UserController@index');

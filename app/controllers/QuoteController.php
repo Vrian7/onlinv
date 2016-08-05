@@ -99,7 +99,11 @@ class QuoteController extends \BaseController{
 		//$invoice->legend = $branch->legend;
 		///$invoice->especification = "";
 		//$invoice->number = $branch->getInvoiceNumber($branch->id);
-		$quote = Quote::where('enterprice_id',Auth::user()->enterprice_id)->orderBy('id','DESC')->first();
+		$quote = Quote::where('enterprice_id',Auth::user()->enterprice_id)->where('branch_id',Auth::user()->branch_id)->orderBy('id','DESC')->first();
+		if($quote){
+			$invoice->number = $quote->number +1;
+		}
+		else
 		$invoice->number = 1;
 		$fecha = trim(Input::get('date'));
         $fecha=  explode("/",$fecha);            
