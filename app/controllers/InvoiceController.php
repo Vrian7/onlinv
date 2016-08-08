@@ -228,6 +228,8 @@ class InvoiceController extends \BaseController{
 				'number' => $inv->number,
 				'copy' => Input::get('copy'),
 			];
+			$alert = new Alert();
+			$alert->add('Generacion de copia','Se genero una copia de la factura '.$inv->number.'.',2,'factura generada por: '.Auth::user()->name.' con destino a: '.Input::get('cancel'));
 			return View::make('invoice.showCopy',$data);			
 		}
 		//CANCEL
@@ -240,7 +242,7 @@ class InvoiceController extends \BaseController{
 			$invoice->save();
 			$invoice->setTracing(2,Auth::user()->name,Input::get('cancel'));
 			$alert = new Alert();
-			$alert->add('Factura anulada','La factura '.$invoice->number.' ha sido anulada',3,'factura anulada por: '.Auth::user()->name.' por '.Input::get('cancel'));
+			$alert->add('Factura anulada','La factura '.$invoice->number.' ha sido anulada',4,'factura anulada por: '.Auth::user()->name.' por '.Input::get('cancel'));
 			return Redirect::to('facturas');	
 		}		
 	}

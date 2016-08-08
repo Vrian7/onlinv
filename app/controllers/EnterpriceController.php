@@ -9,8 +9,7 @@ class EnterpriceController extends \BaseController{
 		//print_r(Input::all());
 
 		$file = Input::file('logo');
-		$destinationPath = 'uploads/logos';		
-			
+		$destinationPath = 'uploads/logos';					
 		$ent = new Enterprice();
 		$ent->currency_id = Input::get('currency');
 		$ent->enterprice_type_id = Input::get('enterprice_type');

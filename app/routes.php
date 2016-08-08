@@ -141,6 +141,24 @@ Route::group(array('before'=>'admin'),function() {
 	Route::post('campos_producto/editar/{public_id}','CustomProductController@update');
 	Route::get('campos_producto/eliminar/{public_id}','CustomProductController@delete');
 
+		/*** ALERTCONTROLLER ***/
+	Route::get('alertas','AlertController@index');
+	Route::get('alerta','AlertController@create');
+	Route::post('alerta','AlertController@store');
+	Route::get('alerta/{public_id}','AlertController@show');
+	Route::get('alerta/editar/{public_id}','AlertController@edit');
+	Route::post('alerta/editar/{public_id}','AlertController@update');
+	Route::get('alerta/eliminar/{public_id}','AlertController@delete');
+
+	/*** NOTIFICATIONCONTROLLER ***/
+	Route::get('notificaciones','NotificationController@index');
+	Route::get('notificacion','NotificationController@create');
+	Route::post('notificacion','NotificationController@store');
+	Route::get('notificacion/{public_id}','NotificationController@show');
+	Route::get('notificacion/editar/{public_id}','NotificationController@edit');
+	Route::post('notificacion/editar/{public_id}','NotificationController@update');
+	Route::get('notificacion/eliminar/{public_id}','NotificationController@delete');
+
 });
 Route::get('productos/busqueda', 'ProductController@busqueda');
 Route::group(array('before'=>'superadmin'),function() {
@@ -195,24 +213,6 @@ Route::group(array('before'=>'superadmin'),function() {
 	Route::get('inventario/editar/{public_id}','InventoryController@edit');
 	Route::post('inventario/editar/{public_id}','InventoryController@update');
 	Route::get('inventario/eliminar/{public_id}','InventoryController@delete');	
-
-	/*** ALERTCONTROLLER ***/
-	Route::get('alertas','AlertController@index');
-	Route::get('alerta','AlertController@create');
-	Route::post('alerta','AlertController@store');
-	Route::get('alerta/{public_id}','AlertController@show');
-	Route::get('alerta/editar/{public_id}','AlertController@edit');
-	Route::post('alerta/editar/{public_id}','AlertController@update');
-	Route::get('alerta/eliminar/{public_id}','AlertController@delete');
-
-	/*** NOTIFICATIONCONTROLLER ***/
-	Route::get('notificaciones','NotificationController@index');
-	Route::get('notificacion','NotificationController@create');
-	Route::post('notificacion','NotificationController@store');
-	Route::get('notificacion/{public_id}','NotificationController@show');
-	Route::get('notificacion/editar/{public_id}','NotificationController@edit');
-	Route::post('notificacion/editar/{public_id}','NotificationController@update');
-	Route::get('notificacion/eliminar/{public_id}','NotificationController@delete');
 
 
 	/*** QUOTECONTROLLER ***/
