@@ -21,16 +21,16 @@
                 <div class="col-lg-6">           
                     <h4>Informaci&oacute;n</h4>
                     <blockquote>
-                       <i class="icon-group"></i> <label>Nombre: </label> {{$brand->name}}
-                       <small>nombre
+                       <i class="icon-archive"></i> <label>Nombre: </label> {{$brand->name}}
+                       <small>Nombre
                         </small>
-                        <i class="icon-group"></i> <label>Manofacturador: </label> {{$brand->manofacturer}}
+                        <i class="icon-truck"></i> <label>Manofacturador: </label> {{$brand->manofacturer}}
                        <small>Manofacturador de la marca
                         </small>
-                        <i class="icon-group"></i> <label>Proveedor: </label> {{$brand->provider}}
+                        <i class="icon-user"></i> <label>Proveedor: </label> {{$brand->provider}}
                        <small>Nombre del proveedor
                         </small>
-                        <i class="icon-group"></i> <label>Descripci&oacute;n: </label> {{$brand->description}}
+                        <i class="icon-plus"></i> <label>Descripci&oacute;n: </label> {{$brand->description}}
                        <small>Detalle de la marca
                         </small>
                         

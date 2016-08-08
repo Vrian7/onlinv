@@ -216,5 +216,20 @@ class QuoteController extends \BaseController{
 		else
 			return View::make('invoice.view',$data);	
 	}
+
+	public function showQuote($public_id){
+		$quote = Quote::where('enterprice_id',Auth::user()->enterprice_id)->where('public_id',$public_id)->first();
+		$products = QuoteDetail::where('quote_id',$quote->id)->get();
+		$ent = Enterprice::where('id',Auth::user()->enterprice_id)->first();
+		$branch = Branch::where('id',$quote->branch_id)->first();
+		$data = [
+			'invoice' => $quote,			
+			'products' => $products,
+			'logo' => $ent->logo,
+			'type' => 'ORIGINAL',
+			'branch' => $branch
+		];
+		return View::make('invoice.view3',$data);			
+	}
 }
 ?>

@@ -12,7 +12,7 @@
         <div class="box primary">            
             <header>
                     <div class="icons"><i class="icon-group"></i></div>
-                    <h5>Listado de Categorias</h5>
+                    <h5>Listado de Categor&iacute;as</h5>
                     <div class="toolbar">
                         <a class="btn btn-success btn-sm btn-grad" href="{{asset('categoria')}}">Nuevo</a>
                     </div>

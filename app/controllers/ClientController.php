@@ -10,9 +10,20 @@ class ClientController extends \BaseController{
 	public function show($public_id){
 		$client = Client::where('enterprice_id',Auth::user()->enterprice_id)->where('public_id',$public_id)->first();
 		$custom = CustomClient::where('enterprice_id',Auth::user()->enterprice_id)->first();
+		$invoices = Invoice::where('enterprice_id',Auth::user()->enterprice_id)->where('client_id',$client->id)->get();
+		// $charges = Charge::join('invoices','invoices.id','=','charges.invoice_id')
+		// 			->where('charges.enterprice_id',Auth::user()->enterprice_id)					
+		// 			->select('charges.public_id','charges.amount','charges.date','invoices.client_name','invoices.number')
+		// 			->get();
+		$charges = Charge::where('client_id',$client->id)->get();
+		$quotes = Quote::where('enterprice_id',Auth::user()->enterprice_id)->where('branch_id',Auth::user()->branch_id)->where('client_id',$client->id)->get();
+
 		$data = [
 			'client' => $client,
 			'custom' => $custom,
+			'invoices' => $invoices,
+			'charges' => $charges,
+			'quotes' => $quotes,
 		];
 		return View::make('client.show',$data);
 	}

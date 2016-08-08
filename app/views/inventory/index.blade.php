@@ -25,7 +25,7 @@
                                 <th class="col-md-1">Id</th>
                                 <th class="col-md-3">Producto</th>
                                 <th class="col-md-3">Sucursal</th>
-                                <th class="col-md-2">Existancia</th>                                
+                                <th class="col-md-2">Existencia</th>                                
                                 <th class="col-md-1">Ver</th>
                             </tr>
                         </thead>

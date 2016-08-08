@@ -21,14 +21,14 @@
                 <div class="col-lg-6">           
                     <h4>Informaci&oacute;n</h4>
                     <blockquote>
-                       <i class="icon-group"></i> <label>Nombre: </label> {{$unit->name}}
-                       <small>nombre
+                       <i class="icon-archive"></i> <label>Nombre: </label> {{$unit->name}}
+                       <small>Nombre
                         </small>
-                        <i class="icon-group"></i> <label>S&iacute;mbolo: </label> {{$unit->symbol}}
-                       <small>Nombre del simolo
+                        <i class="icon-aarchive"></i> <label>S&iacute;mbolo: </label> {{$unit->symbol}}
+                       <small>Nombre del s&iacute;mbolo
                         </small>                  
-                        <i class="icon-group"></i> <label>Descripci&oacute;n: </label> {{$unit->description}}
-                       <small>Descipcion adicional
+                        <i class="icon-archive"></i> <label>Descripci&oacute;n: </label> {{$unit->description}}
+                       <small>Descripci&oacute;n adicional
                         </small>                            
                     </blockquote>                    
                 </div>                               

@@ -223,6 +223,7 @@ Route::group(array('before'=>'superadmin'),function() {
 	Route::get('cotizacion/editar/{public_id}','QuoteController@edit');
 	Route::post('cotizacion/editar/{public_id}','QuoteController@update');
 	Route::get('cotizacion/eliminar/{public_id}','QuoteController@delete');
+	Route::get('cotizacion/vercotizacion/{public_id}','QuoteController@showQuote');
 
 	Route::get('excel','ProductController@excel');
 });

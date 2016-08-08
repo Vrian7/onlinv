@@ -19,18 +19,18 @@
                 </header>
             <div class="panel-body">
                 <div class="col-lg-6">           
-                    <h4>Datos de Usuario</h4>
+                    <h4>Datod de Usuario</h4>
                     <blockquote>
-                       <i class="icon-group"></i> <label>Nombre Completo: </label> {{$user->name}}
+                       <i class="icon-male"></i> <label>Nombre Completo: </label> {{$user->name}}
                        <small>Nombre real del usuario
                         </small>
-                        <i class="icon-group"></i> <label>Nombre del usuario: </label> {{$user->username}}
+                        <i class="icon-user"></i> <label>Nombre del usuario: </label> {{$user->username}}
                        <small>Nombre para ingresar al sistema
                         </small>
-                        <i class="icon-group"></i> <label>Tel&eacute;fono/Celular: </label> {{$user->phone}}
+                        <i class="icon-phone"></i> <label>Tel&eacute;fono/Celular: </label> {{$user->phone}}
                        <small>Dato de contacto con el usuario
                         </small>                        
-                        <i class="icon-group"></i> <label>Foto o Avatar: </label>
+                        <i class="icon-user"></i> <label>Foto o Avatar: </label>
                         <img class="media-object img-thumbnail user-img" alt="Usuario" src="{{asset('uploads/users/'.$user->avatar)}}"  height="100" width="100"/>
                        <small>Usuario
                         </small>
@@ -42,10 +42,10 @@
                        <i class="icon-group"></i> <label>Rol: </label> {{$rol}}
                        <small>Rol del usuario
                         </small>
-                        <i class="icon-group"></i> <label>Sucursal: </label> {{$branch}}
+                        <i class="icon-map-marker"></i> <label>Sucursal: </label> {{$branch}}
                        <small>Sucursal
                         </small>
-                        <i class="icon-group"></i> <label>Habilitado: </label> {{$enabled}}
+                        <i class="icon-ok"></i> <label>Habilitado: </label> {{$enabled}}
                        <small>Habilitado
                         </small>                        
                     </blockquote>

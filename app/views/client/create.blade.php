@@ -32,16 +32,12 @@
                     </li>
                 </ul>
             </div>
-        </header>
-        
+        </header>        
         <div id="div-1" class="accordion-body collapse in body">
-            
-
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Raz&oacute;n Social</label>
-
                     <div class="col-lg-8">
-                        <input type="text"  placeholder="Nombre a la cual se emitir&aacute; la factura" name='business_name' class="form-control" />
+                        <input type="text"  placeholder="Nombre al cual se emitir&aacute; la factura" name='business_name' class="form-control" />
                     </div>
                 </div>
                 <div class="form-group">
@@ -50,11 +46,8 @@
                     <div class="col-lg-8">
                         <input type="text"  placeholder="NIT o CI" name="nit" class="form-control" />
                     </div>
-                </div>
-                            
+                </div>                        
         </div>
-
-        
     </div>
 </div>
 <div class="col-lg-12">
@@ -85,10 +78,10 @@
         </header>
         <div id="div-2" class="accordion-body collapse collapsed body">            
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Nombre del clente</label>
+                    <label for="text1" class="control-label col-lg-4">Nombre del cliente</label>
 
                     <div class="col-lg-8">
-                        <input type="text"  placeholder="Nombre real del ciente" name="name" class="form-control" />
+                        <input type="text"  placeholder="Nombre real del cliente" name="name" class="form-control" />
                     </div>
                 </div>
                 <div class="form-group">
@@ -143,7 +136,7 @@
                     </li>
                 </ul>
             </div>
-        </header>        
+        </header> 
         <div id="div-3" class="accordion-body collapse collapsed body">            
             @if($custom->field1!="")
             <div class="form-group">

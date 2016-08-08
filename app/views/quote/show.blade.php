@@ -14,7 +14,7 @@
                     <div class="icons"><i class="icon-group"></i></div>
                     <h5>Cotizaci&oacute;n: {{$quote->number}}</h5>
                     <div class="toolbar">
-                        <!-- <a class="btn btn-success btn-sm btn-grad" href="{{asset('cobro/factura/'.$quote->public_id)}}">Cobrar</a> -->
+                        <a target="_blank" class="btn btn-success btn-sm btn-grad" href="{{asset('cotizacion/vercotizacion/'.$quote->public_id)}}">Ver PDF</a>
                     </div>
                 </header>
             <div class="panel-body">
@@ -99,10 +99,10 @@
                 </div>
                <hr>
 
-               <div class="col-lg-6"></div>
-               <hr>
+               <div class="col-lg-6"></div>               
             </div>
 <form class="form-horizontal" method="POST" id="form" action="{{asset('factura/editar/'.$quote->public_id)}}">
+<hr>
 <div class="col-lg-12">
     <div class="col-lg-3"></div>
     <input type="hidden" value="0" name="action" id="action">
@@ -115,22 +115,22 @@
             </button>
         </span>
     </div>
-    <div class="col-lg-3 input-group">
+<!--     <div class="col-lg-3 input-group">
         <input type="text" id="cancel" name="cancel" placeholder="Motivo" class="form-control" />
         <span class="input-group-btn">
             <button id="cancel_s"  class="btn btn-danger" type="button">
                 Anular
             </button>
         </span>
-    </div>
-    <div class="col-lg-3 input-group">
+    </div> -->
+    <!-- <div class="col-lg-3 input-group">
         <input type="text" id="copy" name="copy" placeholder="Para" class="form-control" />
         <span class="input-group-btn">
-            <button id="copy_s" class="btn btn-default" type="button">
-                Copia
+            <button id="copy_s" class="btn btn-success" type="button">
+                Ver PDF
             </button>
         </span>
-    </div>
+    </div> -->
     
 </div>
 </form>

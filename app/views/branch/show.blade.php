@@ -21,52 +21,52 @@
                 <div class="col-lg-6">           
                     <h4>Informaci&oacute;n de la Sucursal</h4>
                     <blockquote>
-                       <i class="icon-group"></i> <label>Nombre: </label> {{$branch->name}}
+                       <i class="icon-briefcase"></i> <label>Nombre: </label> {{$branch->name}}
                        <small>Nombre para reconocer a la sucursal
                         </small>
-                        <i class="icon-group"></i> <label>Tipo: </label> {{$type}}
+                        <i class="icon-archive"></i> <label>Tipo: </label> {{$type}}
                        <small>
                         </small>
-                        <i class="icon-group"></i> <label>Actividad Econ&oacute;mica: </label> {{$branch->economic_activity}}
+                        <i class="icon-money"></i> <label>Actividad Econ&oacute;mica: </label> {{$branch->economic_activity}}
                        <small>Actidad que realisa la sucursal
                         </small>
-                        <i class="icon-group"></i> <label>Direcci&oacute;n: </label> {{$branch->address}}
+                        <i class="icon-map-marker"></i> <label>Direcci&oacute;n: </label> {{$branch->address}}
                        <small>Direcci&oacute;n oficil de la emrpesa
                         </small>
-                        <i class="icon-group"></i> <label>Zona: </label> {{$branch->zone}}
+                        <i class="icon-map-marker"></i> <label>Zona: </label> {{$branch->zone}}
                        <small>Zona
                         </small>
-                        <i class="icon-group"></i> <label>Ciudad: </label> {{$branch->city}}
+                        <i class="icon-map-marker"></i> <label>Ciudad: </label> {{$branch->city}}
                        <small>Ciudad
                         </small>
-                        <i class="icon-group"></i> <label>Municipio: </label> {{$branch->state}}
+                        <i class="icon-map-marker"></i> <label>Municipio: </label> {{$branch->state}}
                        <small>Municipio
                         </small>
-                        <i class="icon-group"></i> <label>Tel&eacute;fono: </label> {{$branch->phone}}
+                        <i class="icon-phone"></i> <label>Tel&eacute;fono: </label> {{$branch->phone}}
                        <small>
                         </small>
                     </blockquote>
                     
                 </div>
                 <div class="col-lg-6"> 
-                <h4>Informaci&oacute;n de la sucrrsal</h4>
+                <h4>Informaci&oacute;n de la sucursal</h4>
                     <blockquote>
-                       <i class="icon-group"></i> <label>N&uacute;mero de tr&aacute;mite: </label> {{$branch->process_number}}
+                       <i class="icon-archive"></i> <label>N&uacute;mero de tr&aacute;mite: </label> {{$branch->process_number}}
                        <small>De la presente dosificaci&oacute;n
                         </small>
-                        <i class="icon-group"></i> <label>N&uacute;mero de autorizaci&oacute;n: </label> {{$branch->authorization_number}}
+                        <i class="icon-archive"></i> <label>N&uacute;mero de autorizaci&oacute;n: </label> {{$branch->authorization_number}}
                        <small>Numero
                         </small>
-                        <i class="icon-group"></i> <label>N&uacute;mero de Sucursal: </label> {{$branch->number}}
+                        <i class="icon-archive"></i> <label>N&uacute;mero de Sucursal: </label> {{$branch->number}}
                        <small>Brindada por impuestos
                         </small>
-                        <i class="icon-group"></i> <label>Fecha l&iacute;mite de emisi&oacute;n: </label> {{$branch->deadline}}
+                        <i class="icon-calendar"></i> <label>Fecha l&iacute;mite de emisi&oacute;n: </label> {{$branch->deadline}}
                        <small>Fecha de caducaci&oacute;n de la presente dosificaci&oacute;n
                         </small>
-                        <i class="icon-group"></i> <label>Llave de dosificaci&oacute;n: </label> {{$branch->dosage_key}}
+                        <i class="icon-key"></i> <label>Llave de dosificaci&oacute;n: </label> {{$branch->dosage_key}}
                        <small>Llave
                         </small>
-                        <i class="icon-group"></i> <label>Leyenda seg&uacute;n LEY Nº453: </label> {{$branch->legend}}
+                        <i class="icon-plus"></i> <label>Leyenda seg&uacute;n LEY Nº453: </label> {{$branch->legend}}
                        <small>Leyenda brindada por impuestos
                         </small>
                     </blockquote>

@@ -21,25 +21,25 @@
                 <div class="col-lg-6">           
                     <h4>Informaci&oacute;n</h4>
                     <blockquote>
-                       <i class="icon-group"></i> <label>Clinte: </label> {{$client_name}}
+                       <i class="icon-user"></i> <label>Cliente: </label> {{$client_name}}
                        <small>Nombre del cliente
                         </small>
-                        <i class="icon-group"></i> <label>Factura: </label> {{$number}}
+                        <i class="icon-qrcode"></i> <label>Factura: </label> {{$number}}
                        <small>N&uacute;mero de la factura pagada
                         </small>
-                        <i class="icon-group"></i> <label>Pagado por: </label> {{$charge->paid_for}}
+                        <i class="icon-money"></i> <label>Pagado por: </label> {{$charge->paid_for}}
                        <small>Persona que pag&oacute; la factura
                         </small>
-                         <i class="icon-group"></i> <label>Monto: </label> {{$charge->amount}}
-                       <small>Monto que se pcobr&oacute;
+                         <i class="icon-money"></i> <label>Monto: </label> {{$charge->amount}}
+                       <small>Monto que se cobr&oacute;
                         </small>
-                         <i class="icon-group"></i> <label>Fecha: </label> {{$charge->date}}
+                         <i class="icon-date"></i> <label>Fecha: </label> {{$charge->date}}
                        <small>Fecha del cobro
                         </small>
-                        <i class="icon-group"></i> <label>M&eacute;todo de pago: </label> {{$type}}
+                        <i class="icon-money"></i> <label>M&eacute;todo de pago: </label> {{$type}}
                        <small>Forma de pago
                         </small>
-                        <i class="icon-group"></i> <label>Descripci&oacute;n: </label> {{$charge->description}}
+                        <i class="icon-plus"></i> <label>Descripci&oacute;n: </label> {{$charge->description}}
                        <small>Detalle del cobro
                         </small>
                         

@@ -52,6 +52,16 @@
                     </div>
                 </div>
                 <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">Tipo</label>
+                    <div class="col-lg-8">
+                        <select data-placeholder="Tipo de pago" name="payment_type" class="form-control chzn-select chzn-rtl" tabindex="9">
+                            @foreach($payment_types as $payment_type)
+                                <option value="{{$payment_type->id}}">{{$payment_type->name}}</option>
+                            @endforeach                        
+                        </select>
+                    </div>
+                </div> 
+                <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Pag&oacute;</label>
                     <div class="col-lg-8">
                         <input type="text" value="{{$invoice->client_name}}" placeholder="Nombre de la persona que realiz&oacute; el pago" name="paid_for" class="form-control" />
@@ -69,16 +79,7 @@
                         <input type="text" name="date" class="form-control" placeholder="Fecha del cobro" data-date-format="dd/mm/yyyy" id="date" />
                     </div>
                 </div>
-                <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Tipo</label>
-                    <div class="col-lg-8">
-                        <select data-placeholder="Tipo de pago" name="payment_type" class="form-control chzn-select chzn-rtl" tabindex="9">
-                            @foreach($payment_types as $payment_type)
-                                <option value="{{$payment_type->id}}">{{$payment_type->name}}</option>
-                            @endforeach                        
-                        </select>
-                    </div>
-                </div>                
+                     
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Descripci&oacute;n</label>
                     <div class="col-lg-8">

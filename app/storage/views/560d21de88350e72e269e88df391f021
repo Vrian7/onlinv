@@ -24,7 +24,7 @@
     <div class="panel box dark">
       <header>
         <div class="icons"><i class="icon-home"></i></div>
-        <h5>Emitir factura</h5>
+        <h5>Emitir Factura</h5>
         <div class="toolbar">
             <ul class="nav">
                 <!-- <li><a href="#">Link</a></li>
@@ -95,7 +95,7 @@
               <tr>
                 <th class="col-lg-1">C&oacute;digo</th>
                 <th class="col-lg-7">Concepto</th>
-                <th class="col-lg-1">Costo unitario</th>
+                <th class="col-lg-1">Costo Unitario</th>
                 <th class="col-lg-1">Cantidad</th>
                 <th class="col-lg-1">Subtotal</th>
                 <th class="col-lg-1" style="display:none;"></th>          
@@ -1235,4 +1235,5 @@ $(document).ready(function(){
 </script>
 
 <?php $__env->stopSection(); ?>
+
 <?php echo $__env->make('header', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

@@ -87,7 +87,7 @@
         </header>
         <div id="div-2" class="accordion-body collapse collapsed body">            
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Descripci&oacute;on adicional</label>
+                    <label for="text1" class="control-label col-lg-4">Descripci&oacute;n adicional</label>
                     <div class="col-lg-8">
                         <input type="text"  placeholder="Descripci&oacute;n adicional para identificarlo." name="description" class="form-control" />
                     </div>

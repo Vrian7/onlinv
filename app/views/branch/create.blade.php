@@ -57,13 +57,13 @@
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Actividad Econ&oacute;mica</label>
                     <div class="col-lg-8">
-                        <input type="text"  placeholder="Activdad econ&oacute;mica de la sucursal" name="activity" class="form-control" />
+                        <input type="text"  placeholder="Actividad econ&oacute;mica de la sucursal" name="activity" class="form-control" />
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Direcci&oacute;n</label>
                     <div class="col-lg-8">
-                        <input type="text"  placeholder="Direcci&oacute; de la sucursal" name="address" class="form-control" />
+                        <input type="text"  placeholder="Direcci&oacute;n de la sucursal" name="address" class="form-control" />
                     </div>
                 </div>
                 <div class="form-group">
@@ -75,7 +75,7 @@
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Ciudad</label>
                     <div class="col-lg-8">
-                        <input type="text"  placeholder="Activdad econ&oacute;mica de la sucursal" name="city" class="form-control" />
+                        <input type="text"  placeholder="Ciudad de la sucursal" name="city" class="form-control" />
                     </div>
                 </div>
                 <div class="form-group">
@@ -87,7 +87,7 @@
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Tel&eacute;fono</label>
                     <div class="col-lg-8">
-                        <input type="text"  placeholder="Activdad econ&oacute;mica de la sucursal" name="phone" class="form-control" />
+                        <input type="text"  placeholder="Tel&eacute;fono de la sucursal" name="phone" class="form-control" />
                     </div>
                 </div>                        
         </div>    

@@ -21,12 +21,12 @@
                 <div class="col-lg-6">           
                     <h4>Informaci&oacute;n</h4>
                     <blockquote>
-                       <i class="icon-group"></i> <label>Nombre: </label> {{$category->name}}
-                       <small>nombre
+                       <i class="icon-archive"></i> <label>Nombre: </label> {{$category->name}}
+                       <small>Nombre
                         </small>
                                 
-                        <i class="icon-group"></i> <label>Desctipci&oacute;n: </label> {{$category->description}}
-                       <small>Descipcion adicional
+                    <i class="icon-archive"></i> <label>Descripci&oacute;n: </label> {{$category->description}}
+                       <small>Descripci&oacute;n adicional
                         </small>                            
                     </blockquote>                    
                 </div>                

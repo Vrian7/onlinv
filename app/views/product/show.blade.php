@@ -21,13 +21,13 @@
                 <div class="col-lg-6">           
                     <h4>Informaci&oacute;n B&aacute;sica</h4>
                     <blockquote>
-                       <i class="icon-group"></i> <label>C&oacute;digo del producto: </label> {{$product->code}}
+                       <i class="icon-qrcode"></i> <label>C&oacute;digo del producto: </label> {{$product->code}}
                        <small>Dato para identifacr al producto
                         </small>
-                        <i class="icon-group"></i> <label>Nombre: </label> {{$product->name}}
+                        <i class="icon-archive"></i> <label>Nombre: </label> {{$product->name}}
                        <small>Nombre o Descripci&oacute;n del producto
                         </small>
-                        <i class="icon-group"></i> <label>Precio: </label> {{$product->price}}
+                        <i class="icon-money"></i> <label>Precio: </label> {{$product->price}}
                        <small>Precio general o nominal
                         </small>
                     </blockquote>
@@ -36,15 +36,15 @@
                 <div class="col-lg-6"> 
                 <h4>Informaci&oacute;n Adicional</h4>
                     <blockquote>
-                       <i class="icon-group"></i> <label>Descripci&oacute;n: </label> {{$product->description}}
-                       <small>Datos adicionales dle producto
+                       <i class="icon-plus"></i> <label>Descripci&oacute;n: </label> {{$product->description}}
+                       <small>Datos adicionales del producto
                         </small>
-                        <i class="icon-group"></i> <label>Categor&iacute;a: </label> <span class="label label-primary">{{$category}}</span>                       <small>Categorizaci&oacute;n del producto
+                        <i class="icon-archive"></i> <label>Categor&iacute;a: </label> <span class="label label-primary">{{$category}}</span>                       <small>Categorizaci&oacute;n del producto
                         </small>
-                        <i class="icon-group"></i> <label>Unidad: </label> <span class="label label-primary">{{$unit}}</span>
+                        <i class="icon-archive"></i> <label>Unidad: </label> <span class="label label-primary">{{$unit}}</span>
                        <small>Unidad de medida del producto
                         </small>
-                        <i class="icon-group"></i> <label>Marca: </label>&nbsp;<span class="label label-primary">{{$brand}}</span>
+                        <i class="icon-archive"></i> <label>Marca: </label>&nbsp;<span class="label label-primary">{{$brand}}</span>
                        <small>Marca del producto
                         </small>     
                     @if(isset($custom->field1))
