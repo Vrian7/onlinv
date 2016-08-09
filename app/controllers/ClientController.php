@@ -38,7 +38,8 @@ class ClientController extends \BaseController{
 		//return 0;
 		$client = new Client();
 		$client->enterprice_id = Auth::user()->enterprice_id;
-		$client->name = Input::get('name');
+		if(!Input::get('name'))
+			$client->name = Input::get('business_name');
 		$client->business_name = Input::get('business_name');
 		$client->nit = Input::get('nit');
 		$client->address = Input::get('address');

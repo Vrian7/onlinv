@@ -73,7 +73,9 @@ class InventoryController extends \BaseController{
 		$inventory->stock = Input::get('stock');
 		$inventory->average = Input::get('average');
 		$inventory->minimum = Input::get('minimum');		
-		$inventory->description = Input::get('description');
+		$inventory->description = Input::get('description');					
+		$alert = new Alert();
+		$alert->add('Reposición de inventario','Se actualizó el inventario: '.$product->name.' con: '.$inventory->stock.' unidades.',3,'Se actualizó el inventario: '.$product->name.' con: '.$inventory->stock.' unidades.');
 		$inventory->save();
 		return Redirect::to('inventarios');
 	}

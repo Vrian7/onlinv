@@ -21,19 +21,19 @@
                 <div class="col-lg-6">           
                     <h4>Campos</h4>
                     <blockquote>
-                       <i class="icon-group"></i> <label>Campo 1: </label> {{$custom->field1}}
+                       <i class="icon-group"></i> <label>Campo 1: </label> @if(isset($custom->field1)) {{$custom->field1}} @endif
                        <small>Campo adicional 1
                         </small>
-                        <i class="icon-group"></i> <label>Campo 2: </label> {{$custom->field2}}
+                        <i class="icon-group"></i> <label>Campo 2: </label> {{if(isset($custom->field2)) $custom->field2 endif}}
                        <small>Campo adicional 2
                         </small>
-                        <i class="icon-group"></i> <label>Campo 3: </label> {{$custom->field3}}
+                        <i class="icon-group"></i> <label>Campo 3: </label> {{if(isset($custom->field3)) $custom->field3 endif}}
                        <small>Campo adicional 3
                         </small>
-                        <i class="icon-group"></i> <label>Campo 4: </label> {{$custom->field4}}
+                        <i class="icon-group"></i> <label>Campo 4: </label> {{if(isset($custom->field4)) $custom->field4 endif}}
                        <small>Campo adicional 4
                         </small>
-                        <i class="icon-group"></i> <label>Campo 5: </label> {{$custom->field5}}
+                        <i class="icon-group"></i> <label>Campo 5: </label> {{if(isset($custom->field5)) $custom->field5 endif}}
                        <small>Campo adicional 5
                         </small>
                     </blockquote>                    

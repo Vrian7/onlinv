@@ -89,6 +89,8 @@ class BranchController extends \BaseController{
 		$doc = BranchType::where('id',$branch->branch_type_id)->first();
 		$branch->document = $doc->template;
 		$branch->save();
+		$alert = new Alert();
+		$alert->add('Sucursal editada','Se editó la sucursal: '.$branch->name.'.',2,'La sucursal : '.$branch->name.' fué modificada.');
 		return Redirect::to('sucursales');
 	}
 	public function delete($public_id){

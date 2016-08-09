@@ -100,9 +100,11 @@ class ChargeController extends \BaseController{
 	public function chargeInvoice($public_id){
 		$invoice = Invoice::where('enterprice_id',Auth::user()->enterprice_id)->where('public_id',$public_id)->first();		
 		$payment_types = PaymentTYpe::get();
+		$today = date('d/m/Y');
 		$data = [
 			'payment_types' => $payment_types,
 			'invoice' => $invoice,
+			'date' => $today
 		];
 		return View::make('charge.chargeInvoice',$data);	
 	}

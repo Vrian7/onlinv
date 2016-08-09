@@ -54,8 +54,7 @@ class EnterpriceController extends \BaseController{
 	public function salesBook(){
 		return View::make('enterprice.salesBook');
 	}
-	public function getText(){	
-
+	public function getText(){
 	    $date=Input::get('year').'-'.Input::get('month');
 	    $output = fopen('php://output','w') or Utils::fatalError();
 	    header('Content-Type:application/txt');
@@ -88,8 +87,10 @@ class EnterpriceController extends \BaseController{
 	    }	    
 	    //return 0;
 		if($sw)
-	        fputs($output,"No se encontraron ventas en este periodo: ".Input::get('month').'/'.Input::get('year'));
+	        fputs($output,"No se encontraron facturas en este periodo: ".Input::get('month').'/'.Input::get('year'));
 	    fclose($output);
+	    $alert = new Alert();
+		$alert->add('Generación de LCV','Se generó libro de ventas'.'.',4,'Se generó el libro de ventas de la gestión : '.Input::get('month').'/'.Input::get('year'));
 		exit;
 	}
 }

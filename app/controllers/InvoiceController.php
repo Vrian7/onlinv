@@ -182,6 +182,16 @@ class InvoiceController extends \BaseController{
 			if($inventory){
 			$inventory->stock = $inventory->stock-$producto['quantity'];			
 			$inventory->sold = $inventory->sold + $producto['quantity'];
+			if($inventory->stock <= $inventory->minimum)
+			{
+				$alert = new Alert();
+				$alert->add('Producto por acabarse','Se esta agotando el producto: '.$product->name.'.',4,'El producto : '.$product->code.': '.$product->name.' solo cuenta con : '.$inventory->stock.' unidades.');
+			}				
+			if($inventory->stock > $inventory->average)
+			{
+				$alert = new Alert();
+				$alert->add('Producto exedente','Se tiene un excedente del producto: '.$product->name.'.',4,'El producto : '.$product->code.': '.$product->name.' excede con: '.$inventory->stock.' unidades.');
+			}				
 			$inventory->save(); 
 			}
 			$detail = new InvoiceDetail();			
