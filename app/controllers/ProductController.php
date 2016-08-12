@@ -136,11 +136,14 @@ class ProductController extends \BaseController{
 		});
 	}
 
-	public function busqueda ($code="", $nombre="", $precio="", $descripcion=""){
+	public function searchProduct(){
+		$product = Product::where('enterprice_id',Auth::user()->enterprice_id)->where('code',Input::get('code'))->first();
+		return Response::json($product);
+	}
+	public function busqueda ($code="", $nombre="", $precio="", $descripcion="", $pagina=""){
 		if(Input::get('codigo')){
 			$code = Input::get('codigo');
 			$codesql = "'code','like', '".$code."%'";
-
 		}
 		if(Input::get('nombre')){
 			$nombre = Input::get('nombre');
@@ -152,16 +155,57 @@ class ProductController extends \BaseController{
 			$descripcion = Input::get('descripcion');
 		}
 
+		// dd($pagina);
+		//valores para paginacion
+		if(Input::get('pagina')){
+			$pagina = (int)(Input::get('pagina')) - 1;
+			// dd($pagina);
+		}else {
+			$pagina = 0;
+		}
+		$next_pag = $pagina * 10;
+		$total_registros = Product::where('enterprice_id',Auth::user()->enterprice_id)
+								->select('id', 'code', 'name', 'price', 'description', 'public_id')
+								->where('code','like', $code.'%')
+								->where('name','like', $nombre.'%')
+								->where('price','like', $precio.'%')
+								->where('description','like', $descripcion.'%')
+								->count();
+		$pagDec = $total_registros/10;
+		$pagInt = (int)($total_registros/10);
+
+		if($pagDec > 0.01){
+			$total_paginas = $pagInt + 1 ;
+		}else {
+			$total_paginas = $pagInt;
+		}
+		if(($pagina+1) < $total_paginas){
+			$siguiente = $pagina+1;
+		}else {
+			$siguiente = $pagina;
+		}
+
+		//fin valores de paginacion
+
 		$products = Product::where('enterprice_id',Auth::user()->enterprice_id)
-								->select('id', 'code', 'name', 'price', 'description')
+								->select('id', 'code', 'name', 'price', 'description', 'public_id')
 								->where('code','like', $code.'%')
 								->where('name','like', $nombre.'%')
 								->where('price','like', $precio.'%')
 								->where('description','like', $descripcion.'%')
 								->orderBy('code', 'desc')
-	    					->simplePaginate(30);
-								// ->get();
-		return Response::json($products);
+								->skip($next_pag)
+								->take(10)
+	    					// ->simplePaginate(30);
+								->get();
+		$data = [
+			'products' => $products,
+			'actual' => $pagina + 1,
+			'siguiente' => $siguiente + 1,
+			'total_registros' => $total_registros,
+			'total_paginas' => $total_paginas,
+		];
+		return Response::json($data);
 	}
 }
 ?>

@@ -210,7 +210,7 @@ class QuoteController extends \BaseController{
 			'logo' => $ent->logo,
 			'branch' => $branch,
 		];
-		return View::make('invoice.view3',$data);	
+		return View::make('quote.view',$data);	
 		if($invoice->branch_type_id == 1 )
 			return View::make('invoice.view2',$data);	
 		else

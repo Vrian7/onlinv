@@ -73,6 +73,18 @@
                 </blockquote>
             </div>
             <div class="col-lg-6"> 
+            <h4>Movimiento Econ&oacute;mico</h4>
+                <blockquote>
+                    <i class="icon-money"></i> <label>Total Movimiento: </label> {{$client->flow}}
+                    <small>Total de movimiento del cliente
+                    </small>
+                    <i class="icon-money"></i> <label>Acumulado: </label> {{$client->flow}}
+                    <small>Monto acumulado con pagos previos
+                    </small>
+                    <i class="icon-money"></i> <label>Adeudado: </label> {{$client->debt}}
+                    <small>Total de deudas a la fecha
+                    </small>
+                </blockquote>
             @if(isset($custom->field1))
             <h4>Informaci&oacute;n Personalizada</h4>
                 <blockquote>                        

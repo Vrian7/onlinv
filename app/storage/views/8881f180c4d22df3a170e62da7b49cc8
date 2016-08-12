@@ -21,7 +21,7 @@ class MYPDF extends TCPDF {
 $pdf = new MYPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 
 $pdf->SetCreator(PDF_CREATOR);
-$pdf->SetAuthor('ipxserver');
+$pdf->SetAuthor('rusysve');
 $pdf->SetTitle('Factura');
 $pdf->SetSubject('Primera Factura');
 $pdf->SetKeywords('TCPDF, PDF, example, test, guide');

@@ -81,7 +81,7 @@ Route::group(array('before' => 'auth'), function(){
 	Route::get('buscar_cliente','ClientController@findByString');
 	Route::get('obtener_clientes','ClientController@getClientsByNit');	
 	
-	
+	Route::get('searchProduct','ProductController@searchProduct');
 Route::group(array('before'=>'admin'),function() {
 	/*** PRODUCTCONTROLLER ***/
 	Route::get('productos','ProductController@index');

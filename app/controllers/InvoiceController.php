@@ -112,6 +112,7 @@ class InvoiceController extends \BaseController{
 			'today' => $today,
 			'min_date' => '"-'.$days.'D"',
 		];
+		return View::make('invoice.createFinning',$data);
 		return View::make('invoice.create',$data);
 	}
 	public function store(){		
@@ -325,6 +326,7 @@ class InvoiceController extends \BaseController{
 			'logo' => $ent->logo,
 			'branch' => $branch,
 		];
+		return View::make('invoice.view3',$data);	
 		if($invoice->branch_type_id == 1 )
 			return View::make('invoice.view2',$data);	
 		else

@@ -5,10 +5,11 @@ class Client extends Eloquent
 	public function isValid(){
 		$error = "";
 		if($this->business_name == "")
-			$error .= "Debe introducir una razon social<br>";		
+			$error .= "Debe introducir una raz&oacute;n social.<br>";		
 		if($this->nit == "")
 			$error .= "Debe introducir un nit<br>";
-		if(!is_numeric($this->nit))
+		else
+			if(!is_numeric($this->nit))
 			$error .= "El nit solo debe contener digitos";
 		return $error;		
 	}

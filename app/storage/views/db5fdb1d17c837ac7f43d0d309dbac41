@@ -20,17 +20,17 @@
                 <div class="col-lg-6">           
                     <h4>Informaci&oacute;n</h4>
                     <blockquote>
-                       <i class="icon-group"></i> <label>Nombre: </label> <?php echo $unit->name; ?>
+                       <i class="icon-archive"></i> <label>Nombre: </label> <?php echo $unit->name; ?>
 
-                       <small>nombre
+                       <small>Nombre
                         </small>
-                        <i class="icon-group"></i> <label>S&iacute;mbolo: </label> <?php echo $unit->symbol; ?>
+                        <i class="icon-aarchive"></i> <label>S&iacute;mbolo: </label> <?php echo $unit->symbol; ?>
 
-                       <small>Nombre del simolo
+                       <small>Nombre del s&iacute;mbolo
                         </small>                  
-                        <i class="icon-group"></i> <label>Descripci&oacute;n: </label> <?php echo $unit->description; ?>
+                        <i class="icon-archive"></i> <label>Descripci&oacute;n: </label> <?php echo $unit->description; ?>
 
-                       <small>Descipcion adicional
+                       <small>Descripci&oacute;n adicional
                         </small>                            
                     </blockquote>                    
                 </div>                               
@@ -50,4 +50,5 @@
     <?php echo HTML::script('vendor/bcore/plugins/dataTables/dataTables.bootstrap.js'); ?>   
 
 <?php $__env->stopSection(); ?>
+
 <?php echo $__env->make('header', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
