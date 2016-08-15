@@ -140,7 +140,8 @@ class ProductController extends \BaseController{
 		$product = Product::where('enterprice_id',Auth::user()->enterprice_id)->where('code',Input::get('code'))->first();
 		return Response::json($product);
 	}
-	public function busqueda ($code="", $nombre="", $precio="", $descripcion="", $pagina=""){
+
+public function busqueda ($code="", $nombre="", $precio="", $descripcion="", $pagina=""){
 		if(Input::get('codigo')){
 			$code = Input::get('codigo');
 			$codesql = "'code','like', '".$code."%'";
@@ -156,6 +157,7 @@ class ProductController extends \BaseController{
 		}
 
 		// dd($pagina);
+		$cantidadMostrar = 100;
 		//valores para paginacion
 		if(Input::get('pagina')){
 			$pagina = (int)(Input::get('pagina')) - 1;
@@ -163,7 +165,7 @@ class ProductController extends \BaseController{
 		}else {
 			$pagina = 0;
 		}
-		$next_pag = $pagina * 10;
+		$next_pag = $pagina * $cantidadMostrar;
 		$total_registros = Product::where('enterprice_id',Auth::user()->enterprice_id)
 								->select('id', 'code', 'name', 'price', 'description', 'public_id')
 								->where('code','like', $code.'%')
@@ -171,8 +173,8 @@ class ProductController extends \BaseController{
 								->where('price','like', $precio.'%')
 								->where('description','like', $descripcion.'%')
 								->count();
-		$pagDec = $total_registros/10;
-		$pagInt = (int)($total_registros/10);
+		$pagDec = $total_registros/$cantidadMostrar;
+		$pagInt = (int)($total_registros/$cantidadMostrar);
 
 		if($pagDec > 0.01){
 			$total_paginas = $pagInt + 1 ;
@@ -195,7 +197,7 @@ class ProductController extends \BaseController{
 								->where('description','like', $descripcion.'%')
 								->orderBy('code', 'desc')
 								->skip($next_pag)
-								->take(10)
+								->take($cantidadMostrar)
 	    					// ->simplePaginate(30);
 								->get();
 		$data = [

@@ -38,7 +38,7 @@
                 <div class="form-group">
                     <label for="text1" class="control-label col-lg-4">Categor&iacute;a</label>
                     <div class="col-lg-8">
-                        <select data-placeholder="Categorizacion de productos" name="category" class="form-control chzn-select chzn-rtl" tabindex="9">
+                        <select disabled data-placeholder="Categorizacion de productos" name="category" class="form-control chzn-select chzn-rtl" tabindex="9">
                             @foreach($categories as $category)
                                 @if($category->id == $custom->category_id)
                                     <option value="{{$category->id}}" selected>{{$category->name}}</option>
@@ -84,7 +84,7 @@
 </div>
 <div class="col-lg-12">
     <div class="col-lg-3"></div>
-    <div class="col-lg-2"><a class="btn btn-primary" href="{{asset('campos_clientes')}}"><i class="icon-ban-circle icon-white"></i> Cancelar</a></div>
+    <div class="col-lg-2"><a class="btn btn-primary" href="{{asset('campos_productos')}}"><i class="icon-ban-circle icon-white"></i> Cancelar</a></div>
     <div class="col-lg-2"></div>
     <div class="col-lg-2"><button class="btn btn-success" type="submit"><i class="icon-save icon-white"></i> Guardar</a></div>
 </div>

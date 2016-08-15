@@ -1,0 +1,29 @@
+<!DOCTYPE html5>
+<html>
+<head>
+<title></title>  
+    <style type="text/css"></style>  
+</head>
+<body>
+  <p>
+    <h3>FACTURA COMPUTARIZADA "FACTUFACIL"</h3>
+    <h3><?php echo $enterprice.': '.Auth::user()->name; ?></h3>
+    Estimado cliente: <br>
+    Le enviamos la factura:<br>
+    Ra&oacute;n Social:<strong><?php echo $invoice->client_name; ?></strong><br>
+    NIT:<strong><?php echo $invoice->client_nit; ?></strong><br>
+    N&uacute;mero de factura:<strong><?php echo $invoice->number; ?></strong><br>
+    Monto:<strong><?php echo $invoice->net_amount; ?></strong><br>
+    <hr>
+    Para poder ver la factura haga click en <strong><a href="<?php echo $link; ?>">FACTURA</a></strong>     
+          <br>
+  </p>
+  <hr>
+      <strong><?php echo $enterprice.': '.Auth::user()->name; ?></strong><br>
+       Sucursal: <strong><?php echo $branch->name; ?></strong><br>
+       Direcci&oacute;n: <strong><?php echo $branch->address; ?></strong><br>
+       Telefono: <strong><?php echo $branch->phone; ?></strong><br>
+  <center>SISTEMA DE FACUTACI&Oacute;N BRINDADO POR <a href="www.rusysve.com">FACTUFACIL</a>, simplificamos tu vida</center>
+</body>
+</html>
+

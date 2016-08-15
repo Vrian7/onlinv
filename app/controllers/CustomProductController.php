@@ -12,7 +12,7 @@ class CustomProductController extends \BaseController{
 	}
 	public function show($public_id){
 		$custom = CustomProduct::join('categories','categories.id','=','custom_products.category_id')
-					->where('custom_products.enterprice_id',Auth::user()->enterprice_id)->where('custom_products.public_id',$public_id)
+					->where('custom_products.enterprice_id',Auth::user()->enterprice_id)->where('custom_products.public_id',$public_id)					
 					->select('custom_products.*','categories.name')
 					->first();
 		$data = [
@@ -65,7 +65,7 @@ class CustomProductController extends \BaseController{
 		return View::make('custom_product.edit',$data);
 	}
 	public function update($public_id){
-		$custom = CustomProduct::where('enterprice_id',Auth::user()->enterprice_id)->first();		
+		$custom = CustomProduct::where('enterprice_id',Auth::user()->enterprice_id)->where('public_id',$public_id)->first();		
 		if(Input::get('field1')!="")
 			$custom->field1 = Input::get('field1');
 		if(Input::get('field2')!="")

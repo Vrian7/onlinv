@@ -43,7 +43,7 @@ class QuoteController extends \BaseController{
 			'today' => $today,
 			'min_date' => '"-'.$days.'D"',
 		];
-		return View::make('quote.create',$data);
+		return View::make('quote.createFinning',$data);
 	}
 	public function store(){
 				if(Input::get('client')==0){

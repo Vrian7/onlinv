@@ -34,7 +34,7 @@
                                 <th class="col-md-2">Descripci&oacute;n</th>
                                 <th class="col-md-1">Ver</th>
                             </tr>
-                        </thead>BusquedaCodigo
+                        </thead>
                         <tbody>
                             <?php foreach( $products as $product): ?>
                             <tr class="odd gradeX ParentPro">
@@ -55,7 +55,11 @@
                     <center>
                     <div class="pagination">
                       <ul class="pagination">
-                        <li class="primero"></li>
+                        <li class="primero">
+                          <button class="btn btn-primary next" value="1">1</button>
+                          <button class="btn btn-default next" value="1" disabled>...</button>
+                            <button class="btn btn-default next" value="2"> >> </button>
+                        </li>
                         <li class="siguiente"></li>
                         </li>
                       </ul>
@@ -72,6 +76,7 @@
     <?php echo HTML::script('vendor/bcore/plugins/dataTables/dataTables.bootstrap.js'); ?>
 
 <script type="text/javascript">
+
 $('.busqueda').keyup(function(){
   var codigo = "";
   codigo = $('#BusquedaCodigo').val();
@@ -171,5 +176,4 @@ function paginate(data){
 
 </script>
 <?php $__env->stopSection(); ?>
-
 <?php echo $__env->make('header', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

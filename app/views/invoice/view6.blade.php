@@ -45,35 +45,37 @@ $pdf->SetFont('helvetica', 'B' , 12);
 $nit = $invoice->nit;
 $nfac = $invoice->number;
 $nauto = $invoice->authorization_number;
-$sfc = "1";
 
+$style6 = array('width' => 0.4, 'cap' => 'butt', 'join' => 'miter', 'color' => array(0, 52, 104));
 // add a page
 $pdf->AddPage('P', 'LETTER');
+//dibuja un rectangulo
+$pdf->SetLineStyle(array('width' => 0.5, 'cap' => 'butt', 'join' => 'miter', 'dash' => 0, 'color' => array(0, 0, 0)));
+$pdf->RoundedRect(138, 11, 63, 18, 2, '1111', 'DF', $style6, array(178, 217, 255));
 //contenido del recuadro
 $html = '
     <table border="0" width="180">
     <tr>
-        <td width="75" style="font-size:8px">NIT:</td>
-        <td align="left" style="font-size:10px">:&nbsp;'.$nit.'</td>
+        <td width="75" style="font-size:8px; color:#003468;">NIT:</td>
+        <td align="left" style="font-size:10px; color:#003468;">:&nbsp;'.$nit.'</td>
     </tr>
     <tr>
-        <td style="font-size:8px">AUTORIZACI&Oacute;N N&ordm;</td>
-        <td align="left" style="font-size:10px">:&nbsp;'.$nauto.'</td>
+        <td style="font-size:8px; color:#003468;">AUTORIZACI&Oacute;N N&ordm;</td>
+        <td align="left" style="font-size:10px; color:#003468;">:&nbsp;'.$nauto.'</td>
     </tr>
     <tr>
-        <td style="font-size:8px">FACTURA N&ordm;</td>
-        <td align="left" style="font-size:10px">:&nbsp;'.$nfac.'</td>
+        <td style="font-size:8px; color:#003468;">FACTURA N&ordm;</td>
+        <td align="left" style="font-size:10px; color:#003468;">:&nbsp;'.$nfac.'</td>
     </tr>
     <tr><td></td></tr>
     </table>
 ';
 //imprime el contenido de la variable html
 $pdf->writeHTMLCell($w=0, $h=0, $x='140', $y='13', $html, $border=0, $ln=1, $fill=0, $reseth=true, $align='left', $autopadding=true);
-//dibuja un rectangulo
-$pdf->SetLineStyle(array('width' => 0.5, 'cap' => 'butt', 'join' => 'miter', 'dash' => 0, 'color' => array(0, 0, 0)));
-$pdf->RoundedRect(138, 11, 63, 18, 2, '1111', null);
+
 $imgdata = asset('uploads/logos/'.$logo);//base64_decode($invoice->logo);
-$pdf->Image($imgdata, '26', '6', '34', '20', '', '', 'T', false, 500, '', false, false, 0, false, false, false);
+//$pdf->Image('@'.$imgdata, '26', '6', '34', '30', '', '', 'T', false, 500, '', false, false, 0, false, false, false);
+$pdf->Image($imgdata, '16', '10', '66', '20', '', '', 'T', false, 500, '', false, false, 0, false, false, false);
 
 ///title
 $anchoDivFac = 480;
@@ -90,63 +92,31 @@ else{
 
 $titleFactura='<table border="0">
 <tr>
-<td width="480" align="center"><font color="#333333">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'.$factura.'</font></td>
+<td width="480" style="color:#003468;" align="center">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'.$factura.'</td>
 </tr>
 </table>';
 $pdf->SetFont('helvetica', 'B' , 22);
 $pdf->writeHTMLCell($w=0, $h=0, $x='', $y='19', $titleFactura, $border=0, $ln=1, $fill=0, $reseth=true, $align='left', $autopadding=true);
 $pdf->SetFont('helvetica', 'B' , 9);
-
-// $sinCreditoFiscal = "SIN DERECHO A CR&Eacute;DITO FISCAL";
-//$sinCreditoFiscalHtml='<table border="0">
-//<tr>
-//<td width="500" align="center"><font color="#333333">&nbsp;&nbsp;&nbsp;&nbsp;'.$sinCreditoFiscal.'</font></td>
-//</tr>
-//</table>';
-//$pdf->SetFont('helvetica', 'B' , 13);
-//$pdf->writeHTMLCell($w=0, $h=0, $x='', $y='38', $sinCreditoFiscalHtml, $border=0, $ln=1, $fill=0, $reseth=true, $align='left', $autopadding=true);
 $pdf->SetFont('helvetica', 'B' , 11);
-
-
-
-
-
-
-
-
 //nombre de la empresa
 $business = $invoice->account_name;
 $unipersonal = $invoice->account_uniper;
 $pdf->SetFont('helvetica', 'B', 10, false);
-// $NombreEmpresa = '
-//     <p style="line-height: 150%">
-//         <font color="#333333">
-//             '.$business.'
-//         </font>
-//     </p>';
-//$NombreEmpresa = ' <table border="0">
-//  <tr>
- //   <td width="250" align="center"><font color="#333333">'.$business.'</font></td>
-//  </tr>
-//</table>
-//';
-//$pdf->writeHTMLCell($w=0, $h=0, $x='45', $y='10', $NombreEmpresa, $border=0, $ln=1, $fill=0, $reseth=true, $align='left', $autopadding=true);
-
 $pdf->SetFont('helvetica', 'B', 8, false);
 if($unipersonal!="")
     $pdf->writeHTMLCell($w=0, $h=0, $x='15', $y='36', 'De: '.$unipersonal, $border=0, $ln=1, $fill=0, $reseth=true, $align='left', $autopadding=true);
 $pdf->writeHTMLCell($w=0, $h=0, $x='15', $y='1', $tercero, $border=0, $ln=1, $fill=0, $reseth=true, $align='left', $autopadding=true);
-/*if($copia==1)
-    $original = "COPIA";
-else
-$original = "ORIGINAL";*/
 $original = $type;
+$original = "ORIGINAL";
 
 $pdf->SetFont('helvetica', 'B', 12);
     $original = '
-        <p style="line-height: 150% ">
-            '.$original.'
-        </p>';
+        <table>
+          <tr>
+            <td style="color:#003468;">'.$original.'</td>
+          </tr>
+        </table>';
 $pdf->writeHTMLCell($w=0, $h=0, $x='155', $y='29', $original, $border=0, $ln=1, $fill=0, $reseth=true, $align='left', $autopadding=true);
 
 //datos de la empresa
@@ -155,11 +125,8 @@ $casa = "CASA MATRIZ";
 $dir_casa = $branch->address.', '.$branch->zone;//"dreccion casa matriz";//$matriz->address2."  ".$matriz->address1;
 $tel_casa = $branch->phone;//$matriz->work_phone;
 $city_casa = $branch->city.', Bolivia';//"la paz bolivia ";//$matriz->city." - Bolivia";
-//if($matriz->city == $invoice->city && $invoice->branch_id != $matriz->id)
-  //  $city_casa ="";
-//else
 $city_casa = '<tr>
-        <td width="150">'.$city_casa.'</td>
+        <td width="150" style="color:#003468;">'.$city_casa.'</td>
         </tr>';
 $pdf->SetFont('helvetica', '', 8);
 
@@ -168,13 +135,13 @@ if(true)//$invoice->branch_id == $matriz->id || $branch->number_branch == 0)
     $datoEmpresa = '
     <table border = "0">
         <tr style="line-height:1">
-        <td width="150"><b>'.$casa.'</b></td>
+        <td width="150" style="color:#003468;"><b>'.$casa.'</b></td>
         </tr>
         <tr style="line-height:1">
-        <td width="150">'.$dir_casa.' </td>
+        <td width="150" style="color:#003468;">'.$dir_casa.' </td>
         </tr>
         <tr style="line-height:1">
-        <td width="150">Telfs: '.$tel_casa.'</td>
+        <td width="150" style="color:#003468;">Telfs: '.$tel_casa.'</td>
         </tr>
         '.$city_casa.'
     </table>
@@ -213,7 +180,7 @@ else{
     ';
 }
 
-$pdf->writeHTMLCell($w=0, $h=0, $x='15', $y='36', $datoEmpresa, $border=0, $ln=1, $fill=0, $reseth=true, $align='left', $autopadding=true);
+$pdf->writeHTMLCell($w=0, $h=0, $x='15', $y='31', $datoEmpresa, $border=0, $ln=1, $fill=0, $reseth=true, $align='left', $autopadding=true);
 //actividad económica
 $actividad=$invoice->economic_activity;
 $pdf->SetFont('helvetica', '', 10);
@@ -259,59 +226,57 @@ $nit = $invoice->client_nit;
 $datosCliente = '
 <table cellpadding="2" border="0">
     <tr>
-        <td width="300"><b>&nbsp;Lugar y fecha :</b>'.$fecha.'</td>
-        <td width="230" align="right"><b>NIT/CI :</b>'.$nit.'</td>
+        <td width="300" style="color:#003468;"><b>&nbsp;Lugar y fecha :</b>'.$fecha.'</td>
+        <td width="230" align="right" style="color:#003468;"><b>NIT/CI :</b>'.$nit.'</td>
     </tr>
     <tr>
-        <td colspan="2"><b>&nbsp;Se&ntilde;or(es):</b> '.$senor .'</td>
+        <td colspan="2" style="color:#003468;"><b>&nbsp;Se&ntilde;or(es):</b> '.$senor .'</td>
     </tr>
 
 </table>
 ';
 //$datosCliente="asdf";
-
-$pdf->writeHTMLCell($w=0, $h=0, $x='', $y='58', $datosCliente, $border=0, $ln=1, $fill=0, $reseth=true, $align='left', $autopadding=true);
-
 //dibuja rectangulo datos del cliente
 $pdf->SetLineStyle(array('width' => 0.3, 'cap' => 'butt', 'join' => 'miter', 'dash' => 0, 'color' => array(0, 0, 0)));
-$pdf->RoundedRect(15, 58, 187, 14, 1, '1111', null);
+$pdf->RoundedRect(15, 50, 187, 14, 1, '1111', 'DF', $style6, array(242, 242, 242));
+$style6 = array('width' => 0.2, 'cap' => 'butt', 'join' => 'miter', 'color' => array(0, 0, 0));
+$pdf->writeHTMLCell($w=0, $h=0, $x='', $y='50', $datosCliente, $border=0, $ln=1, $fill=0, $reseth=true, $align='left', $autopadding=true);
 $textTitulos = '
 <table border="0.2" cellpadding="3" cellspacing="0">
     <thead>
         <tr>
-          <td width="60" align="center" bgcolor="#E6DFDF"><font size="9"><b>CANTIDAD</b></font></td>
-          <td width="50" align="center" bgcolor="#E6DFDF"><font size="9"><b>LÍNEA</b></font></td>
-          <td width="50" align="center" bgcolor="#E6DFDF"><font size="9"><b>UNIDAD</b></font></td>
-          <td width="60" align="center" bgcolor="#E6DFDF"><font size="9"><b>CÓDIGO</b></font></td>
-          <td width="170" align="center" bgcolor="#E6DFDF"><font size="9"><b>DETALLE</b></font></td>
-           <td width="60" align="center" bgcolor="#E6DFDF"><font size="9"><b>PRECIO</b></font></td>
-           <td width="80" align="center" bgcolor="#E6DFDF"><font size="9"><b>SUBTOTAL</b></font></td>
+          <td width="60" align="center" style="color:#003468;" bgcolor="#B2D9FF"><font size="9"><b>CANTIDAD</b></font></td>
+          <td width="50" align="center" style="color:#003468;" bgcolor="#B2D9FF"><font size="9"><b>LÍNEA</b></font></td>
+          <td width="50" align="center" style="color:#003468;" bgcolor="#B2D9FF"><font size="9"><b>UNIDAD</b></font></td>
+          <td width="60" align="center" style="color:#003468;" bgcolor="#B2D9FF"><font size="9"><b>CÓDIGO</b></font></td>
+          <td width="170" align="center" style="color:#003468;" bgcolor="#B2D9FF"><font size="9"><b>DETALLE</b></font></td>
+           <td width="60" align="center" style="color:#003468;" bgcolor="#B2D9FF"><font size="9"><b>PRECIO</b></font></td>
+           <td width="80" align="center" style="color:#003468;" bgcolor="#B2D9FF"><font size="9"><b>SUBTOTAL</b></font></td>
         </tr>
     </thead>
 </table>
 ';
-$pdf->writeHTMLCell($w=0, $h=0, '', '76', $textTitulos, $border=0, $ln=1, $fill=0, $reseth=true, $align='left', $autopadding=true);
+$pdf->writeHTMLCell($w=0, $h=0, '', '67', $textTitulos, $border=0, $ln=1, $fill=0, $reseth=true, $align='left', $autopadding=true);
 //
 $ini = 0;
 $final = "";
 $resto = $ini;
 //for ($i=0;$i<=10;$i++)
 //{
-foreach ($products as $key => $product){        
+foreach ($products as $key => $product){
         $unidad = Product::where('id', $product->product_id)->select('unit_id', 'brand_id')->first();
         $brand = Brand::where('id', $unidad->brand_id)->first();
         $unit = Unit::where('id', $unidad->unit_id)->first();
-
         $textContenido ='
         <table border="0.2" cellpadding="3" cellspacing="0">
         <tr>
-        <td width="60" align="center"><font size="9">'.$product->quantity.'</font></td>
-        <td width="50" align="center"><font size="9">'.$brand->name.'</font></td>
-        <td width="50"><font size="9">'.$unit->name.'</font></td>
-        <td width="60" align="center"><font size="9 ">'.$product->code.'</font></td>
-        <td width="170"><font size="9">'.$product->name.'</font></td>
-        <td width="60" align="right"><font size="9">'.$product->price.'</font></td>
-        <td width="80" align="right"><font size="9"> '.number_format((float)($product->price*$product->quantity), 2, '.', ',').'</font></td>
+        <td width="60" align="center" style="font-size:9px; color:#003468;">'.$product->quantity.'</td>
+        <td width="50" align="center" style="font-size:9px; color:#003468;">'.$brand->name.'</td>
+        <td width="50" style="font-size:9px; color:#003468;">'.$unit->name.'</td>
+        <td width="60" align="center" style="font-size:9px; color:#003468;">'.$product->code.'</td>
+        <td width="170" style="font-size:9px; color:#003468;">'.$product->name.'</td>
+        <td width="60" align="right" style="font-size:9px; color:#003468;">'.$product->price.'</td>
+        <td width="80" align="right" style="font-size:9px; color:#003468;"> '.number_format((float)($product->price*$product->quantity), 2, '.', ',').'</td>
         </tr>
          </table>
         ';
@@ -351,16 +316,16 @@ $literal = $tool->to_string($num[0]).substr($num[1],0,2);
 
 $textSub = '<table border="0.2" cellpadding="3" cellspacing="0">
             <tr>
-                <td width="450" align="right"><b>SUBTOTAL &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></td>
-                <td  width="80" align="right"><b>'.$subtotal.'</b></td>
+                <td width="450" align="right" style="color:#003468;"><b>SUBTOTAL Su$ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></td>
+                <td  width="80" align="right" style="color:#003468;"><b>'.$subtotal.'</b></td>
             </tr>
           </table>';
 $pdf->writeHTMLCell($w=0, $h=0, '', '', $textSub, $border=0, $ln=1, $fill=0, $reseth=true, $align='left', $autopadding=true);
 
 $textDesc = '<table border="0.2" cellpadding="3" cellspacing="0">
                 <tr>
-                <td width="450"  align="right"><b>Descuentos &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></td>
-                <td width="80" align="right"><b>'.$descuento.'</b></td>
+                <td width="450"  align="right" style="color:#003468;"><b>DESCUENTO Su$&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></td>
+                <td width="80" align="right" style="color:#003468;"><b>'.$descuento.'</b></td>
             </tr>
             </table>';
 
@@ -371,15 +336,15 @@ $pdf->SetFont('helvetica', '', 11);
         $texPie .='
         <table border="0.2" cellpadding="3" cellspacing="0">
             <tr>
-                <td width="450"  align="right"><b>TOTAL $us &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></td>
-                <td width="80" align="right"><b>'.$total.'</b></td>
+                <td width="450"  align="right" bgcolor="#F2F2F2" style="color:#003468;"><b>TOTAL Su$ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></td>
+                <td width="80" align="right" bgcolor="#B2D9FF" style="color:#003468;"><b>'.$total.'</b></td>
             </tr>
             <tr>
-                <td width="450"  align="right"><b>TOTAL Bs. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></td>
-                <td width="80" align="right"><b>'.$totalBs.'</b></td>
+                <td width="450"  align="right" bgcolor="#F2F2F2" style="color:#003468;"><b>TOTAL Bs. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></td>
+                <td width="80" align="right" bgcolor="#B2D9FF" style="color:#003468;"><b>'.$totalBs.'</b></td>
             </tr>
             <tr>
-                <td colspan="2" style="font-size:9px"><b>Son: </b>'.$literal.'/100 BOLIVIANOS.</td>
+                <td colspan="2" style="font-size:9px; color:#003468;" bgcolor="#B2D9FF"><b>Son: '.$literal.'/100 BOLIVIANOS.</b></td>
             </tr>
         </table>
         ';
@@ -398,8 +363,7 @@ $leyenda = '<table  cellpadding="3" cellspacing="0">
                   </tr>
                   <tr>
                         <td width="440" bgcolor="#F2F2F2" style="font-size:7px;">
-                            (RND NO 10.0016.07) US.     169.34 AL CAMBIO DE BS. 6.96 POR US$ 1.00 EL MISMO QUE DEBERA SER CANCELADO EN DOLARES  
-                            &nbsp;&nbsp;&nbsp;ESTADOUNIDENSES O EN EQUIVALENTE EN MONEDA NACIONAL AL TIPO DE CAMBIO VIGENTE EN EL MOMENTO DE PAGO
+                            (RND NO 10.0016.07) US.     169.34 AL CAMBIO DE BS. 6.96 POR US$ 1.00 EL MISMO QUE DEBERA SER CANCELADO EN DOLARES ESTADOUNIDENSES O EN EQUIVALENTE EN MONEDA NACIONAL AL TIPO DE CAMBIO VIGENTE EN EL MOMENTO DE PAGO
 
                         </td>
                   </tr>
@@ -468,14 +432,14 @@ $datosFactura = '
 <table border="0" style="line-height: 160%">
     <tr><td style="line-height: '.$line.'%"> </td></tr>
     <tr>
-        <td width="230" align="left"><b>C&Oacute;DIGO DE CONTROL :&nbsp;&nbsp;'.$control_code.'</b></td>
-        <td width="210" align="left"><b>Fecha L&iacute;mite de Emisi&oacute;n : &nbsp;'.$fecha_limite.' </b></td>
+        <td width="230" align="left" style="color:#003468;"><b>C&Oacute;DIGO DE CONTROL :&nbsp;&nbsp;'.$control_code.'</b></td>
+        <td width="210" align="left" style="color:#003468;"><b>Fecha L&iacute;mite de Emisi&oacute;n : &nbsp;'.$fecha_limite.' </b></td>
     </tr>
     <tr>
-        <td width="450" align="center" style="font-size:7px"><b>"'.$law_gen.'"</b></td>
+        <td width="450" align="center" style="font-size:7px; color:white;" bgcolor="#003468"><b>"'.$law_gen.'"</b></td>
     </tr>
     <tr>
-        <td width="450" align="center" style="font-size:7px">"'.$law.'"</td>
+        <td width="450" align="center" style="font-size:7px; color:#003468;">"'.$law.'"</td>
     </tr>
 </table>
 ';

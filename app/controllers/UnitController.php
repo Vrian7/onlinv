@@ -26,7 +26,7 @@ class UnitController extends \BaseController{
 		$validation = $unit->isValid();
 		if($validation==""){
 			$unit->save();
-			Session::flash('title','Creacion de inventario');
+			Session::flash('title','Creacion de nueva unidad');
 			Session::flash('text','Se cre&oacute; la unidad '.$unit->name.' correctamente..');
 			return Redirect::to('unidades');
 		}
@@ -50,8 +50,8 @@ class UnitController extends \BaseController{
 		$unit->symbol = Input::get('symbol');
 		$unit->description = Input::get('description');
 		$unit->save();
-		Session::flash('title','creacion de unidad');
-		Session::flash('text','creacino del ciente milford correcto.. felicidades!!!');
+		Session::flash('title','Actualizaci&oacute;n de unidad');
+		Session::flash('text','Se actualiz&oacute; la unidad '.$unit->name.' correctamente..');
 		return Redirect::to('unidades');
 	}
 	public function delete($public_id){

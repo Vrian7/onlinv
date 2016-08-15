@@ -46,6 +46,7 @@ class InvoiceController extends \BaseController{
 			'type' => 'ORIGINAL',
 			'branch' => $branch
 		];
+		return View::make('invoice.view3',$data);	
 		if($invoice->branch_type_id == 1 )
 			return View::make('invoice.view2',$data);	
 		else
@@ -81,7 +82,8 @@ class InvoiceController extends \BaseController{
 			'branch' => $branch,
 			'number' => $invoice->number,
 			'public_id' => $invoice->public_id,
-		];		
+		];	
+		return View::make('invoice.view3',$data);		
 		if($invoice->branch_type_id == 1)
 			return View::make('invoice.view2',$data);	
 		else
@@ -326,7 +328,7 @@ class InvoiceController extends \BaseController{
 			'logo' => $ent->logo,
 			'branch' => $branch,
 		];
-		return View::make('invoice.view3',$data);	
+		return View::make('invoice.view4',$data);	
 		if($invoice->branch_type_id == 1 )
 			return View::make('invoice.view2',$data);	
 		else

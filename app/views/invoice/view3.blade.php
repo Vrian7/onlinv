@@ -73,7 +73,7 @@ $pdf->writeHTMLCell($w=0, $h=0, $x='140', $y='13', $html, $border=0, $ln=1, $fil
 $pdf->SetLineStyle(array('width' => 0.5, 'cap' => 'butt', 'join' => 'miter', 'dash' => 0, 'color' => array(0, 0, 0)));
 $pdf->RoundedRect(138, 11, 63, 18, 2, '1111', null);
 $imgdata = asset('uploads/logos/'.$logo);//base64_decode($invoice->logo);
-$pdf->Image($imgdata, '26', '6', '34', '30', '', '', 'T', false, 500, '', false, false, 0, false, false, false);
+$pdf->Image($imgdata, '26', '6', '34', '20', '', '', 'T', false, 500, '', false, false, 0, false, false, false);
 
 ///title
 $anchoDivFac = 480;

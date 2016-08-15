@@ -73,7 +73,8 @@ $pdf->writeHTMLCell($w=0, $h=0, $x='140', $y='13', $html, $border=0, $ln=1, $fil
 $pdf->SetLineStyle(array('width' => 0.5, 'cap' => 'butt', 'join' => 'miter', 'dash' => 0, 'color' => array(0, 0, 0)));
 $pdf->RoundedRect(138, 11, 63, 18, 2, '1111', null);
 $imgdata = asset('uploads/logos/'.$logo);//base64_decode($invoice->logo);
-$pdf->Image($imgdata, '26', '6', '34', '20', '', '', 'T', false, 500, '', false, false, 0, false, false, false);
+//$pdf->Image('@'.$imgdata, '26', '6', '34', '30', '', '', 'T', false, 500, '', false, false, 0, false, false, false);
+$pdf->Image($imgdata, '16', '10', '66', '20', '', '', 'T', false, 500, '', false, false, 0, false, false, false);
 
 ///title
 $anchoDivFac = 480;
@@ -141,7 +142,7 @@ $pdf->writeHTMLCell($w=0, $h=0, $x='15', $y='1', $tercero, $border=0, $ln=1, $fi
 else
 $original = "ORIGINAL";*/
 $original = $type;
-
+$original = "ORIGINAL";
 $pdf->SetFont('helvetica', 'B', 12);
     $original = '
         <p style="line-height: 150% ">
@@ -213,7 +214,7 @@ else{
     ';
 }
 
-$pdf->writeHTMLCell($w=0, $h=0, $x='15', $y='36', $datoEmpresa, $border=0, $ln=1, $fill=0, $reseth=true, $align='left', $autopadding=true);
+$pdf->writeHTMLCell($w=0, $h=0, $x='15', $y='31', $datoEmpresa, $border=0, $ln=1, $fill=0, $reseth=true, $align='left', $autopadding=true);
 //actividad económica
 $actividad=$invoice->economic_activity;
 $pdf->SetFont('helvetica', '', 10);
@@ -270,11 +271,11 @@ $datosCliente = '
 ';
 //$datosCliente="asdf";
 
-$pdf->writeHTMLCell($w=0, $h=0, $x='', $y='58', $datosCliente, $border=0, $ln=1, $fill=0, $reseth=true, $align='left', $autopadding=true);
+$pdf->writeHTMLCell($w=0, $h=0, $x='', $y='50', $datosCliente, $border=0, $ln=1, $fill=0, $reseth=true, $align='left', $autopadding=true);
 
 //dibuja rectangulo datos del cliente
 $pdf->SetLineStyle(array('width' => 0.3, 'cap' => 'butt', 'join' => 'miter', 'dash' => 0, 'color' => array(0, 0, 0)));
-$pdf->RoundedRect(15, 58, 187, 14, 1, '1111', null);
+$pdf->RoundedRect(15, 50, 187, 14, 1, '1111', null);
 $textTitulos = '
 <table border="0.2" cellpadding="3" cellspacing="0">
     <thead>
@@ -290,18 +291,17 @@ $textTitulos = '
     </thead>
 </table>
 ';
-$pdf->writeHTMLCell($w=0, $h=0, '', '76', $textTitulos, $border=0, $ln=1, $fill=0, $reseth=true, $align='left', $autopadding=true);
+$pdf->writeHTMLCell($w=0, $h=0, '', '67', $textTitulos, $border=0, $ln=1, $fill=0, $reseth=true, $align='left', $autopadding=true);
 //
 $ini = 0;
 $final = "";
 $resto = $ini;
 //for ($i=0;$i<=10;$i++)
 //{
-foreach ($products as $key => $product){        
+foreach ($products as $key => $product){
         $unidad = Product::where('id', $product->product_id)->select('unit_id', 'brand_id')->first();
         $brand = Brand::where('id', $unidad->brand_id)->first();
         $unit = Unit::where('id', $unidad->unit_id)->first();
-
         $textContenido ='
         <table border="0.2" cellpadding="3" cellspacing="0">
         <tr>
@@ -351,7 +351,7 @@ $literal = $tool->to_string($num[0]).substr($num[1],0,2);
 
 $textSub = '<table border="0.2" cellpadding="3" cellspacing="0">
             <tr>
-                <td width="450" align="right"><b>SUBTOTAL &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></td>
+                <td width="450" align="right"><b>SUBTOTAL Su$&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></td>
                 <td  width="80" align="right"><b>'.$subtotal.'</b></td>
             </tr>
           </table>';
@@ -359,7 +359,7 @@ $pdf->writeHTMLCell($w=0, $h=0, '', '', $textSub, $border=0, $ln=1, $fill=0, $re
 
 $textDesc = '<table border="0.2" cellpadding="3" cellspacing="0">
                 <tr>
-                <td width="450"  align="right"><b>Descuentos &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></td>
+                <td width="450"  align="right"><b>DESCUENTO Su$&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></td>
                 <td width="80" align="right"><b>'.$descuento.'</b></td>
             </tr>
             </table>';
@@ -371,11 +371,11 @@ $pdf->SetFont('helvetica', '', 11);
         $texPie .='
         <table border="0.2" cellpadding="3" cellspacing="0">
             <tr>
-                <td width="450"  align="right"><b>TOTAL $us &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></td>
+                <td width="450"  align="right"><b>TOTAL Su$ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></td>
                 <td width="80" align="right"><b>'.$total.'</b></td>
             </tr>
             <tr>
-                <td width="450"  align="right"><b>TOTAL Bs. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></td>
+                <td width="450"  align="right"><b>TOTAL Bs. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></td>
                 <td width="80" align="right"><b>'.$totalBs.'</b></td>
             </tr>
             <tr>
@@ -398,8 +398,7 @@ $leyenda = '<table  cellpadding="3" cellspacing="0">
                   </tr>
                   <tr>
                         <td width="440" bgcolor="#F2F2F2" style="font-size:7px;">
-                            (RND NO 10.0016.07) US.     169.34 AL CAMBIO DE BS. 6.96 POR US$ 1.00 EL MISMO QUE DEBERA SER CANCELADO EN DOLARES  
-                            &nbsp;&nbsp;&nbsp;ESTADOUNIDENSES O EN EQUIVALENTE EN MONEDA NACIONAL AL TIPO DE CAMBIO VIGENTE EN EL MOMENTO DE PAGO
+                            (RND NO 10.0016.07) US.     169.34 AL CAMBIO DE BS. 6.96 POR US$ 1.00 EL MISMO QUE DEBERA SER CANCELADO EN DOLARES ESTADOUNIDENSES O EN EQUIVALENTE EN MONEDA NACIONAL AL TIPO DE CAMBIO VIGENTE EN EL MOMENTO DE PAGO
 
                         </td>
                   </tr>

@@ -18,7 +18,6 @@
                     </div>
                 </header>
             <div class="panel-body">
-
                <hr>
             </div>
         </div>
@@ -75,7 +74,7 @@
             <div class="col-lg-6"> 
             <h4>Movimiento Econ&oacute;mico</h4>
                 <blockquote>
-                    <i class="icon-money"></i> <label>Total Movimiento: </label> {{$client->flow}}
+                        <i class="icon-money"></i> <label>Total Movimiento: </label> {{$client->flow}}
                     <small>Total de movimiento del cliente
                     </small>
                     <i class="icon-money"></i> <label>Acumulado: </label> {{$client->flow}}
