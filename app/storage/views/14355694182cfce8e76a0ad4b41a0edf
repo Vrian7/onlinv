@@ -132,7 +132,8 @@
                             <?php endforeach; ?>                        
                         </select>
                     </div>
-                </div>           
+                </div>          
+            <?php if(isset($custom->field1) ): ?>
                 <?php if($custom->field1): ?>
                 <div class="form-group" id="extra1">
                     <label for="text1" class="control-label col-lg-4"><?php echo $custom->field1; ?></label>
@@ -173,6 +174,7 @@
                     </div>
                 </div> 
                 <?php endif; ?>
+            <?php endif; ?>
         </div>
     </div>
     <hr>       

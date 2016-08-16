@@ -7,10 +7,10 @@ class MYPDF extends TCPDF {
 
           $html = '<hr><table border="0">
             <tr>
-            <td align="center">Sistema de Facturación Computarizada <b>www.factufacil.online</b></td>
+            <td align="center">Sistema de Facturación Computarizada <b>www.factufacil.bo</b></td>
             </tr>
             <tr>
-            <td width="578" align="center">Página '.$this->getAliasNumPage().'/'.$this->getAliasNbPages().'</td>
+            <td width="578" align="center">Pág '.$this->getAliasNumPage().'/'.$this->getAliasNbPages().'</td>
             </tr>
             </table>';
         $this->writeHTMLCell($w=0, $h=0, $x='', $y='', $html, $border=0, $ln=1, $fill=0, $reseth=true, $align='left', $autopadding=true);
@@ -272,10 +272,10 @@ foreach ($products as $key => $product){
         <tr>
         <td width="60" align="center" style="font-size:9px; color:#003468;">'.$product->quantity.'</td>
         <td width="50" align="center" style="font-size:9px; color:#003468;">'.$brand->name.'</td>
-        <td width="50" align="center"  style="font-size:9px; color:#003468;">'.$unit->name.'</td>
+        <td width="50" style="font-size:9px; color:#003468;">'.$unit->name.'</td>
         <td width="60" align="center" style="font-size:9px; color:#003468;">'.$product->code.'</td>
         <td width="170" style="font-size:9px; color:#003468;">'.$product->name.'</td>
-        <td width="60" align="right" style="font-size:9px; color:#003468;">'.number_format((float)($product->price), 2, '.', ',').'</td>
+        <td width="60" align="right" style="font-size:9px; color:#003468;">'.$product->price.'</td>
         <td width="80" align="right" style="font-size:9px; color:#003468;"> '.number_format((float)($product->price*$product->quantity), 2, '.', ',').'</td>
         </tr>
          </table>
@@ -316,7 +316,7 @@ $literal = $tool->to_string($num[0]).substr($num[1],0,2);
 
 $textSub = '<table border="0.2" cellpadding="3" cellspacing="0">
             <tr>
-                <td width="450" align="right" style="color:#003468;"><b>SUBTOTAL USD &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></td>
+                <td width="450" align="right" style="color:#003468;"><b>SUBTOTAL Su$ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></td>
                 <td  width="80" align="right" style="color:#003468;"><b>'.$subtotal.'</b></td>
             </tr>
           </table>';
@@ -324,7 +324,7 @@ $pdf->writeHTMLCell($w=0, $h=0, '', '', $textSub, $border=0, $ln=1, $fill=0, $re
 
 $textDesc = '<table border="0.2" cellpadding="3" cellspacing="0">
                 <tr>
-                <td width="450"  align="right" style="color:#003468;"><b>DESCUENTO USD&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></td>
+                <td width="450"  align="right" style="color:#003468;"><b>DESCUENTO Su$&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></td>
                 <td width="80" align="right" style="color:#003468;"><b>'.$descuento.'</b></td>
             </tr>
             </table>';
@@ -336,7 +336,7 @@ $pdf->SetFont('helvetica', '', 11);
         $texPie .='
         <table border="0.2" cellpadding="3" cellspacing="0">
             <tr>
-                <td width="450"  align="right" bgcolor="#F2F2F2" style="color:#003468;"><b>TOTAL USD &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></td>
+                <td width="450"  align="right" bgcolor="#F2F2F2" style="color:#003468;"><b>TOTAL Su$ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></td>
                 <td width="80" align="right" bgcolor="#B2D9FF" style="color:#003468;"><b>'.$total.'</b></td>
             </tr>
             <tr>
@@ -358,13 +358,29 @@ $leyenda = '<table  cellpadding="3" cellspacing="0">
                   <tr><td style="line-height: 50%"> </td></tr>
                   <tr>
                         <td width="440" bgcolor="#F2F2F2" style="font-size:7px;">
-                            EL MONTO EN BOLIVIANOS DE ESTA FACTURA EQUIVALE SOLO A EFECTOS DE CRÉDITO FISCAL IVA (RND NO 10.0016.07) US.     169.34 AL CAMBIO DE BS. 6.96 POR US$ 1.00 EL MISMO QUE DEBERA SER CANCELADO EN DOLARES ESTADOUNIDENSES O EN EQUIVALENTE EN MONEDA NACIONAL AL TIPO DE CAMBIO VIGENTE EN EL MOMENTO DE PAGO.
+                            EL MONTO EN BOLIVIANOS DE ESTA FACTURA EQUIVALE SOLO A EFECTOS DE CRÉDITO FISCAL IVA
+                        </td>
+                  </tr>
+                  <tr>
+                        <td width="440" bgcolor="#F2F2F2" style="font-size:7px;">
+                            (RND NO 10.0016.07) US.     169.34 AL CAMBIO DE BS. 6.96 POR US$ 1.00 EL MISMO QUE DEBERA SER CANCELADO EN DOLARES ESTADOUNIDENSES O EN EQUIVALENTE EN MONEDA NACIONAL AL TIPO DE CAMBIO VIGENTE EN EL MOMENTO DE PAGO
+
+                        </td>
+                  </tr>
+                  <tr>
+                        <td width="440" bgcolor="#F2F2F2" style="font-size:7px;">
+                            DESCUENTO DISCRESIONAL
+                        </td>
+                  </tr>
+                  <tr>
+                        <td width="440" bgcolor="#F2F2F2" style="font-size:7px; line-height: 50%;">
+                            SEGUN ACUERDO CLIENTE
                         </td>
                   </tr>
               </table>';
 $pdf->writeHTMLCell($w=0, $h=0, '', '', $leyenda, $border=0, $ln=1, $fill=0, $reseth=true, $align='left', $autopadding=true);
 //nota al cliente
-$restoQr = 28;
+$restoQr = 40;
 $line=60;
 if (!empty($invoice->public_notes)){
 $nota = $invoice->public_notes;

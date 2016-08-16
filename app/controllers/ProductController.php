@@ -115,8 +115,25 @@ class ProductController extends \BaseController{
 	public function delete($public_id){
 		
 	}
-	public function excel(){		
-		Excel::load('files/excel/productos5.csv', function($reader) {
+public function getExcel(){
+	return View::make('product.import');
+}
+	public function excel(){
+		$dir = "files/excel/";
+        $fecha = base64_encode("excel".date('d/m/Y-H:m:i'));
+        $file_name = $fecha;
+        //return $file_name;
+     
+        
+        
+        $file = Input::file('excel');
+        $destinationPath = 'files/excel/';
+        // If the uploads fail due to file system, you can try doing public_path().'/uploads'
+        $filename = "import.csv";//$file_name;//str_random(12);
+        //$filename = $file->getClientOriginalName();
+        //$extension =$file->getClientOriginalExtension();
+        $upload_success = Input::file('excel')->move($destinationPath, $filename);
+		Excel::load('files/excel/import.csv', function($reader) {
  
      		foreach ($reader->get() as $prueba) {     			
                 foreach($prueba as $pru){                    
@@ -129,6 +146,8 @@ class ProductController extends \BaseController{
 					$product->name = $prod[1];
 					$product->code = $prod[0];
 					$product->price = $prod[2];
+					$product->extra1 = $prod[3];
+
 					$product->description = "";		
 					$product->save();
                 }                

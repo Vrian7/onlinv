@@ -328,7 +328,7 @@ class InvoiceController extends \BaseController{
 			'logo' => $ent->logo,
 			'branch' => $branch,
 		];
-		return View::make('invoice.view4',$data);	
+		return View::make('invoice.view4',$data);
 		if($invoice->branch_type_id == 1 )
 			return View::make('invoice.view2',$data);	
 		else

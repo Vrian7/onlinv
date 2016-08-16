@@ -15,9 +15,10 @@
 {
 	return View::make('index.dashboard');
 });*/
-Route::get('factura/cliente/{enterprice}/{public_id}','InvoiceController@showClient');
+//Route::get('factura/cliente/{enterprice}/{public_id}','InvoiceController@showClient');
 //Route::group(array('domain'=>'{enterprice}.demo.factufacil.online'),function(){
-Route::group(array('domain'=>'{enterprice}.factufacil.bo'),function(){
+//Route::group(array('domain'=>'{enterprice}.factufacil.bo'),function(){
+Route::group(array('domain'=>'{enterprice}.factufacil.online'),function(){
 	/*** USER CONTROLLER ***/
 	//Route::get('ingresar','UserController@login');
 
@@ -225,7 +226,8 @@ Route::group(array('before'=>'superadmin'),function() {
 	Route::get('cotizacion/eliminar/{public_id}','QuoteController@delete');
 	Route::get('cotizacion/vercotizacion/{public_id}','QuoteController@showQuote');
 
-	Route::get('excel','ProductController@excel');
+	Route::get('excel','ProductController@getExcel');
+	Route::post('excel','ProductController@excel');
 });
 
 Route::group(array('before' => 'auth.basic'), function(){
