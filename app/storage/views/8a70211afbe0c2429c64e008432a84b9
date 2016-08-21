@@ -18,21 +18,21 @@
                 </header>
             <div class="panel-body">
                 <div class="col-lg-6">           
-                    <h4>Datos de Usuario</h4>
+                    <h4>Datod de Usuario</h4>
                     <blockquote>
-                       <i class="icon-group"></i> <label>Nombre Completo: </label> <?php echo $user->name; ?>
+                       <i class="icon-male"></i> <label>Nombre Completo: </label> <?php echo $user->name; ?>
 
                        <small>Nombre real del usuario
                         </small>
-                        <i class="icon-group"></i> <label>Nombre del usuario: </label> <?php echo $user->username; ?>
+                        <i class="icon-user"></i> <label>Nombre del usuario: </label> <?php echo $user->username; ?>
 
                        <small>Nombre para ingresar al sistema
                         </small>
-                        <i class="icon-group"></i> <label>Tel&eacute;fono/Celular: </label> <?php echo $user->phone; ?>
+                        <i class="icon-phone"></i> <label>Tel&eacute;fono/Celular: </label> <?php echo $user->phone; ?>
 
                        <small>Dato de contacto con el usuario
                         </small>                        
-                        <i class="icon-group"></i> <label>Foto o Avatar: </label>
+                        <i class="icon-user"></i> <label>Foto o Avatar: </label>
                         <img class="media-object img-thumbnail user-img" alt="Usuario" src="<?php echo asset('uploads/users/'.$user->avatar); ?>"  height="100" width="100"/>
                        <small>Usuario
                         </small>
@@ -45,11 +45,11 @@
 
                        <small>Rol del usuario
                         </small>
-                        <i class="icon-group"></i> <label>Sucursal: </label> <?php echo $branch; ?>
+                        <i class="icon-map-marker"></i> <label>Sucursal: </label> <?php echo $branch; ?>
 
                        <small>Sucursal
                         </small>
-                        <i class="icon-group"></i> <label>Habilitado: </label> <?php echo $enabled; ?>
+                        <i class="icon-ok"></i> <label>Habilitado: </label> <?php echo $enabled; ?>
 
                        <small>Habilitado
                         </small>                        
@@ -71,4 +71,5 @@
     <?php echo HTML::script('vendor/bcore/plugins/dataTables/dataTables.bootstrap.js'); ?>   
 
 <?php $__env->stopSection(); ?>
+
 <?php echo $__env->make('header', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

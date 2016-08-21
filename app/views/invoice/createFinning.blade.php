@@ -520,8 +520,9 @@ $(document).on('focus', '.select2', function() {
 });
 $("#search_single_product").click(function(){
   //console.log("adfasdf");
-  //console.log($("#searchCodeProduct").val());    
+  //console.log($("#searchCodeProduct").val());  
   code = $("#searchCodeProduct").val();
+  $("#searchCodeProduct").val("");
   $.ajax({
         type: 'GET',
         url:'{{ URL::to('searchProduct') }}',
@@ -534,11 +535,13 @@ $("#search_single_product").click(function(){
           console.log(result);      
           //$('#tableb').append(addNewRow());
           //id_products++;
+          if(result.name){
           id_products++;
           $('#tableb').append(addNewRow());
-          $('#killit'+ind_act).css('cursor', 'pointer');
+          $('#killit'+ind_act).css('cursor', 'pointer');                    
           addProduct(result);          
           calculateAllTotal();
+        }
           //addProduct();
         }
   });

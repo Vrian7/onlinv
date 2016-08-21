@@ -164,7 +164,7 @@
       <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="myModalLabel">Vista Previa Factura</h4>
+            <h4 class="modal-title" id="myModalLabel">Vista Previa Cotizaci&oacute;n</h4>
           </div>
           <div class="modal-body col-lg-12">
           <iframe id="invoice_frame" type="text/html" frameborder="1" width="100%" height="800"></iframe>        
@@ -261,7 +261,7 @@ $(document).on("change",'#razon_new',function(){
 //$("#select_client").modal('show');  
 $('#preview_btn').click(function(){
   var datos = $('#main_form').serialize();
-    $('#invoice_frame').attr('src', '<?php echo asset("factura/nuevo/previsualizar?'+datos+'"); ?>' );
+    $('#invoice_frame').attr('src', '<?php echo asset("cotizacion/nuevo/previsualizar?'+datos+'"); ?>' );
     $('#preview').modal('show');  
 });
 /*$(".razon_text").click(function(){
@@ -523,6 +523,7 @@ $("#search_single_product").click(function(){
   //console.log("adfasdf");
   //console.log($("#searchCodeProduct").val());    
   code = $("#searchCodeProduct").val();
+  $("#searchCodeProduct").val("");
   $.ajax({
         type: 'GET',
         url:'<?php echo URL::to('searchProduct'); ?>',

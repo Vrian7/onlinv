@@ -17,8 +17,8 @@
 });*/
 //Route::get('factura/cliente/{enterprice}/{public_id}','InvoiceController@showClient');
 //Route::group(array('domain'=>'{enterprice}.demo.factufacil.online'),function(){
-//Route::group(array('domain'=>'{enterprice}.factufacil.bo'),function(){
-Route::group(array('domain'=>'{enterprice}.factufacil.online'),function(){
+Route::group(array('domain'=>'{enterprice}.factufacil.bo'),function(){
+//Route::group(array('domain'=>'{enterprice}.factufacil.online'),function(){
 	/*** USER CONTROLLER ***/
 	//Route::get('ingresar','UserController@login');
 
@@ -172,6 +172,8 @@ Route::group(array('before'=>'superadmin'),function() {
 	Route::post('usuario/editar/{public_id}','UserController@update');
 	Route::get('usuario/eliminar/{public_id}','UserController@delete');			
 
+
+});	
 	/*** CUSTOMCLIENTCONTROLLER ***/
 	Route::get('campos_clientes','CustomClientController@index');
 	Route::get('campos_cliente','CustomClientController@create');
@@ -180,7 +182,6 @@ Route::group(array('before'=>'superadmin'),function() {
 	Route::get('campos_cliente/editar/{public_id}','CustomClientController@edit');
 	Route::post('campos_cliente/editar/{public_id}','CustomClientController@update');
 	Route::get('campos_cliente/eliminar/{public_id}','CustomClientController@delete');
-});	
 
 	/*** INVOICECONTROLLER ***/
 	Route::get('facturas','InvoiceController@index');
@@ -225,6 +226,7 @@ Route::group(array('before'=>'superadmin'),function() {
 	Route::post('cotizacion/editar/{public_id}','QuoteController@update');
 	Route::get('cotizacion/eliminar/{public_id}','QuoteController@delete');
 	Route::get('cotizacion/vercotizacion/{public_id}','QuoteController@showQuote');
+	Route::get('cotizacion/nuevo/previsualizar','QuoteController@previewQuote');
 
 	Route::get('excel','ProductController@getExcel');
 	Route::post('excel','ProductController@excel');

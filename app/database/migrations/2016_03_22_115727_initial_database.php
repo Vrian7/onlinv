@@ -513,17 +513,17 @@ class InitialDatabase extends Migration {
 			END
 		');
 		DB::unprepared('
-			CREATE TRIGGER clients_before_insert BEFORE INSERT ON `clients` FOR EACH ROW 
+			CREATE TRIGGER clients_before_insert BEFORE INSERT ON `clients` FOR EACH ROW
 			BEGIN
 			    SET NEW.public_id = (SELECT COALESCE (MAX(public_id),0) + 1 FROM clients WHERE enterprice_id = NEW.enterprice_id );
 			END
 		');
 		DB::unprepared('
-			CREATE TRIGGER custom_products_before_insert BEFORE INSERT ON `custom_products` FOR EACH ROW 
+			CREATE TRIGGER custom_products_before_insert BEFORE INSERT ON `custom_products` FOR EACH ROW
 			BEGIN
     			SET NEW.public_id = (SELECT COALESCE (MAX(public_id),0) + 1 FROM custom_products WHERE enterprice_id = NEW.enterprice_id );
 			END
-		');
+		');		
 		DB::unprepared('
 			CREATE TRIGGER inventories_before_insert BEFORE INSERT ON `inventories` FOR EACH ROW 
 			BEGIN

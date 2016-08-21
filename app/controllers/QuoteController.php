@@ -2,6 +2,7 @@
 class QuoteController extends \BaseController{
 	public function index(){
 		$quotes = Quote::where('enterprice_id',Auth::user()->enterprice_id)->where('branch_id',Auth::user()->branch_id)->get();
+		$statuses = Status::get():
 		$data = [
 			'quotes' => $quotes,
 		];
@@ -142,26 +143,23 @@ class QuoteController extends \BaseController{
 	public function delete($public_id){
 		
 	}
-	public function previewInvoice(){
-		$client = Client::where('id',Input::get('client'))->first();	
+	public function previewQuote(){
+		$client = Client::where('id',Input::get('client'))->first();		
 		$branch = Branch::where('id',Auth::user()->branch_id)->first();
-		$central = Branch::where('id',Auth::user()->branch_id)->where('number',0)->first();
-		//$tool = new Tool();
-		$invoice = new Invoice();
-		//$invoice->enterprice_id = Auth::user()->enterprice_id;
+		$enterprice = Enterprice::where('id',Auth::user()->enterprice_id)->first();		
+		$invoice = new Invoice();		
 		$invoice->branch_id = Auth::user()->branch_id;
 		$invoice->branch_type_id = $branch->branch_type_id;
 		$invoice->user_id = Auth::user()->id;
 		$invoice->client_id = Input::get('client');
 		$invoice->invoice_status_ids = 1;
-		$invoice->nit = Input::get('nit');
+		$invoice->nit = $enterprice->nit;
 		$invoice->client_name = Input::get('razon');
 		$invoice->client_nit = Input::get('nit');
 		$invoice->authorization_number = $branch->authorization_number;
-		$invoice->dosage_key = $branch->dosage_key;
-		//$invoice->matriz_address = $central->address;
+		$invoice->dosage_key = $branch->dosage_key;		
 		$invoice->city = $branch->city;
-		$invoice->country = "no";//$branch->country;
+		$invoice->country = $branch->country;
 		$invoice->deadline = $branch->deadline;
 		$invoice->net_amount = Input::get('total');
 		$invoice->total_amount = Input::get('subtotal');
@@ -172,7 +170,7 @@ class QuoteController extends \BaseController{
 		$invoice->notes = Input::get('notes');
 		$invoice->validate = Input::get('validate');
 		$invoice->discount = Input::get('descuento_send');
-		$invoice->exchange = 6.96;
+		$invoice->exchange = 6.966;
 		$invoice->net_amount_dollar = 0;
 		$date_send = Input::get('date');
 		$date_send = explode('/',$date_send);
@@ -189,7 +187,7 @@ class QuoteController extends \BaseController{
 		$products =array();
 		foreach (Input::get('productos') as $key => $producto) {
 			if($producto['code']!=""){
-			$product = Product::where('enterprice_id',Auth::user()->enterprice_id)->where('code',$producto['code'])->first();			
+			$product = Product::where('enterprice_id',Auth::user()->enterprice_id)->where('code',$producto['code'])->first();
 			$detail = new InvoiceDetail();			
 			//$detail->enterprice_id = Auth::user()->enterprice_id;
 			//$detail->invoice_id = $invoice->id;			
@@ -197,20 +195,20 @@ class QuoteController extends \BaseController{
 			$detail->code = $producto['code'];
 			$detail->name = $producto['name'];
 			$detail->price = $producto['price'];
-			$detail->quantity = $producto['quantity'];			
+			$detail->quantity = $producto['quantity'];
 			array_push($products, $detail);
 			}
-		}		
-		$ent = Enterprice::where('id',Auth::user()->enterprice_id)->first();
+		}				
 		$branch = Branch::where('id',$invoice->branch_id)->first();
 		$data = [
+			'client' => $client,
 			'invoice' => $invoice,
 			'type'	=> 'Previsualizaci&oacute;n',
 			'products' => $products,
-			'logo' => $ent->logo,
+			'logo' => $enterprice->logo,
 			'branch' => $branch,
 		];
-		return View::make('invoice.view4',$data);	
+		return View::make('quote.view',$data);	
 		if($invoice->branch_type_id == 1 )
 			return View::make('invoice.view4',$data);	
 		else
@@ -222,14 +220,17 @@ class QuoteController extends \BaseController{
 		$products = QuoteDetail::where('quote_id',$quote->id)->get();
 		$ent = Enterprice::where('id',Auth::user()->enterprice_id)->first();
 		$branch = Branch::where('id',$quote->branch_id)->first();
+		$client = Client::where('id',$quote->client_id)->first();
 		$data = [
-			'invoice' => $quote,			
+			'client' => $client,
+			'invoice' => $quote,	
 			'products' => $products,
 			'logo' => $ent->logo,
 			'type' => 'ORIGINAL',
 			'branch' => $branch
 		];
-		return View::make('invoice.view3',$data);			
+		return View::make('quote.view',$data);
+		return View::make('invoice.view3',$data);
 	}
 }
 ?>

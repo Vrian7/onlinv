@@ -46,7 +46,7 @@ class InvoiceController extends \BaseController{
 			'type' => 'ORIGINAL',
 			'branch' => $branch
 		];
-		return View::make('invoice.view3',$data);	
+		return View::make('invoice.view4',$data);	
 		if($invoice->branch_type_id == 1 )
 			return View::make('invoice.view2',$data);	
 		else
@@ -64,6 +64,7 @@ class InvoiceController extends \BaseController{
 			'type' => 'ORIGINAL',
 			'branch' => $branch,
 		];
+		return View::make('invoice.view4',$data);	
 		if($invoice->branch_type_id == 1 )
 			return View::make('invoice.view2',$data);	
 		else
@@ -83,7 +84,7 @@ class InvoiceController extends \BaseController{
 			'number' => $invoice->number,
 			'public_id' => $invoice->public_id,
 		];	
-		return View::make('invoice.view3',$data);		
+		return View::make('invoice.view4',$data);
 		if($invoice->branch_type_id == 1)
 			return View::make('invoice.view2',$data);	
 		else
@@ -138,6 +139,7 @@ class InvoiceController extends \BaseController{
 		$client->debt = $client->debt+Input::get('total');
 		$branch = Branch::where('id',Auth::user()->branch_id)->first();
 		$central = Branch::where('enterprice_id',Auth::user()->enterprice_id)->where('number',0)->first();
+		$enterprice = Enterprice::where('id',Auth::user()->enterprice_id)->first();
 		$tool = new Tool();
 		$invoice = new Invoice();
 		$invoice->enterprice_id = Auth::user()->enterprice_id;
@@ -146,7 +148,7 @@ class InvoiceController extends \BaseController{
 		$invoice->user_id = Auth::user()->id;
 		$invoice->client_id = $client->id;
 		$invoice->invoice_status_ids = 1;
-		$invoice->nit = $client->nit;
+		$invoice->nit = $enterprice->nit;
 		$invoice->client_name = $client->business_name;
 		$invoice->client_nit = $client->nit;
 		$invoice->authorization_number = $branch->authorization_number;
@@ -216,7 +218,7 @@ class InvoiceController extends \BaseController{
 		// if($invoice->branch_type_id == 1)
 		// 	return View::make('invoice.view2',$data);	
 		// else
-		// 	return View::make('invoice.view',$data);	
+		// 	return View::make('invoice.view',$data);			
 		return View::make('invoice.showStandard',$data);
 	}
 	public function edit($public_id){

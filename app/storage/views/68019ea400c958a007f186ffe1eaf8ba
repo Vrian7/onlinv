@@ -185,8 +185,8 @@ $textTitulos .= '<p></p>
          <td width="35" align="center" style="font-size:7px; color:#003468;" bgcolor="#B2D9FF"><b>Unidad de Manejo</b></td>
          <td width="110" align="center" style="font-size:7px; color:#003468;" bgcolor="#B2D9FF"><b>NÚMERO DE PARTE</b></td>
          <td width="110" align="center" style="font-size:7px; color:#003468;" bgcolor="#B2D9FF"><b>DESCRIPCIÓN</b></td>
-         <td width="50" align="center" style="font-size:7px; color:#003468;" bgcolor="#B2D9FF"><b>Precio Unitario US$</b></td>
-         <td width="70" align="center" style="font-size:7px; color:#003468;" bgcolor="#B2D9FF"><b>Total US$</b></td>
+         <td width="50" align="center" style="font-size:7px; color:#003468;" bgcolor="#B2D9FF"><b>Precio Unitario USD</b></td>
+         <td width="70" align="center" style="font-size:7px; color:#003468;" bgcolor="#B2D9FF"><b>Total USD</b></td>
          <td width="63" align="center" style="font-size:7px; color:#003468;" bgcolor="#B2D9FF"><b>Entrega</b></td>
         </tr>
     </thead>

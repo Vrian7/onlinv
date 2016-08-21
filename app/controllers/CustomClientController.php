@@ -18,7 +18,7 @@ class CustomClientController extends \BaseController{
 		return View::make('custom_client.create',$data);
 	}
 	public function store(){
-		$custom = new CustomClient();
+		$custom = CustomClient::where('enterprice_id',Auth::user()->enterprice_id)->first();
 		$custom->enterprice_id = Auth::user()->enterprice_id;
 		if(Input::get('field1')!="")
 			$custom->field1 = Input::get('field1');
@@ -52,17 +52,17 @@ class CustomClientController extends \BaseController{
 		return View::make('custom_client.edit',$data);
 	}
 	public function update($public_id){
-		$custom = CustomClient::where('enterprice_id',Auth::user()->enterprice_id)->first();		
+		$custom = CustomClient::where('enterprice_id',Auth::user()->enterprice_id)->first();
 		if(Input::get('field1')!="")
 			$custom->field1 = Input::get('field1');
 		if(Input::get('field2')!="")
-			$custom->field1 = Input::get('field2');
+			$custom->field2 = Input::get('field2');
 		if(Input::get('field3')!="")
-			$custom->field1 = Input::get('field3');
+			$custom->field3 = Input::get('field3');
 		if(Input::get('field4')!="")
-			$custom->field1 = Input::get('field4');
+			$custom->field4 = Input::get('field4');
 		if(Input::get('field5')!="")
-			$custom->field1 = Input::get('field5');
+			$custom->field5 = Input::get('field5');
 		$validation = $custom->isValid();
 		if($validation==""){
 			$custom->save();

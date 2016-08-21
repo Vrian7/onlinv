@@ -82,6 +82,7 @@
         
     </div>
 </div>
+<?php if($user->rol_id!=1): ?>
 <div class="col-lg-12">
     <div class="box dark">
         <header>
@@ -151,6 +152,7 @@
     </div>
     <hr>       
 </div>
+<?php endif; ?>
 <div class="col-lg-12">
 	<div class="col-lg-3"></div>
 	<div class="col-lg-2"><a class="btn btn-primary" href="<?php echo asset('usuarios'); ?>"><i class="icon-ban-circle icon-white"></i> Cancelar</a></div>

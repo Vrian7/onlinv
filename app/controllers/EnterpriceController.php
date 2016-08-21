@@ -49,6 +49,15 @@ class EnterpriceController extends \BaseController{
 		$cat->name = "General";
 		$cat->save();
 
+		$custom = new CustomClient();
+		$custom->enterprice_id = Auth::user()->enterprice_id;
+		$custom->field1 = "";
+		$custom->field2 = "";
+		$custom->field3= "";
+		$custom->field4 = "";
+		$custom->field5 = "";
+		$custom->save();
+
 		return Redirect::to('ingresar');
 	}
 	public function salesBook(){

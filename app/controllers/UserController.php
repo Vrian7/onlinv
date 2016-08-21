@@ -1,7 +1,7 @@
 <?php 
 
 class UserController extends \BaseController{
-	public function index(){
+	public function index(){		
 		$users = User::where('enterprice_id',Auth::user()->enterprice_id)->where('id','!=',Auth::user()->id)->get();
 		$roles = Rol::get();
 		$branchs = Branch::where('enterprice_id',Auth::user()->enterprice_id)->get();  
@@ -70,7 +70,7 @@ class UserController extends \BaseController{
 			Session::flash('title','Creacion de usuario');
 			Session::flash('text','Se cre&oacute; el usuario '.$user->username.' correctamente..');
 			return Redirect::to('usuarios');
-		}
+		}	
 		else
 		{
 			Session::flash('title','Se encontraron estos errores');
@@ -96,27 +96,42 @@ class UserController extends \BaseController{
 		$ent = Enterprice::where('id',Auth::user()->enterprice_id)->first();
 		$file = Input::file('logo');
 		$destinationPath = 'uploads/users';
-		$user = User::where('enterprice_id',$ent->id)->where('public_id',$public_id)->first();		
-		$user->rol_id = Input::get('rol');
-		$user->branch_id = Input::get('branch');		
+		$user = User::where('enterprice_id',$ent->id)->where('public_id',$public_id)->first();
+		if($user->rol_id != 1){
+			$user->rol_id = Input::get('rol');
+			$user->branch_id = Input::get('branch');		
+			if(Input::get('enabled')!="")
+				$user->enabled = 1;
+			else
+				$user->enabled = 0;
+		}
 		$user->name = Input::get('name');
 		$user->username = $ent->domain.".".Input::get('username');
-		$user->password = Hash::make(Input::get('password'));		
+		if(Input::get('password') != "**********")
+			$user->password = Hash::make(Input::get('password'));
 		$user->phone = Input::get('phone');
 		if(!empty(Input::file('avatar'))){
-			$filename = "user-D".date("dmYHis").'.u'.$user->username.'.'.Input::file('avatar')->getClientOriginalExtension();	
-			Input::file('avatar')->move($destinationPath, $filename);		
+			$filename = "user-D".date("dmYHis").'.u'.$user->username.'.'.Input::file('avatar')->getClientOriginalExtension();
+			Input::file('avatar')->move($destinationPath, $filename);
 			$user->avatar = $filename;
+		}
+		$validation = $user->isValid();
+		if($validation==""){
+			$user->save();
+			Session::flash('title','Creacion de usuario');
+			Session::flash('text','Se modifi&oacute; el usuario '.Input::get('name').' correctamente..');
+			if($user->id == Auth::user()->id)
+				return Redirect::to('salir');
+			else
+				return Redirect::to('usuarios');
+			
 		}	
-		if(Input::get('enabled')!="")
-			$user->enabled = 1;
 		else
-			$user->enabled = 0;
-		$user->save();
-		if($user->id == Auth::user()->id)
-			return Redirect::to('salir');
-		else
+		{
+			Session::flash('title','Se encontraron estos errores');
+			Session::flash('text',$validation);
 			return Redirect::to('usuarios');
+		}	
 	}
 	public function delete($public_id){
 		
@@ -129,7 +144,7 @@ class UserController extends \BaseController{
 		$user = Input::get('domain').'.'.Input::get('username');
 		$password = Input::get('password');
 		//return $password;
-		if (Auth::attempt(array('username' => $user, 'password' => $password)))
+		if (Auth::attempt(array('username' => $user, 'password' => $password)) && Auth::user()->enabled ==1)
 		{
 			$ent = Enterprice::where('id',Auth::user()->enterprice_id)->first();
 			Session::put('enterprice',$ent->name);

@@ -24,6 +24,11 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	protected $hidden = array('password', 'remember_token');
 	public function isValid(){
 		$error = "";
+		
+		if(strlen($this->name)<2)
+			$error .= "El nombre es muy corto.<br>";	
+		if(strlen($this->username)<2)
+			$error .= "El nombre de usuario es muy corto.<br>";	
 		return $error;
 	}
 

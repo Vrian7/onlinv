@@ -73,7 +73,8 @@ $html = '
 //imprime el contenido de la variable html
 $pdf->writeHTMLCell($w=0, $h=0, $x='140', $y='13', $html, $border=0, $ln=1, $fill=0, $reseth=true, $align='left', $autopadding=true);
 
-$imgdata = asset('uploads/logos/'.$logo);//base64_decode($invoice->logo);
+$imgdata = 'uploads/logos/'.$logo;
+// $imgdata = asset('uploads/logos/'.$logo);//base64_decode($invoice->logo);
 //$pdf->Image('@'.$imgdata, '26', '6', '34', '30', '', '', 'T', false, 500, '', false, false, 0, false, false, false);
 $pdf->Image($imgdata, '16', '10', '66', '20', '', '', 'T', false, 500, '', false, false, 0, false, false, false);
 
@@ -108,7 +109,7 @@ if($unipersonal!="")
     $pdf->writeHTMLCell($w=0, $h=0, $x='15', $y='36', 'De: '.$unipersonal, $border=0, $ln=1, $fill=0, $reseth=true, $align='left', $autopadding=true);
 $pdf->writeHTMLCell($w=0, $h=0, $x='15', $y='1', $tercero, $border=0, $ln=1, $fill=0, $reseth=true, $align='left', $autopadding=true);
 $original = $type;
-$original = "ORIGINAL";
+//$original = "ORIGINAL";
 
 $pdf->SetFont('helvetica', 'B', 12);
     $original = '
@@ -206,6 +207,9 @@ setlocale(LC_ALL, $lenguage);
 //$date = DateTime::createFromFormat("d/m/Y", $date);
 //$fecha=strftime("%d de %B de %Y",$date->getTimestamp());
 
+
+$date = DateTime::createFromFormat('Y-m-d',$invoice->date);
+
 $date = DateTime::createFromFormat("d/m/Y", $invoice->date);
 if($date== null){
     $date = DateTime::createFromFormat("Y-m-d", $invoice->date);
@@ -222,15 +226,21 @@ else{
 $fecha= $invoice->state.", ".$fecha;
 $senor = $invoice->client_name;
 $nit = $invoice->client_nit;
+// $direccionCliente =
+$cliente = Client::find($invoice->client_id);
+
 
 $datosCliente = '
 <table cellpadding="2" border="0">
     <tr>
-        <td width="300" style="color:#003468;"><b>&nbsp;Lugar y fecha :</b>'.$fecha.'</td>
+        <td width="300" style="color:#003468;"><b>&nbsp;Lugar y fecha :</b>'.' La Paz'.$fecha.'</td>
         <td width="230" align="right" style="color:#003468;"><b>NIT/CI :</b>'.$nit.'</td>
     </tr>
     <tr>
-        <td colspan="2" style="color:#003468;"><b>&nbsp;Se&ntilde;or(es):</b> '.$senor .'</td>
+        <td colspan="2" style="color:#003468;"><b>&nbsp;Se&ntilde;or(es)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</b> '.$senor .'</td>
+    </tr>
+    <tr>
+        <td colspan="2" style="color:#003468;"><b>&nbsp;Dirección&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</b> '.$cliente->address.'</td>
     </tr>
 
 </table>
@@ -238,9 +248,9 @@ $datosCliente = '
 //$datosCliente="asdf";
 //dibuja rectangulo datos del cliente
 $pdf->SetLineStyle(array('width' => 0.3, 'cap' => 'butt', 'join' => 'miter', 'dash' => 0, 'color' => array(0, 0, 0)));
-$pdf->RoundedRect(15, 50, 187, 14, 1, '1111', 'DF', $style6, array(242, 242, 242));
+$pdf->RoundedRect(15, 48, 187, 19, 1, '1111', 'DF', $style6, array(242, 242, 242));
 $style6 = array('width' => 0.2, 'cap' => 'butt', 'join' => 'miter', 'color' => array(0, 0, 0));
-$pdf->writeHTMLCell($w=0, $h=0, $x='', $y='50', $datosCliente, $border=0, $ln=1, $fill=0, $reseth=true, $align='left', $autopadding=true);
+$pdf->writeHTMLCell($w=0, $h=0, $x='', $y='48', $datosCliente, $border=0, $ln=1, $fill=0, $reseth=true, $align='left', $autopadding=true);
 $textTitulos = '
 <table border="0.2" cellpadding="3" cellspacing="0">
     <thead>
@@ -250,13 +260,13 @@ $textTitulos = '
           <td width="50" align="center" style="color:#003468;" bgcolor="#B2D9FF"><font size="9"><b>UNIDAD</b></font></td>
           <td width="60" align="center" style="color:#003468;" bgcolor="#B2D9FF"><font size="9"><b>CÓDIGO</b></font></td>
           <td width="170" align="center" style="color:#003468;" bgcolor="#B2D9FF"><font size="9"><b>DETALLE</b></font></td>
-           <td width="60" align="center" style="color:#003468;" bgcolor="#B2D9FF"><font size="9"><b>PRECIO</b></font></td>
+           <td width="60" align="center" style="color:#003468;" bgcolor="#B2D9FF"><font size="9"><b>PRECIO UNITARIO</b></font></td>
            <td width="80" align="center" style="color:#003468;" bgcolor="#B2D9FF"><font size="9"><b>SUBTOTAL</b></font></td>
         </tr>
     </thead>
 </table>
 ';
-$pdf->writeHTMLCell($w=0, $h=0, '', '67', $textTitulos, $border=0, $ln=1, $fill=0, $reseth=true, $align='left', $autopadding=true);
+$pdf->writeHTMLCell($w=0, $h=0, '', '70', $textTitulos, $border=0, $ln=1, $fill=0, $reseth=true, $align='left', $autopadding=true);
 //
 $ini = 0;
 $final = "";
@@ -358,7 +368,7 @@ $leyenda = '<table  cellpadding="3" cellspacing="0">
                   <tr><td style="line-height: 50%"> </td></tr>
                   <tr>
                         <td width="440" bgcolor="#F2F2F2" style="font-size:7px;">
-                            EL MONTO EN BOLIVIANOS DE ESTA FACTURA EQUIVALE SOLO A EFECTOS DE CRÉDITO FISCAL IVA (RND NO 10.0016.07) US.     169.34 AL CAMBIO DE BS. 6.96 POR US$ 1.00 EL MISMO QUE DEBERA SER CANCELADO EN DOLARES ESTADOUNIDENSES O EN EQUIVALENTE EN MONEDA NACIONAL AL TIPO DE CAMBIO VIGENTE EN EL MOMENTO DE PAGO.
+                            EL MONTO EN BOLIVIANOS DE ESTA FACTURA EQUIVALE SOLO A EFECTOS DE CRÉDITO FISCAL IVA (RND NO 10.0016.07) USD '.$total.' AL CAMBIO DE BS. 6.96 POR USD 1.00 EL MISMO QUE DEBERA SER CANCELADO EN DOLARES ESTADOUNIDENSES O EN EQUIVALENTE EN MONEDA NACIONAL AL TIPO DE CAMBIO VIGENTE EN EL MOMENTO DE PAGO.
                         </td>
                   </tr>
               </table>';

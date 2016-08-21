@@ -25,7 +25,7 @@
         </div>
         <div id="forgot" class="tab-pane">
             <form action="index.html" class="form-signin">
-                <p class="text-muted text-center btn-block btn btn-primary btn-rect">Ingrese Correo Electr&oacute;nico</p>
+                <p class="text-muted text-center btn-block btn btn-primary btn-rect">Ingrese Nombre de usuario</p>
                 <input type="email"  required="required" placeholder="Correo Electrónico"  class="form-control" />
                 <br />
                 <button class="btn text-muted text-center btn-success" type="submit">Recuperar Password</button>
@@ -48,7 +48,7 @@
         <ul class="list-inline">
             <li><a class="text-muted" href="#login" data-toggle="tab">Ingresar</a></li>
             <li><a class="text-muted" href="#forgot" data-toggle="tab">Olvid&oacute; su password</a></li>
-            <li><a class="text-muted" href="#signup" data-toggle="tab">Registrarse</a></li>
+            <li><a hidden = "hidden" class="text-muted" href="#signup" data-toggle="tab">Registrarse</a></li>
         </ul>
     </div>
 </div>
