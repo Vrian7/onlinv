@@ -123,7 +123,17 @@
               <i class="icon-plus"></i>
               </a>
               </span>
-              </div>
+              </div>                     
+              <div class="col-lg-12">
+              <div class="form-group col-lg-8">
+              <label>T&eacute;rminos y condiciones</label>
+              <textarea class="form-control" name="notes" rows="2"></textarea>
+            </div>          
+          <div class="form-group col-lg-4">
+              <label>V&aacute;lido</label>
+              <input class="form-control" name="validate" placeholder="Ingrese validez en dias">
+          </div>
+          </div>       
             </div>                
             <div class="col-lg-2">
               <label>Total</label>
@@ -142,6 +152,7 @@
             <!-- <label id="descuento_box">0</label> -->
             <br>
             <h4><label id="total">0</label></h4>
+            <br><br><br>
             </div>
 
             <div class="col-lg-1"></div>                        

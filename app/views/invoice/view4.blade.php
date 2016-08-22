@@ -226,9 +226,12 @@ else{
 $fecha= $invoice->state.", ".$fecha;
 $senor = $invoice->client_name;
 $nit = $invoice->client_nit;
+
 // $direccionCliente =
 $cliente = Client::find($invoice->client_id);
-
+$direc = "";
+if($cliente)
+    $direc = $cliente->address;
 
 $datosCliente = '
 <table cellpadding="2" border="0">
@@ -240,7 +243,7 @@ $datosCliente = '
         <td colspan="2" style="color:#003468;"><b>&nbsp;Se&ntilde;or(es)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</b> '.$senor .'</td>
     </tr>
     <tr>
-        <td colspan="2" style="color:#003468;"><b>&nbsp;Dirección&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</b> '.$cliente->address.'</td>
+        <td colspan="2" style="color:#003468;"><b>&nbsp;Dirección&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</b> '.$direc.'</td>
     </tr>
 
 </table>

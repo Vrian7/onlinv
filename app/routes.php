@@ -83,6 +83,7 @@ Route::group(array('before' => 'auth'), function(){
 	Route::get('obtener_clientes','ClientController@getClientsByNit');	
 	
 	Route::get('searchProduct','ProductController@searchProduct');
+		Route::post('examen','BranchController@testResult');
 Route::group(array('before'=>'admin'),function() {
 	/*** PRODUCTCONTROLLER ***/
 	Route::get('productos','ProductController@index');
@@ -112,7 +113,7 @@ Route::group(array('before'=>'admin'),function() {
 	Route::post('sucursal/editar/{public_id}','BranchController@update');
 	Route::get('sucursal/eliminar/{public_id}','BranchController@delete');	
 	Route::get('examen','BranchController@test');
-	Route::post('examen','BranchController@testResult');	
+
 
 	/*** UNITCONTROLLER ***/
 	Route::get('unidades','UnitController@index');

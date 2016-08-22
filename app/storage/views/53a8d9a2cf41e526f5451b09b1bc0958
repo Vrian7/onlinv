@@ -35,8 +35,8 @@
                                 <td><?php echo $quote->number; ?></td>
                                 <td><?php echo $quote->client_name; ?></td>
                                 <td align="right"><?php echo number_format($quote->net_amount,2,'.',','); ?></td>
-                                <td class="center"><?php echo $quote->date; ?></td>
-                                <td class="center"><?php echo $quote->public_id; ?></td>
+                                <td class="center"><?php echo date_format(date_create($quote->date),'d/m/Y'); ?></td>
+                                <td class="center"><?php if($quote->tracing == 0): ?>En espera <?php else: ?> Vendido <?php endif; ?></td>
                                 <td class="center">
                                     <a class="btn btn-primary btn-xs" href="<?php echo asset('cotizacion/'.$quote->public_id); ?>">
                                         <i class="icon-eye-open"></i> Ver

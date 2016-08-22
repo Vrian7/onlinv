@@ -36,7 +36,7 @@
                                 <td>{{ $invoice->number }}</td>
                                 <td>{{ $invoice->client_name }}</td>                                
                                 <td align="right">{{ number_format($invoice->net_amount,2,'.',',') }}</td>
-                                <td class="center">{{ $invoice->date }}</td>
+                                <td class="center">{{ date_format(date_create($invoice->date),'d/m/Y') }}</td>
                                 <td class="center">{{ $statuses[$invoice->invoice_status_ids] }}</td>
                                 <td class="center">
                                     <a class="btn btn-primary btn-xs" href="{{asset('factura/'.$invoice->public_id)}}">

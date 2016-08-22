@@ -108,13 +108,19 @@ $vendedor = Auth::user()->name;
 $marca = $client->extra2;
 $fechaCotizacion = $ciudad." ".$singledate;
 $modelo = $client->extra3;
-$vigencia = "jueves, 18 de Agosto de 2016";
+$datev = $invoice->date;
+$datev = date('d/m/Y',strtotime($datev.'+ '.$invoice->validate.' days'));
+$dias = array('Domingo','Lunes','Martes','Miercoles','Jueves','Viernes','Sabado','Domingo');
+$datev = "15/10/2016";
+$datev = "2016-08-15";
+$dia = $dias[date('N', strtotime($datev))];
+$vigencia = $dia;//"jueves, 18 de Agosto de 2016";
 $serie = $client->extra4;
 $cambio = $invoice->exchange;
 $interno = $client->extra5;
 
-$datosCliente = '
-<table cellpadding="2" border="0">
+$datosCliente = 
+'<table cellpadding="2" border="0">
     <tr>
         <td width="280" style="color:#003468;">&nbsp;CLIENTE &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:<b>&nbsp;'.$cliente.'</b></td>
         <td width="180" style="color:#003468;">&nbsp;CODIGO &nbsp;&nbsp; :<b>&nbsp;'.$codigo.'</b></td>
@@ -186,7 +192,7 @@ $entrega = "35 DIAS";
 
 
 foreach ($products as $key => $product){
-        $unidad = Product::where('id', $product->product_id)->select('unit_id', 'brand_id')->first();
+        $unidad = Product::where('id', $product->product_id)->select('unit_id', 'brand_id','extra1')->first();
         $brand = Brand::where('id', $unidad->brand_id)->first();
         $unit = Unit::where('id', $unidad->unit_id)->first();
         $textContenido ='
@@ -201,7 +207,7 @@ foreach ($products as $key => $product){
         <td width="110" align="left" style="color:#003468;">'.$product->name.'</td>
         <td width="50" align="right" style="color:#003468;">'.number_format((float)$product->price, 2, '.', ',').'</td>
         <td width="70" align="right" style="color:#003468;"><b>'.number_format((float)$product->price*$product->quantity, 2, '.', ',').'</b></td>
-        <td width="63" align="center" style="color:#003468;">'.$product->extra1.'</td>
+        <td width="63" align="center" style="color:#003468;">'.$unidad->extra1.'</td>
         </tr>
          </table>
         ';
@@ -258,7 +264,7 @@ $line=60;
 //if (!empty($invoice->public_notes)){
 //$nota = $invoice->public_notes;
 $nota = $invoice->notes;
-$nota = "50% al inicio de la orden de compra, saldo contra entrega.";
+//$nota = "50% al inicio de la orden de compra, saldo contra entrega.";
 $notaCliente = '
 
         <table style="padding:0px 0px 0px 5px" border="0">

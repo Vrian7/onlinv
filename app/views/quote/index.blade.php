@@ -36,8 +36,8 @@
                                 <td>{{ $quote->number }}</td>
                                 <td>{{ $quote->client_name }}</td>
                                 <td align="right">{{ number_format($quote->net_amount,2,'.',',') }}</td>
-                                <td class="center">{{ $quote->date }}</td>
-                                <td class="center">{{$quote->public_id}}</td>
+                                <td class="center">{{ date_format(date_create($quote->date),'d/m/Y') }}</td>
+                                <td class="center">@if($quote->tracing == 0)En espera @else Vendido @endif</td>
                                 <td class="center">
                                     <a class="btn btn-primary btn-xs" href="{{asset('cotizacion/'.$quote->public_id)}}">
                                         <i class="icon-eye-open"></i> Ver

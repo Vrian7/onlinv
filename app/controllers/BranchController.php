@@ -35,9 +35,11 @@ class BranchController extends \BaseController{
 		$branch->number = Input::get('number');
 		$branch->process_number = Input::get('process_number');
 		$branch->authorization_number = Input::get('authorization_number');
-		$date_send = Input::get('deadline');
-		$date_send = explode('/',$date_send);
-		$branch->deadline = $date_send[2].'-'.$date_send[1].'-'.$date_send[0];		
+		if(Input::get('deadline')){
+			$date_send = Input::get('deadline');
+			$date_send = explode('/',$date_send);
+			$branch->deadline = $date_send[2].'-'.$date_send[1].'-'.$date_send[0];
+		}
 		$branch->economic_activity = Input::get('activity');
 		$branch->legend = Input::get('legend');
 		$branch->dosage_key = Input::get('dosage_key');
@@ -79,9 +81,11 @@ class BranchController extends \BaseController{
 		$branch->number = Input::get('number');
 		$branch->process_number = Input::get('process_number');
 		$branch->authorization_number = Input::get('authorization_number');
-		$date_send = Input::get('deadline');
-		$date_send = explode('/',$date_send);
-		$branch->deadline = $date_send[2].'-'.$date_send[1].'-'.$date_send[0];		
+		if(Input::get('deadline')){
+			$date_send = Input::get('deadline');
+			$date_send = explode('/',$date_send);
+			$branch->deadline = $date_send[2].'-'.$date_send[1].'-'.$date_send[0];		
+		}
 		$branch->economic_activity = Input::get('activity');
 		$branch->legend = Input::get('legend');
 		$branch->dosage_key = Input::get('dosage_key');

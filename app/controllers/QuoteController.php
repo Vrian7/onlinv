@@ -2,9 +2,10 @@
 class QuoteController extends \BaseController{
 	public function index(){
 		$quotes = Quote::where('enterprice_id',Auth::user()->enterprice_id)->where('branch_id',Auth::user()->branch_id)->get();
-		$statuses = Status::get():
+		$statuses = InvoiceStatus::get();
 		$data = [
 			'quotes' => $quotes,
+			'statuses' => $statuses,
 		];
 		return View::make('quote.index',$data);		
 	}
