@@ -90,34 +90,51 @@ $lenguage = 'es_ES.UTF-8';
 putenv("LANG=$lenguage");
 setlocale(LC_ALL, $lenguage);
 $date = DateTime::createFromFormat("d/m/Y", $invoice->date);
+$datev = $invoice->date;
+//$datev = date('d/m/Y',strtotime($datev.'+ '.$invoice->validate.' days'));
+$datedia = date('Y-m-d',strtotime($datev.'+ '.$invoice->validate.' days'));
+$datev = DateTime::createFromFormat("Y-m-d", $datedia);
+$exp  =explode('-', $datedia);
+$datev = strftime("%d de ".$meses[(int)$exp[1]]." de %Y",$datev->getTimestamp());
+//$exp  =explode('-', $invoice->date);
+//$datev = strftime("%d de ".$meses[(int)$exp[1]]." de %Y",$datev->getTimestamp());
 if($date== null){
     $date = DateTime::createFromFormat("Y-m-d", $invoice->date);
     $exp  =explode('-', $invoice->date);
     $fecha = strftime("%d de ".$meses[(int)$exp[1]]." de %Y",$date->getTimestamp());
 }
 else{
-    $fecha = strftime("%d de Abril de %Y",$date->getTimestamp());
+    $fecha = strftime("%d de Abril de %Y",$date->getTimestamp());     
 }
+//$datedia = date('Y-m-d',strtotime($invoice->date.'+ '.$invoice->validate.' days'));
 // datos del cliente, atencion, vendedor
 $singledate = date('d/m/Y');
+
+$codigo = "";
+$marca = "";
+$serie = "";
+$interno = "";
+$modelo = "";
+$ciudad = "";
 $cliente = $client->business_name;
-$codigo = $client->public_id;
+// if($client){    
+//     $codigo = $client->public_id;
+//     $marca = $client->extra2;
+//     $serie = $client->extra4;
+//     $interno = $client->extra5;
+//     $modelo = $client->extra3;
+//     $ciudad = $client->extra1;
+// }
 $atencion = "";
-$ciudad = $client->extra1;
+
 $vendedor = Auth::user()->name;
-$marca = $client->extra2;
 $fechaCotizacion = $ciudad." ".$singledate;
-$modelo = $client->extra3;
-$datev = $invoice->date;
-$datev = date('d/m/Y',strtotime($datev.'+ '.$invoice->validate.' days'));
+
 $dias = array('Domingo','Lunes','Martes','Miercoles','Jueves','Viernes','Sabado','Domingo');
-$datev = "15/10/2016";
-$datev = "2016-08-15";
-$dia = $dias[date('N', strtotime($datev))];
-$vigencia = $dia;//"jueves, 18 de Agosto de 2016";
-$serie = $client->extra4;
-$cambio = $invoice->exchange;
-$interno = $client->extra5;
+$dia = $dias[date('N', strtotime($datedia))];
+$vigencia = $dia.', '.$datev;
+$cambio = number_format((float)$invoice->exchange, 2, '.', ',');
+
 
 $datosCliente = 
 '<table cellpadding="2" border="0">
@@ -238,9 +255,10 @@ if(!isset($num[1]))
 $tool = new Tool();
 $literal = $tool->to_string($num[0]).substr($num[1],0,2);
 
+
+$total = number_format((float)$invoice->net_amount, 2, '.', ',');
 $totalBs = $total*$cambio;
 $totalBs = number_format((float)$totalBs, 2, '.', ',');
-$total = number_format((float)$invoice->net_amount, 2, '.', ',');
 $pdf->SetFont('helvetica', '', 8);
         $texPie .='
         <br><br>

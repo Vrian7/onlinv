@@ -35,13 +35,21 @@
         
         <div id="div-1" class="accordion-body collapse in body">            
                 <div class="form-group">
-                    <label for="text1" class="control-label col-lg-4">Producto</label>
+                    <label for="text1" class="control-label col-lg-4">C&oacute;digo de producto</label>
+                    <div class="col-lg-8 form-group input-group">
+                        <input type="text" class="form-control" placeholder="C&oacute;digo de producto" id="product_code" />
+                        <span class="input-group-btn">
+                        <a class="btn btn-default" id="search_product" type="button">
+                        <i class="icon-search"></i>
+                        </a>
+                        </span>
+                    </div>                    
+                </div>
+                <div class="form-group">
+                    <label for="text1" class="control-label col-lg-4">Nombre de producto</label>
+                    <input type="hidden" type="text" placeholder="Nombre de producto" name="product" class="form-control" id="product_id" />
                     <div class="col-lg-8">
-                         <select data-placeholder="Producto" name="product" class="form-control chzn-select chzn-rtl" tabindex="9">
-                            <?php foreach($products as $product): ?>
-                                <option value="<?php echo $product->id; ?>"><?php echo $product->name; ?></option>
-                            <?php endforeach; ?>                        
-                        </select>
+                         <input type="text" disabled placeholder="Nombre de producto" name="product_name" id="product_name" class="form-control" />
                     </div>
                 </div>
                 <div class="form-group">
@@ -92,5 +100,24 @@
 </div>
 </form>
 </div>
+<script type="text/javascript">
+    $("#search_product").click(function(){
+      code = $("#product_code").val();
+      $.ajax({
+            type: 'GET',
+            url:'<?php echo URL::to('searchProduct'); ?>',
+            data: 'code='+code,
+            beforeSend: function(){ 
+              console.log("Starting send data ");
+            },
+            success: function(result)
+            {                  
+                $("#product_name").val(result.name);
+                $("#product_id").val(result.id);
+                console.log(result.id);
+            }
+        });
+    });
+</script>
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('header', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

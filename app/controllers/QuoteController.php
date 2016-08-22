@@ -48,7 +48,7 @@ class QuoteController extends \BaseController{
 		return View::make('quote.createFinning',$data);
 	}
 	public function store(){
-				if(Input::get('client')==0){
+		if(Input::get('client')==0){
 			$client = new Client();
 			$client->enterprice_id = Auth::user()->enterprice_id;			
 			$client->business_name = Input::get('razon');
@@ -129,6 +129,7 @@ class QuoteController extends \BaseController{
 		}		
 		$inv = Quote::where('id',$invoice->id)->first();
 		$data = [
+			'client' => $client,
 			'public_id' => $inv->public_id,
 			'number' => $inv->number,
 			'invoice' => $invoice,
@@ -145,7 +146,21 @@ class QuoteController extends \BaseController{
 		
 	}
 	public function previewQuote(){
-		$client = Client::where('id',Input::get('client'))->first();		
+		//$client = Client::where('id',Input::get('client'))->first();		
+		if(Input::get('client')==0){
+			$client = new Client();
+			$client->enterprice_id = Auth::user()->enterprice_id;			
+			$client->business_name = Input::get('razon');
+			$client->name = Input::get('razon');
+			$client->nit = Input::get('nit');
+			//$client->save();
+		}
+		else{
+			$client = Client::where('id',Input::get('client'))->first();
+			$client->business_name = Input::get('razon');		
+			$client->nit = Input::get('nit');
+		//	$client->save();
+		}
 		$branch = Branch::where('id',Auth::user()->branch_id)->first();
 		$enterprice = Enterprice::where('id',Auth::user()->enterprice_id)->first();		
 		$invoice = new Invoice();		
@@ -171,7 +186,7 @@ class QuoteController extends \BaseController{
 		$invoice->notes = Input::get('notes');
 		$invoice->validate = Input::get('validate');
 		$invoice->discount = Input::get('descuento_send');
-		$invoice->exchange = 6.966;
+		$invoice->exchange = 6.96;
 		$invoice->net_amount_dollar = 0;
 		$date_send = Input::get('date');
 		$date_send = explode('/',$date_send);

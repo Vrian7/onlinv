@@ -35,7 +35,7 @@ class InventoryController extends \BaseController{
 	public function store(){
 		$inventory = new Inventory();
 		$inventory->enterprice_id = Auth::user()->enterprice_id;
-		$inventory->product_id = Input::get('product');
+		$inventory->product_id = Input::get('product');		
 		$inventory->branch_id = Input::get('branch');
 		$inventory->stock = Input::get('stock');
 		$inventory->average = Input::get('average');

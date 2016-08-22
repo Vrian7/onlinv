@@ -17,8 +17,8 @@
 });*/
 //Route::get('factura/cliente/{enterprice}/{public_id}','InvoiceController@showClient');
 //Route::group(array('domain'=>'{enterprice}.demo.factufacil.online'),function(){
-Route::group(array('domain'=>'{enterprice}.factufacil.bo'),function(){
-//Route::group(array('domain'=>'{enterprice}.factufacil.online'),function(){
+//Route::group(array('domain'=>'{enterprice}.factufacil.bo'),function(){
+Route::group(array('domain'=>'{enterprice}.factufacil.online'),function(){
 	/*** USER CONTROLLER ***/
 	//Route::get('ingresar','UserController@login');
 
